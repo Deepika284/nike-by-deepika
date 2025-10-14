@@ -463,7 +463,7 @@ HTML_TEMPLATE = '''
 
         .discover-image {
             width: 100%;
-            height: 400px;
+            height: 500px;
             object-fit: cover;
             display: block;
         }
