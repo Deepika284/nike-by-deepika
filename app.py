@@ -708,8 +708,8 @@ HTML_TEMPLATE = '''
             font-size: 1.5rem;
             letter-spacing: 0.1px;
             text-align: left;
-            margin-top: 40px;
-            margin-bottom: 20px;
+            margin-top: 200px;
+            margin-bottom: 40px;
         }
         
         .icons-slider-container {
@@ -749,7 +749,7 @@ HTML_TEMPLATE = '''
         
         .icon-image {
             width: 100%;
-            height: 200px;
+            height: 300px;
             object-fit: cover;
             display: block;
         }
