@@ -14,12 +14,19 @@ HTML_TEMPLATE = '''
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+        
+        html {
+            font-size: 16px;
         }
         
         body {
             background-color: #F2EDED;
             color: black;
             font-family: Arial, sans-serif;
+            font-size: 1rem;
         }
         
         .header-container {
@@ -29,32 +36,32 @@ HTML_TEMPLATE = '''
             background-color: black;
             padding: 0;
             position: relative;
-            height: 20px;
+            height: 40px;
         }
         
         .logo-container {
-            height: 20px;
+            height: 40px;
             display: flex;
             align-items: center;
-            padding: 0 5px;
+            padding: 0 10px;
         }
         
         .logo-container img {
-            width: 25px;
-            height: 15px;
+            width: 50px;
+            height: 30px;
         }
         
         .text-container {
             text-align: center;
-            font-size: 7px;
+            font-size: 0.875rem;
             font-weight: bold;
             letter-spacing: 1px;
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
             color: white;
-            padding: 2px 15px;
-            height: 20px;
+            padding: 4px 30px;
+            height: 40px;
             display: flex;
             align-items: center;
         }
@@ -62,12 +69,12 @@ HTML_TEMPLATE = '''
         .top-right-menu {
             display: flex;
             align-items: center;
-            gap: 2px;
-            font-size: 5px;
-            margin-right: 10px;
+            gap: 8px;
+            font-size: 0.75rem;
+            margin-right: 20px;
             color: white;
-            padding: 2px 8px;
-            height: 20px;
+            padding: 4px 16px;
+            height: 40px;
         }
         
         .top-right-menu a {
@@ -87,8 +94,8 @@ HTML_TEMPLATE = '''
             text-align: center;
             margin-top: 15px;
             background-color: white;
-            padding: 0 20px;
-            height: 20px;
+            padding: 0 40px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: flex-start;
@@ -98,21 +105,21 @@ HTML_TEMPLATE = '''
         }
         
         .nav-logo {
-            width: 25px;
-            height: 15px;
+            width: 50px;
+            height: 30px;
             display: flex;
             align-items: center;
-            margin-right: 30px;
+            margin-right: 60px;
         }
         
         .nav-logo img {
-            width: 25px;
-            height: 15px;
+            width: 50px;
+            height: 30px;
         }
         
         .nav-links-container {
             display: flex;
-            gap: 15px;
+            gap: 30px;
             align-items: center;
             flex: 1;
         }
@@ -120,11 +127,11 @@ HTML_TEMPLATE = '''
         .nav-link {
             color: black;
             text-decoration: none;
-            font-size: 5px;
+            font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             font-weight: bold;
-            padding: 5px;
+            padding: 10px;
             position: relative;
             text-align: center;
         }
@@ -141,11 +148,11 @@ HTML_TEMPLATE = '''
         .new-featured-link, .men-link, .women-link, .kids-link, .sale-link, .snkrs-link {
             color: black;
             text-decoration: none;
-            font-size: 5px;
+            font-size: 1rem;
             text-transform: capitalize;
             letter-spacing: 0.2px;
             font-weight: bold;
-            padding: 0.5px;
+            padding: 1px;
             cursor: pointer;
             text-align: center;
         }
@@ -157,12 +164,12 @@ HTML_TEMPLATE = '''
         .new-featured-menu, .men-menu, .women-menu, .kids-menu, .sale-menu, .snkrs-menu {
             display: none;
             position: fixed;
-            top: 55px;
+            top: 115px;
             left: 0;
             right: 0;
             background-color: white;
             color: black;
-            padding: 10px 10px;
+            padding: 30px 20px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
             z-index: 200;
             width: 100%;
@@ -179,9 +186,9 @@ HTML_TEMPLATE = '''
         
         .new-featured-content, .men-content, .women-content, .kids-content, .sale-content, .snkrs-content {
             display: grid;
-            gap: 10px;
+            gap: 40px;
             margin: 0 auto;
-            padding: 0 50px;
+            padding: 0 100px;
         }
         
         .new-featured-content, .men-content, .women-content, .kids-content, .sale-content {
@@ -203,24 +210,24 @@ HTML_TEMPLATE = '''
         }
         
         .new-featured-heading, .men-heading, .women-heading, .kids-heading, .sale-heading, .snkrs-heading {
-            font-size: 5px;
+            font-size: 1rem;
             font-weight: bolder;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             text-transform: capitalize;
             letter-spacing: 0.1px;
             color: black;
         }
         
         .new-featured-item, .men-item, .women-item, .kids-item, .sale-item, .snkrs-item {
-            font-size: 4px;
+            font-size: 0.875rem;
             font-weight: bold;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
             text-transform: capitalize;
             color: #666;
             text-decoration: none;
             letter-spacing: 0.1px;
             display: block;
-            gap: 5px;
+            gap: 10px;
         }
         
         .new-featured-item:hover, .men-item:hover, .women-item:hover, .kids-item:hover, .sale-item:hover, .snkrs-item:hover {
@@ -242,8 +249,8 @@ HTML_TEMPLATE = '''
         .search-container {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 5px;
+            gap: 20px;
+            font-size: 1rem;
             margin-left: auto;
             margin-right: 0;
         }
@@ -252,10 +259,10 @@ HTML_TEMPLATE = '''
             background-color: #f5f5f5;
             border: 1px solid #ccc;
             border-radius: 20px;
-            padding: 3px 15px;
-            font-size: 5px;
+            padding: 8px 20px;
+            font-size: 0.875rem;
             color: #333;
-            width: 65px;
+            width: 180px;
             outline: none;
         }
         
@@ -269,7 +276,7 @@ HTML_TEMPLATE = '''
         }
         
         .favorites-icon, .basket-icon {
-            font-size: 10px;
+            font-size: 24px;
             cursor: pointer;
             text-decoration: none;
             color: black;
@@ -301,15 +308,15 @@ HTML_TEMPLATE = '''
         
         .shop-button {
             position: absolute;
-            bottom: 20px;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
             background-color: white;
             color: black;
-            padding: 1px 4px;
+            padding: 12px 24px;
             border: none;
             cursor: pointer;
-            font-size: 8px;
+            font-size: 1rem;
             text-transform: capitalize;
             letter-spacing: 0.1px;
             z-index: 10;
@@ -332,30 +339,30 @@ HTML_TEMPLATE = '''
         }
         
         .content-wrapper {
-            padding: 0 20px;
+            padding: 0 40px;
             margin: 0 auto;
         }
         
         .features-section {
             background-color: white;
-            padding: 20px 0;
+            padding: 40px 0;
         }
         
         .athlete-section {
             background-color: white;
-            padding: 20px 0;
+            padding: 40px 0;
         }
         
         .athlete-title {
-            font-size: 9px;
+            font-size: 1.5rem;
             letter-spacing: 0.1px;
-            margin-bottom: 10px;
-            margin-top: 15px;
+            margin-bottom: 20px;
+            margin-top: 30px;
         }
         
         .athlete-images-container {
             display: flex;
-            gap: 6px;
+            gap: 12px;
             width: 100%;
             margin-bottom: 0;
         }
@@ -367,20 +374,20 @@ HTML_TEMPLATE = '''
         
         .athlete-image {
             width: 100%;
-            height: 110px;
+            height: 300px;
             object-fit: cover;
         }
         
         .athlete-shop-button {
             position: absolute;
-            bottom: 10px;
-            left: 10px;
+            bottom: 20px;
+            left: 20px;
             background-color: white;
             color: black;
-            padding: 1px 4px;
+            padding: 10px 20px;
             border: none;
             cursor: pointer;
-            font-size: 7px;
+            font-size: 1rem;
             text-transform: capitalize;
             letter-spacing: 0.1px;
             z-index: 10;
@@ -393,32 +400,32 @@ HTML_TEMPLATE = '''
 
         .featured-heading-section {
             background-color: white;
-            padding: 20px 0;
+            padding: 40px 0;
             text-align: center;
         }
 
         .featured-main-title {
-            font-size: 9px;
+            font-size: 1.5rem;
             font-weight: bold;
             letter-spacing: 0.5px;
-            margin-bottom: 2px;
+            margin-bottom: 10px;
             text-transform: uppercase;
         }
 
         .featured-subtitle {
-            font-size: 10px;
+            font-size: 1.25rem;
             color: #757575;
             letter-spacing: 0.5px;
-            margin-bottom: 8px;
+            margin-bottom: 20px;
         }
 
         .featured-cta-button {
             background-color: black;
             color: white;
-            padding: 4px 8px;
+            padding: 12px 24px;
             border: none;
             cursor: pointer;
-            font-size: 8px;
+            font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 0.3px;
             border-radius: 50px;
@@ -431,22 +438,22 @@ HTML_TEMPLATE = '''
 
         .discover-section {
             background-color: white;
-            padding: 20px 0;
+            padding: 40px 0;
         }
 
         .discover-title {
-            font-size: 9px;
+            font-size: 1.5rem;
             letter-spacing: 0.1px;
-            margin-bottom: 10px;
-            margin-top: 2px;
+            margin-bottom: 20px;
+            margin-top: 10px;
         }
 
         .discover-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 0;
+            gap: 10px;
             width: 100%;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
         }
 
         .discover-item {
@@ -456,24 +463,24 @@ HTML_TEMPLATE = '''
 
         .discover-image {
             width: 100%;
-            height: 180px;
+            height: 400px;
             object-fit: cover;
             display: block;
         }
         
         .features-title {
-            font-size: 9px;
+            font-size: 1.5rem;
             letter-spacing: 0.1px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             margin-top: 0px;
         }
         
         .featured-images-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 2px;
+            gap: 10px;
             width: 100%;
-            margin-bottom: 2px;
+            margin-bottom: 20px;
         }
         
         .featured-image-wrapper {
@@ -482,45 +489,45 @@ HTML_TEMPLATE = '''
         
         .featured-image {
             width: 100%;
-            height: 150px;
+            height: 350px;
             object-fit: cover;
         }
         
         .gear-section {
             background-color: white;
-            padding: 5px 0;
+            padding: 40px 0;
         }
         
         .gear-title {
-            font-size: 9px;
+            font-size: 1.5rem;
             letter-spacing: 0.1px;
-            margin-bottom: 10px;
-            margin-top: 1px;
+            margin-bottom: 20px;
+            margin-top: 10px;
         }
         
         .gear-image-container {
             width: 100%;
-            margin-bottom: 2px;
-            margin-top: 10px;
+            margin-bottom: 20px;
+            margin-top: 20px;
             position: relative;
         }
         
         .gear-image {
             width: 100%;
-            height: 250px;
+            height: 500px;
             object-fit: cover;
         }
         
         .sports-section {
             background-color: white;
-            padding: 20px 0;
+            padding: 40px 0;
         }
         
         .sports-title {
-            font-size: 9px;
+            font-size: 1.5rem;
             letter-spacing: 0.1px;
-            margin-bottom: 10px;
-            margin-top: 1px;
+            margin-bottom: 20px;
+            margin-top: 10px;
         }
         
         .sports-slider-container {
@@ -530,7 +537,7 @@ HTML_TEMPLATE = '''
         
         .sports-slider {
             display: flex;
-            gap: 1px;
+            gap: 15px;
             overflow-x: auto;
             scroll-behavior: smooth;
             scrollbar-width: none;
@@ -549,10 +556,10 @@ HTML_TEMPLATE = '''
         
         .sports-image {
             width: 100%;
-            height: 150px;
+            height: 350px;
             object-fit: cover;
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 15px;
             transition: opacity 0.3s ease;
         }
         
@@ -562,7 +569,7 @@ HTML_TEMPLATE = '''
         
         .sports-text {
             text-align: center;
-            font-size: 7px;
+            font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -576,7 +583,7 @@ HTML_TEMPLATE = '''
             z-index: 1000;
             border-radius: 8px;
             overflow: hidden;
-            max-width: 300px;
+            max-width: 400px;
             pointer-events: none;
         }
         
@@ -586,14 +593,14 @@ HTML_TEMPLATE = '''
         
         .sports-popup-image {
             width: 100%;
-            height: 250px;
+            height: 350px;
             object-fit: cover;
         }
         
         .sports-popup-text {
-            padding: 12px;
+            padding: 20px;
             text-align: center;
-            font-size: 8px;
+            font-size: 1.125rem;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -623,9 +630,9 @@ HTML_TEMPLATE = '''
         }
         
         .icons-popup-text {
-            padding: 20px;
+            padding: 30px;
             text-align: center;
-            font-size: 12px;
+            font-size: 1.25rem;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -633,7 +640,7 @@ HTML_TEMPLATE = '''
         
         .slider-controls {
             position: relative;
-            margin-top: -95px;
+            margin-top: -200px;
             pointer-events: none;
         }
         
@@ -641,10 +648,10 @@ HTML_TEMPLATE = '''
             position: absolute;
             background-color: transparent;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             cursor: pointer;
-            font-size: 30px;
+            font-size: 3rem;
             font-weight: bold;
             color: white;
             display: flex;
@@ -666,34 +673,34 @@ HTML_TEMPLATE = '''
         }
         
         .slider-btn.left {
-            left: 5px;
+            left: 10px;
         }
         
         .slider-btn.right {
-            right: 5px;
+            right: 10px;
         }
         
         .select-icons-title {
-            font-size: 9px;
+            font-size: 1.5rem;
             letter-spacing: 0.1px;
             text-align: left;
-            margin-top: 130px;
-            margin-bottom: 1px;
+            margin-top: 80px;
+            margin-bottom: 20px;
         }
         
         .icons-slider-container {
             position: relative;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
         }
         
         .icons-slider {
             display: flex;
-            gap: 8px;
+            gap: 16px;
             overflow-x: auto;
             scroll-behavior: smooth;
             scrollbar-width: none;
-            padding: 10px 0;
+            padding: 20px 0;
         }
         
         .icons-slider::-webkit-scrollbar {
@@ -701,8 +708,8 @@ HTML_TEMPLATE = '''
         }
         
         .icon-item {
-            flex: 0 0 calc(25% - 6px);
-            min-width: calc(25% - 6px);
+            flex: 0 0 calc(25% - 12px);
+            min-width: calc(25% - 12px);
             position: relative;
             cursor: pointer;
             transition: transform 0.2s ease;
@@ -717,16 +724,16 @@ HTML_TEMPLATE = '''
         
         .icon-image {
             width: 100%;
-            height: 97px;
+            height: 200px;
             object-fit: cover;
             display: block;
         }
         
         .icons-slider-controls {
             position: relative;
-            margin-top: -77px;
+            margin-top: -150px;
             pointer-events: none;
-            margin-bottom: 60px;
+            margin-bottom: 120px;
             z-index: 9;
         }
         
@@ -734,10 +741,10 @@ HTML_TEMPLATE = '''
             position: absolute;
             background-color: transparent;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             cursor: pointer;
-            font-size: 30px;
+            font-size: 3rem;
             font-weight: bold;
             color: #EBE4E1;
             display: flex;
@@ -755,23 +762,23 @@ HTML_TEMPLATE = '''
         }
         
         .icons-slider-btn.left {
-            left: 5px;
+            left: 10px;
         }
         
         .icons-slider-btn.right {
-            right: 5px;
+            right: 10px;
         }
         
         .nba-section {
             background-color: white;
-            padding: 5px 0 60px 0;
+            padding: 40px 0 80px 0;
         }
         
         .nba-section-title {
-            font-size: 9px;
+            font-size: 1.5rem;
             letter-spacing: 0.1px;
-            margin-bottom: 10px;
-            margin-top: 1px;
+            margin-bottom: 20px;
+            margin-top: 10px;
         }
         
         .nba-slider-container {
@@ -781,7 +788,7 @@ HTML_TEMPLATE = '''
         
         .nba-slider {
             display: flex;
-            gap: 3px;
+            gap: 15px;
             overflow-x: auto;
             scroll-behavior: smooth;
             scrollbar-width: none;
@@ -792,19 +799,19 @@ HTML_TEMPLATE = '''
         }
         
         .nba-item {
-            flex: 0 0 calc(33.333% - 6px);
-            min-width: calc(33.333% - 6px);
+            flex: 0 0 calc(33.333% - 10px);
+            min-width: calc(33.333% - 10px);
             position: relative;
             cursor: pointer;
         }
         
         .nba-image {
             width: 100%;
-            height: 150px;
+            height: 350px;
             object-fit: cover;
             display: block;
             transition: opacity 0.3s ease;
-            margin-bottom: 6px;
+            margin-bottom: 15px;
         }
         
         .nba-item:hover .nba-image {
@@ -812,28 +819,28 @@ HTML_TEMPLATE = '''
         }
         
         .nba-item-title {
-            font-size: 6px;
+            font-size: 0.875rem;
             color: black;
-            margin-bottom: 1px;
-            line-height: 1.2;
+            margin-bottom: 8px;
+            line-height: 1.4;
         }
         
         .nba-description {
-            font-size: 5px;
+            font-size: 0.875rem;
             color: #757575;
-            margin-bottom: 3px;
-            line-height: 1.2;
+            margin-bottom: 8px;
+            line-height: 1.4;
         }
         
         .nba-price {
-            font-size: 5px;
+            font-size: 0.875rem;
             font-weight: 500;
             color: black;
         }
         
         .nba-slider-controls {
             position: relative;
-            margin-top: -95px;
+            margin-top: -200px;
             pointer-events: none;
         }
         
@@ -841,10 +848,10 @@ HTML_TEMPLATE = '''
             position: absolute;
             background-color: transparent;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             cursor: pointer;
-            font-size: 30px;
+            font-size: 3rem;
             font-weight: bold;
             color: black;
             display: flex;
@@ -866,29 +873,29 @@ HTML_TEMPLATE = '''
         }
         
         .nba-slider-btn.left {
-            left: 5px;
+            left: 10px;
         }
         
         .nba-slider-btn.right {
-            right: 5px;
+            right: 10px;
         }
         
         .footer-section {
             background-color: white;
             color: white;
-            padding: 0 10px 40px 10px;
-            margin-top: 80px;
-            border-top: 0.3px solid #7A7777;
+            padding: 0 20px 60px 20px;
+            margin-top: 100px;
+            border-top: 1px solid #7A7777;
         }
         
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(3, 1fr) 50px;
-            gap: 5px;
+            grid-template-columns: repeat(3, 1fr) 100px;
+            gap: 40px;
             max-width: 1200px;
-            margin: 0 10px;
-            margin-bottom: 20px;
-            margin-top: 15px;
+            margin: 0 20px;
+            margin-bottom: 40px;
+            margin-top: 30px;
             font-weight: bold;
         }
         
@@ -898,68 +905,65 @@ HTML_TEMPLATE = '''
         }
         
         .footer-column-title {
-            font-size: 5px;
+            font-size: 1rem;
             font-weight: 500;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             text-transform: capitalize;
             letter-spacing: 0.1px;
             color: black;
             font-weight: bold;
-            
         }
         
         .footer-link {
             color: #7e7e7e;
             text-decoration: none;
-            font-size: 5px;
-            margin-bottom: 3px;
+            font-size: 0.875rem;
+            margin-bottom: 8px;
             transition: color 0.3s;
             font-weight: bold;
-            
         }
-         .footer-link:hover {
+        
+        .footer-link:hover {
             text-decoration: underline;
             color: black;
         }
-      
-        
         
         .footer-location {
             display: flex;
             align-items: center;
-            gap: 1px;
-            font-size: 5px;
+            gap: 8px;
+            font-size: 0.875rem;
             color: white;
-            margin-top: 10px;
+            margin-top: 20px;
         }
         
         .location-icon {
-            width: 12px;
-            height: 12px;
+            width: 24px;
+            height: 24px;
         }
         
         .footer-bottom {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 1px;
+            padding-top: 20px;
             border-top: none;
             max-width: 1200px;
-            margin: 0 10px;
-            font-size: 6px;
+            margin: 0 20px;
+            font-size: 0.875rem;
             color: #7e7e7e;
             font-weight: bold;
         }
         
         .footer-bottom-left {
             display: flex;
-            gap: 20px;
+            gap: 30px;
             align-items: center;
         }
         
         .footer-bottom-right {
             display: flex;
-            gap: 15px;
+            gap: 20px;
         }
         
         .footer-bottom-link {
@@ -967,11 +971,11 @@ HTML_TEMPLATE = '''
             text-decoration: none;
             transition: color 0.3s;
         }
-           .footer-bottom-link:hover {
+        
+        .footer-bottom-link:hover {
             text-decoration: underline;
             color: black;
         }
-        
         
     </style>
 </head>
@@ -1081,7 +1085,6 @@ HTML_TEMPLATE = '''
                             <a href="#jackets" class="men-item">Pants and Leggings</a>
                             <a href="#jackets" class="men-item">Jerseys and Kits</a>
                             <a href="#jackets" class="men-item">Jordans</a>
-                            
                         </div>
                         <div class="men-column">
                             <div class="men-heading">Shop By Sport</div>
@@ -1144,7 +1147,6 @@ HTML_TEMPLATE = '''
                             <a href="#jackets" class="women-item">Modest Wear</a>
                             <a href="#jackets" class="women-item">Plus Size</a>
                             <a href="#jackets" class="women-item">Nike Maternity</a>
-                            
                         </div>
                            <div class="women-column">
                             <div class="women-heading">Shop By Sport</div>
@@ -1314,7 +1316,7 @@ HTML_TEMPLATE = '''
                 <span class="heart-filled">♥</span>
             </a>
             <a href="/basket" class="basket-icon">
-                <svg width="10" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="9" cy="21" r="1"></circle>
                     <circle cx="20" cy="21" r="1"></circle>
                     <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -1518,7 +1520,6 @@ HTML_TEMPLATE = '''
                         <div class="nba-item-title">San Antonio Spurs Icon Edition</div>
                         <div class="nba-description">Men's Nike Dri-FIT NBA Swingman Jersey</div>
                         <div class="nba-price">MRP : ₹ 5 995.00</div>
-                    </div>
                     <div class="nba-item">
                         <img src="/static/nba7.avif" alt="NBA 7" class="nba-image">
                         <div class="nba-item-title">Team 13</div>
@@ -1712,8 +1713,8 @@ HTML_TEMPLATE = '''
                 `;
                 
                 sportsPopup.classList.add('active');
-                sportsPopup.style.top = (rect.top + window.scrollY - 270) + 'px';
-                sportsPopup.style.left = (rect.left + rect.width / 2 - 150) + 'px';
+                sportsPopup.style.top = (rect.top + window.scrollY - 370) + 'px';
+                sportsPopup.style.left = (rect.left + rect.width / 2 - 200) + 'px';
             });
             
             item.addEventListener('mouseleave',() => {
@@ -1735,7 +1736,7 @@ HTML_TEMPLATE = '''
         
         const iconsSlider = document.getElementById('iconsSlider');
         const originalItems = Array.from(document.querySelectorAll('.icon-item'));
-        const itemWidth = iconsSlider.querySelector('.icon-item').offsetWidth + 8;
+        const itemWidth = iconsSlider.querySelector('.icon-item').offsetWidth + 16;
         const totalItems = originalItems.length;
         let currentPosition = totalItems * 30;
         let isScrolling = false;
@@ -1840,8 +1841,8 @@ HTML_TEMPLATE = '''
                     `;
                     
                     iconsPopup.classList.add('active');
-                    iconsPopup.style.top = (rect.top + window.scrollY - 440) + 'px';
-                    iconsPopup.style.left = (rect.left + rect.width / 2 - 225) + 'px';
+                    iconsPopup.style.top = (rect.top + window.scrollY - 720) + 'px';
+                    iconsPopup.style.left = (rect.left + rect.width / 2 - 350) + 'px';
                 });
                 
                 item.addEventListener('mouseleave', () => {
@@ -1960,3 +1961,4 @@ def basket():
 
 if __name__ == '__main__':
     app.run(debug=False)
+                    
