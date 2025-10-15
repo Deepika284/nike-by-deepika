@@ -14,20 +14,12 @@ HTML_TEMPLATE = '''
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-text-size-adjust: 100%;
-            text-size-adjust: 100%;
-        }
-        
-        html {
-            font-size: 16px;
         }
         
         body {
             background-color: #F2EDED;
             color: black;
             font-family: Arial, sans-serif;
-            font-size: 1rem;
-            overflow-x: hidden;
         }
         
         .header-container {
@@ -37,47 +29,45 @@ HTML_TEMPLATE = '''
             background-color: black;
             padding: 0;
             position: relative;
-            height: 40px;
-            width: 100%;
+            height: 20px;
         }
         
         .logo-container {
-            height: 40px;
+            height: 20px;
             display: flex;
             align-items: center;
-            padding: 0 10px;
+            padding: 0 5px;
         }
         
         .logo-container img {
-            width: 50px;
-            height: 30px;
+            width: 25px;
+            height: 15px;
         }
         
         .text-container {
             text-align: center;
-            font-size: 0.875rem;
+            font-size: 7px;
             font-weight: bold;
             letter-spacing: 1px;
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
             color: white;
-            padding: 4px 30px;
-            height: 40px;
+            padding: 2px 15px;
+            height: 20px;
             display: flex;
             align-items: center;
-            white-space: nowrap;
         }
         
         .top-right-menu {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.75rem;
-            margin-right: 20px;
+            gap: 2px;
+            font-size: 5px;
+            margin-right: 10px;
             color: white;
-            padding: 4px 16px;
-            height: 40px;
+            padding: 2px 8px;
+            height: 20px;
         }
         
         .top-right-menu a {
@@ -95,49 +85,46 @@ HTML_TEMPLATE = '''
         
         .nav-menu {
             text-align: center;
-            margin-top: 0;
+            margin-top: 15px;
             background-color: white;
-            padding: 0 40px;
-            height: 60px;
+            padding: 0 20px;
+            height: 20px;
             display: flex;
             align-items: center;
             justify-content: flex-start;
             position: sticky;
             z-index: 100;
             top: 0;
-            width: 100%;
         }
         
         .nav-logo {
-            width: 50px;
-            height: 30px;
+            width: 25px;
+            height: 15px;
             display: flex;
             align-items: center;
-            margin-right: 60px;
-            flex-shrink: 0;
+            margin-right: 30px;
         }
         
         .nav-logo img {
-            width: 50px;
-            height: 30px;
+            width: 25px;
+            height: 15px;
         }
         
         .nav-links-container {
             display: flex;
-            gap: 30px;
+            gap: 15px;
             align-items: center;
             flex: 1;
-            min-width: 0;
         }
         
         .nav-link {
             color: black;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 5px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             font-weight: bold;
-            padding: 10px;
+            padding: 5px;
             position: relative;
             text-align: center;
         }
@@ -154,14 +141,13 @@ HTML_TEMPLATE = '''
         .new-featured-link, .men-link, .women-link, .kids-link, .sale-link, .snkrs-link {
             color: black;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 5px;
             text-transform: capitalize;
             letter-spacing: 0.2px;
             font-weight: bold;
-            padding: 1px;
+            padding: 0.5px;
             cursor: pointer;
             text-align: center;
-            white-space: nowrap;
         }
         
         .new-featured-link:hover, .men-link:hover, .women-link:hover, .kids-link:hover, .sale-link:hover, .snkrs-link:hover {
@@ -171,20 +157,18 @@ HTML_TEMPLATE = '''
         .new-featured-menu, .men-menu, .women-menu, .kids-menu, .sale-menu, .snkrs-menu {
             display: none;
             position: fixed;
-            top: 100px;
+            top: 55px;
             left: 0;
             right: 0;
             background-color: white;
             color: black;
-            padding: 30px 20px;
+            padding: 10px 10px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
             z-index: 200;
             width: 100%;
             white-space: normal;
             animation: slideDown 0.3s ease-out;
             margin: 0;
-            max-height: 400px;
-            overflow-y: auto;
         }
         
         .new-featured-trigger:hover .new-featured-menu, .men-trigger:hover .men-menu,
@@ -195,22 +179,21 @@ HTML_TEMPLATE = '''
         
         .new-featured-content, .men-content, .women-content, .kids-content, .sale-content, .snkrs-content {
             display: grid;
-            gap: 40px;
+            gap: 10px;
             margin: 0 auto;
-            padding: 0 40px;
-            max-width: 1400px;
+            padding: 0 50px;
         }
         
         .new-featured-content, .men-content, .women-content, .kids-content, .sale-content {
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(5, 1fr);
         }
         
         .snkrs-content {
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
         }
         
         .new-featured-content {
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
         }
         
         .new-featured-column, .men-column, .women-column, .kids-column, .sale-column, .snkrs-column {
@@ -220,24 +203,24 @@ HTML_TEMPLATE = '''
         }
         
         .new-featured-heading, .men-heading, .women-heading, .kids-heading, .sale-heading, .snkrs-heading {
-            font-size: 1rem;
+            font-size: 5px;
             font-weight: bolder;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             text-transform: capitalize;
             letter-spacing: 0.1px;
             color: black;
         }
         
         .new-featured-item, .men-item, .women-item, .kids-item, .sale-item, .snkrs-item {
-            font-size: 0.875rem;
+            font-size: 4px;
             font-weight: bold;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             text-transform: capitalize;
             color: #666;
             text-decoration: none;
             letter-spacing: 0.1px;
             display: block;
-            gap: 10px;
+            gap: 5px;
         }
         
         .new-featured-item:hover, .men-item:hover, .women-item:hover, .kids-item:hover, .sale-item:hover, .snkrs-item:hover {
@@ -259,21 +242,20 @@ HTML_TEMPLATE = '''
         .search-container {
             display: flex;
             align-items: center;
-            gap: 20px;
-            font-size: 1rem;
+            gap: 10px;
+            font-size: 5px;
             margin-left: auto;
             margin-right: 0;
-            flex-shrink: 0;
         }
         
         .search-bar {
             background-color: #f5f5f5;
             border: 1px solid #ccc;
             border-radius: 20px;
-            padding: 8px 20px;
-            font-size: 0.875rem;
+            padding: 3px 15px;
+            font-size: 5px;
             color: #333;
-            width: 180px;
+            width: 65px;
             outline: none;
         }
         
@@ -287,7 +269,7 @@ HTML_TEMPLATE = '''
         }
         
         .favorites-icon, .basket-icon {
-            font-size: 24px;
+            font-size: 10px;
             cursor: pointer;
             text-decoration: none;
             color: black;
@@ -313,21 +295,21 @@ HTML_TEMPLATE = '''
             position: relative;
             width: 100%;
             height: 100vh;
-            margin-top: 0;
+            margin-top: 15px;
             overflow: hidden;
         }
         
         .shop-button {
             position: absolute;
-            bottom: 40px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             background-color: white;
             color: black;
-            padding: 12px 24px;
+            padding: 1px 4px;
             border: none;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 8px;
             text-transform: capitalize;
             letter-spacing: 0.1px;
             z-index: 10;
@@ -350,33 +332,30 @@ HTML_TEMPLATE = '''
         }
         
         .content-wrapper {
-            padding: 0 40px;
+            padding: 0 20px;
             margin: 0 auto;
-            max-width: 1600px;
         }
         
         .features-section {
             background-color: white;
-            padding: 40px 0;
-            width: 100%;
+            padding: 20px 0;
         }
         
         .athlete-section {
             background-color: white;
-            padding: 40px 0;
-            width: 100%;
+            padding: 20px 0;
         }
         
         .athlete-title {
-            font-size: 1.5rem;
+            font-size: 9px;
             letter-spacing: 0.1px;
-            margin-bottom: 20px;
-            margin-top: 30px;
+            margin-bottom: 10px;
+            margin-top: 15px;
         }
         
         .athlete-images-container {
             display: flex;
-            gap: 12px;
+            gap: 6px;
             width: 100%;
             margin-bottom: 0;
         }
@@ -388,21 +367,20 @@ HTML_TEMPLATE = '''
         
         .athlete-image {
             width: 100%;
-            height: 300px;
+            height: 110px;
             object-fit: cover;
-            display: block;
         }
         
         .athlete-shop-button {
             position: absolute;
-            bottom: 20px;
-            left: 20px;
+            bottom: 10px;
+            left: 10px;
             background-color: white;
             color: black;
-            padding: 10px 20px;
+            padding: 1px 4px;
             border: none;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 7px;
             text-transform: capitalize;
             letter-spacing: 0.1px;
             z-index: 10;
@@ -415,33 +393,32 @@ HTML_TEMPLATE = '''
 
         .featured-heading-section {
             background-color: white;
-            padding: 40px 0;
+            padding: 20px 0;
             text-align: center;
-            width: 100%;
         }
 
         .featured-main-title {
-            font-size: 1.5rem;
+            font-size: 9px;
             font-weight: bold;
             letter-spacing: 0.5px;
-            margin-bottom: 10px;
+            margin-bottom: 2px;
             text-transform: uppercase;
         }
 
         .featured-subtitle {
-            font-size: 1.25rem;
+            font-size: 10px;
             color: #757575;
             letter-spacing: 0.5px;
-            margin-bottom: 20px;
+            margin-bottom: 8px;
         }
 
         .featured-cta-button {
             background-color: black;
             color: white;
-            padding: 12px 24px;
+            padding: 4px 8px;
             border: none;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 8px;
             text-transform: uppercase;
             letter-spacing: 0.3px;
             border-radius: 50px;
@@ -454,15 +431,14 @@ HTML_TEMPLATE = '''
 
         .discover-section {
             background-color: white;
-            padding: 40px 0;
-            width: 100%;
+            padding: 20px 0;
         }
 
         .discover-title {
-            font-size: 1.5rem;
+            font-size: 9px;
             letter-spacing: 0.1px;
-            margin-bottom: 20px;
-            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-top: 2px;
         }
 
         .discover-grid {
@@ -470,7 +446,7 @@ HTML_TEMPLATE = '''
             grid-template-columns: repeat(2, 1fr);
             gap: 0;
             width: 100%;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
 
         .discover-item {
@@ -480,155 +456,237 @@ HTML_TEMPLATE = '''
 
         .discover-image {
             width: 100%;
-            height: 500px;
+            height: 180px;
             object-fit: cover;
             display: block;
         }
         
         .features-title {
-            font-size: 1.5rem;
+            font-size: 9px;
             letter-spacing: 0.1px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             margin-top: 0px;
         }
         
         .featured-images-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+            gap: 2px;
             width: 100%;
-            margin-bottom: 20px;
+            margin-bottom: 2px;
         }
         
         .featured-image-wrapper {
             position: relative;
-            width: 100%;
         }
         
         .featured-image {
             width: 100%;
-            height: 350px;
+            height: 150px;
             object-fit: cover;
-            display: block;
         }
         
         .gear-section {
             background-color: white;
-            padding: 40px 0;
-            width: 100%;
+            padding: 5px 0;
         }
         
         .gear-title {
-            font-size: 1.5rem;
+            font-size: 9px;
             letter-spacing: 0.1px;
-            margin-bottom: 20px;
-            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-top: 1px;
         }
         
         .gear-image-container {
             width: 100%;
-            margin-bottom: 20px;
-            margin-top: 20px;
+            margin-bottom: 2px;
+            margin-top: 10px;
             position: relative;
         }
         
         .gear-image {
             width: 100%;
-            height: 500px;
+            height: 250px;
             object-fit: cover;
-            display: block;
         }
         
         .sports-section {
-            background-color: white;
-            padding: 40px 0;
-            width: 100%;
-        }
-        
-        .sports-title {
-            font-size: 1.5rem;
+    background-color: white;
+    padding: 20px 0;
+}
+
+.sports-title {
+    font-size: 9px;
+    letter-spacing: 0.1px;
+    margin-bottom: 10px;
+    margin-top: 1px;
+}
+
+.sports-slider-container {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 150px;
+}
+
+.sports-slider {
+    display: flex;
+    gap: 1px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.sports-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.sports-item {
+    flex: 0 0 calc(33.333% - 10px);
+    min-width: calc(33.333% - 10px);
+    position: relative;
+    cursor: pointer;
+}
+
+.sports-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 4px;
+    transition: opacity 0.3s ease;
+}
+
+.sports-item:hover .sports-image {
+    opacity: 0.7;
+}
+
+.sports-text {
+    text-align: center;
+    font-size: 7px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.slider-btn {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    top: 75px;
+    border-radius: 50%;
+    opacity: 0.9;
+    z-index: 100;
+}
+
+.slider-btn:hover {
+    background-color: rgba(255, 255, 255, 1);
+    opacity: 1;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.slider-btn.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.slider-btn.left {
+    left: 10px;
+}
+
+.slider-btn.right {
+    right: 10px;
+}
+
+.sports-popup {
+    position: fixed;
+    display: none;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 300px;
+    pointer-events: none;
+}
+
+.sports-popup.active {
+    display: block;
+}
+
+.sports-popup-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.sports-popup-text {
+    padding: 12px;
+    text-align: center;
+    font-size: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+        .select-icons-title {
+            font-size: 9px;
             letter-spacing: 0.1px;
-            margin-bottom: 20px;
-            margin-top: 10px;
+            text-align: left;
+            margin-top: 130px;
+            margin-bottom: 1px;
         }
-        
-        .sports-slider-container {
+
+        .icons-slider-container {
             position: relative;
             overflow: hidden;
-            width: 100%;
+            margin-bottom: 20px;
         }
-        
-        .sports-slider {
+
+        .icons-slider {
             display: flex;
-            gap: 15px;
+            gap: 8px;
             overflow-x: auto;
             scroll-behavior: smooth;
             scrollbar-width: none;
+            padding: 10px 0;
         }
-        
-        .sports-slider::-webkit-scrollbar {
+
+        .icons-slider::-webkit-scrollbar {
             display: none;
         }
-        
-        .sports-item {
-            flex: 0 0 calc(33.333% - 10px);
-            min-width: calc(33.333% - 10px);
+
+        .icon-item {
+            flex: 0 0 calc(25% - 6px);
+            min-width: calc(25% - 6px);
             position: relative;
             cursor: pointer;
-        }
-        
-        .sports-image {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-            display: block;
-            margin-bottom: 15px;
-            transition: opacity 0.3s ease;
-        }
-        
-        .sports-item:hover .sports-image {
-            opacity: 0.7;
-        }
-        
-        .sports-text {
-            text-align: center;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .sports-popup {
-            position: fixed;
-            display: none;
-            background-color: white;
-            border: 1px solid #ddd;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            z-index: 1000;
-            border-radius: 8px;
-            overflow: hidden;
-            max-width: 400px;
-            pointer-events: none;
-        }
-        
-        .sports-popup.active {
+            transition: transform 0.2s ease;
+            text-decoration: none;
             display: block;
         }
-        
-        .sports-popup-image {
+
+        .icon-item:hover {
+            transform: scale(1.05);
+            z-index: 5;
+        }
+
+        .icon-image {
             width: 100%;
-            height: 350px;
+            height: 97px;
             object-fit: cover;
+            display: block;
         }
-        
-        .sports-popup-text {
-            padding: 20px;
-            text-align: center;
-            font-size: 1.125rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
+
         .icons-popup {
             position: fixed;
             display: none;
@@ -641,181 +699,85 @@ HTML_TEMPLATE = '''
             max-width: 700px;
             pointer-events: none;
         }
-        
+
         .icons-popup.active {
             display: block;
         }
-        
+
         .icons-popup-image {
             width: 100%;
             height: 700px;
             object-fit: cover;
         }
-        
+
         .icons-popup-text {
-            padding: 30px;
+            padding: 20px;
             text-align: center;
-            font-size: 1.25rem;
+            font-size: 12px;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        
-        .slider-controls {
-            position: relative;
-            margin-top: -200px;
-            pointer-events: none;
-            margin-bottom: 180px;
-        }
-        
-        .slider-btn {
-            position: absolute;
-            background-color: transparent;
-            border: none;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            font-size: 3rem;
-            font-weight: bold;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.3s;
-            pointer-events: auto;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        
-        .slider-btn:hover {
-            color: #f0f0f0;
-        }
-        
-        .slider-btn.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-        
-        .slider-btn.left {
-            left: 10px;
-        }
-        
-        .slider-btn.right {
-            right: 10px;
-        }
-        
-        .select-icons-title {
-            font-size: 1.5rem;
-            letter-spacing: 0.1px;
-            text-align: left;
-            margin-top: 40px;
-            margin-bottom: 20px;
-        }
-        
-        .icons-slider-container {
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 40px;
-            width: 100%;
-        }
-        
-        .icons-slider {
-            display: flex;
-            gap: 16px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            scrollbar-width: none;
-            padding: 20px 0;
-        }
-        
-        .icons-slider::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .icon-item {
-            flex: 0 0 calc(25% - 12px);
-            min-width: calc(25% - 12px);
-            position: relative;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-            text-decoration: none;
-            display: block;
-        }
-        
-        .icon-item:hover {
-            transform: scale(1.05);
-            z-index: 5;
-        }
-        
-        .icon-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            display: block;
-        }
-        
-        .icons-slider-controls {
-            position: relative;
-            margin-top: -150px;
-            pointer-events: none;
-            margin-bottom: 120px;
-            z-index: 9;
-        }
-        
+
         .icons-slider-btn {
             position: absolute;
-            background-color: transparent;
+            background-color: rgba(235, 228, 225, 0.9);
             border: none;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             cursor: pointer;
-            font-size: 3rem;
+            font-size: 30px;
             font-weight: bold;
-            color: #EBE4E1;
+            color: black;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.3s;
-            pointer-events: auto;
+            transition: all 0.3s;
             top: 50%;
             transform: translateY(-50%);
             z-index: 11;
+            border-radius: 50%;
+            opacity: 0.9;
         }
-        
+
         .icons-slider-btn:hover {
-            color: black;
+            background-color: rgba(235, 228, 225, 1);
+            opacity: 1;
         }
-        
+
+        .icons-slider-btn.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
         .icons-slider-btn.left {
             left: 10px;
         }
-        
+
         .icons-slider-btn.right {
             right: 10px;
         }
         
         .nba-section {
             background-color: white;
-            padding: 40px 0 80px 0;
-            width: 100%;
+            padding: 5px 0 60px 0;
         }
         
         .nba-section-title {
-            font-size: 1.5rem;
+            font-size: 9px;
             letter-spacing: 0.1px;
-            margin-bottom: 20px;
-            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-top: 1px;
         }
         
         .nba-slider-container {
             position: relative;
             overflow: hidden;
-            width: 100%;
         }
         
         .nba-slider {
             display: flex;
-            gap: 15px;
+            gap: 3px;
             overflow-x: auto;
             scroll-behavior: smooth;
             scrollbar-width: none;
@@ -826,19 +788,19 @@ HTML_TEMPLATE = '''
         }
         
         .nba-item {
-            flex: 0 0 calc(33.333% - 10px);
-            min-width: calc(33.333% - 10px);
+            flex: 0 0 calc(33.333% - 6px);
+            min-width: calc(33.333% - 6px);
             position: relative;
             cursor: pointer;
         }
         
         .nba-image {
             width: 100%;
-            height: 350px;
+            height: 150px;
             object-fit: cover;
             display: block;
             transition: opacity 0.3s ease;
-            margin-bottom: 15px;
+            margin-bottom: 6px;
         }
         
         .nba-item:hover .nba-image {
@@ -846,53 +808,55 @@ HTML_TEMPLATE = '''
         }
         
         .nba-item-title {
-            font-size: 0.875rem;
+            font-size: 6px;
             color: black;
-            margin-bottom: 8px;
-            line-height: 1.4;
+            margin-bottom: 1px;
+            line-height: 1.2;
         }
         
         .nba-description {
-            font-size: 0.875rem;
+            font-size: 5px;
             color: #757575;
-            margin-bottom: 8px;
-            line-height: 1.4;
+            margin-bottom: 3px;
+            line-height: 1.2;
         }
         
         .nba-price {
-            font-size: 0.875rem;
+            font-size: 5px;
             font-weight: 500;
             color: black;
         }
         
         .nba-slider-controls {
             position: relative;
-            margin-top: -200px;
+            margin-top: -95px;
             pointer-events: none;
-            margin-bottom: 180px;
         }
         
         .nba-slider-btn {
             position: absolute;
-            background-color: transparent;
+            background-color: rgba(255, 255, 255, 0.8);
             border: none;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             cursor: pointer;
-            font-size: 3rem;
+            font-size: 30px;
             font-weight: bold;
             color: black;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.3s;
+            transition: all 0.3s;
             pointer-events: auto;
             top: 50%;
             transform: translateY(-50%);
+            border-radius: 50%;
+            opacity: 0.9;
         }
         
         .nba-slider-btn:hover {
-            color: #333;
+            background-color: rgba(255, 255, 255, 1);
+            opacity: 1;
         }
         
         .nba-slider-btn.hidden {
@@ -911,18 +875,19 @@ HTML_TEMPLATE = '''
         .footer-section {
             background-color: white;
             color: white;
-            padding: 0 20px 60px 20px;
-            margin-top: 100px;
-            border-top: 1px solid #7A7777;
-            width: 100%;
+            padding: 0 10px 40px 10px;
+            margin-top: 80px;
+            border-top: 0.3px solid #7A7777;
         }
         
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(3, 1fr) 50px;
+            gap: 5px;
             max-width: 1200px;
-            margin: 30px auto 40px;
+            margin: 0 10px;
+            margin-bottom: 20px;
+            margin-top: 15px;
             font-weight: bold;
         }
         
@@ -932,68 +897,68 @@ HTML_TEMPLATE = '''
         }
         
         .footer-column-title {
-            font-size: 1rem;
+            font-size: 5px;
             font-weight: 500;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             text-transform: capitalize;
             letter-spacing: 0.1px;
             color: black;
             font-weight: bold;
+            
         }
         
         .footer-link {
             color: #7e7e7e;
             text-decoration: none;
-            font-size: 0.875rem;
-            margin-bottom: 8px;
+            font-size: 5px;
+            margin-bottom: 3px;
             transition: color 0.3s;
             font-weight: bold;
+            
         }
-        
-        .footer-link:hover {
+         .footer-link:hover {
             text-decoration: underline;
             color: black;
         }
+      
+        
         
         .footer-location {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.875rem;
-            color: black;
-            margin-top: 20px;
+            gap: 1px;
+            font-size: 5px;
+            color: white;
+            margin-top: 10px;
         }
         
         .location-icon {
-            width: 24px;
-            height: 24px;
+            width: 12px;
+            height: 12px;
         }
         
         .footer-bottom {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            padding-top: 20px;
+            padding-top: 1px;
             border-top: none;
             max-width: 1200px;
-            margin: 0 auto;
-            font-size: 0.875rem;
+            margin: 0 10px;
+            font-size: 6px;
             color: #7e7e7e;
             font-weight: bold;
-            gap: 20px;
         }
         
         .footer-bottom-left {
             display: flex;
-            gap: 30px;
+            gap: 20px;
             align-items: center;
-            flex-wrap: wrap;
         }
         
         .footer-bottom-right {
             display: flex;
-            gap: 20px;
+            gap: 15px;
         }
         
         .footer-bottom-link {
@@ -1001,55 +966,11 @@ HTML_TEMPLATE = '''
             text-decoration: none;
             transition: color 0.3s;
         }
-        
-        .footer-bottom-link:hover {
+           .footer-bottom-link:hover {
             text-decoration: underline;
             color: black;
         }
-
-        /* Responsive fixes */
-        @media (max-width: 1200px) {
-            .featured-images-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .icon-item {
-                flex: 0 0 calc(33.333% - 12px);
-                min-width: calc(33.333% - 12px);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links-container {
-                gap: 15px;
-            }
-            
-            .new-featured-link, .men-link, .women-link, .kids-link, .sale-link, .snkrs-link {
-                font-size: 0.875rem;
-            }
-            
-            .search-bar {
-                width: 120px;
-            }
-            
-            .featured-images-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .discover-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .sports-item, .nba-item {
-                flex: 0 0 80%;
-                min-width: 80%;
-            }
-            
-            .icon-item {
-                flex: 0 0 50%;
-                min-width: 50%;
-            }
-        }
+        
         
     </style>
 </head>
@@ -1079,7 +1000,7 @@ HTML_TEMPLATE = '''
                 <a href="/new-featured" class="new-featured-link">New & Featured</a>
                 <div class="new-featured-menu">
                     <div class="new-featured-content">
-                        <div class="new-featured-column">
+                     <div class="new-featured-column">
                             <div class="new-featured-heading">Featured</div>
                             <a href="#new-drops" class="new-featured-item">New & Upcoming Drops</a>
                             <a href="#new-arrivals" class="new-featured-item">New Arrivals</a>
@@ -1143,15 +1064,24 @@ HTML_TEMPLATE = '''
                             <a href="#jordan" class="men-item">Jordan</a>
                             <a href="#running" class="men-item">Running</a>
                             <a href="#basketball" class="men-item">Basketball</a>
+                            <a href="#basketball" class="men-item">Football</a>
+                            <a href="#basketball" class="men-item">Gym and Training</a>
+                            <a href="#basketball" class="men-item">Skateboarding</a>
+                            <a href="#basketball" class="men-item">Sandals and Slides</a>
+                            <a href="#basketball" class="men-item">Nike By You</a>
                         </div>
                         <div class="men-column">
                             <div class="men-heading">Clothing</div>
                             <a href="#all-clothing" class="men-item">All Clothing</a>
                             <a href="#tops-shirts" class="men-item">Tops and T-Shirts</a>
                             <a href="#shorts" class="men-item">Shorts</a>
-                            <a href="#hoodies" class="men-item">Hoodies</a>
+                            <a href="#hoodies" class="men-item">Hoodies and Sweatshirts</a>
+                            <a href="#jackets" class="men-item">Jackets and Gilets</a>
+                            <a href="#jackets" class="men-item">Pants and Leggings</a>
+                            <a href="#jackets" class="men-item">Jerseys and Kits</a>
+                            <a href="#jackets" class="men-item">Jordans</a>
+                            
                         </div>
-                    <
                         <div class="men-column">
                             <div class="men-heading">Shop By Sport</div>
                             <a href="#running" class="men-item">Running</a>
@@ -1213,6 +1143,7 @@ HTML_TEMPLATE = '''
                             <a href="#jackets" class="women-item">Modest Wear</a>
                             <a href="#jackets" class="women-item">Plus Size</a>
                             <a href="#jackets" class="women-item">Nike Maternity</a>
+                            
                         </div>
                            <div class="women-column">
                             <div class="women-heading">Shop By Sport</div>
@@ -1382,7 +1313,7 @@ HTML_TEMPLATE = '''
                 <span class="heart-filled">♥</span>
             </a>
             <a href="/basket" class="basket-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="10" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="9" cy="21" r="1"></circle>
                     <circle cx="20" cy="21" r="1"></circle>
                     <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -1471,87 +1402,83 @@ HTML_TEMPLATE = '''
         </div>
     </div>
     
-    <div class="sports-section">
-        <div class="content-wrapper">
-            <div class="sports-title">Live For Sports</div>
-            <div class="sports-slider-container">
-                <div class="sports-slider" id="sportsSlider">
-                    <div class="sports-item" data-sport="Running" data-image="/static/running.avif">
-                        <img src="/static/running.avif" alt="Sport 1" class="sports-image">
-                        <div class="sports-text">Running</div>
-                    </div>
-                    <div class="sports-item" data-sport="Basketball" data-image="/static/basketball.avif">
-                        <img src="/static/basketball.avif" alt="Sport 2" class="sports-image">
-                        <div class="sports-text">Basketball</div>
-                    </div>
-                    <div class="sports-item" data-sport="Football" data-image="/static/football.avif">
-                        <img src="/static/football.avif" alt="Sport 3" class="sports-image">
-                        <div class="sports-text">Football</div>
-                    </div>
-                    <div class="sports-item" data-sport="Golf" data-image="/static/golg.avif">
-                        <img src="/static/golg.avif" alt="Sport 4" class="sports-image">
-                        <div class="sports-text">Golf</div>
-                    </div>
-                    <div class="sports-item" data-sport="Skating" data-image="/static/skate.jpg">
-                        <img src="/static/skate.avif" alt="Sport 5" class="sports-image">
-                        <div class="sports-text">Skating</div>
-                    </div>
-                    <div class="sports-item" data-sport="Tennis" data-image="/static/tennis.avif">
-                        <img src="/static/tennis.avif" alt="Sport 6" class="sports-image">
-                        <div class="sports-text">Tennis</div>
-                    </div>
+<div class="sports-section">
+    <div class="content-wrapper">
+        <div class="sports-title">Live For Sports</div>
+        <div class="sports-slider-container">
+            <button class="slider-btn left" onclick="slideLeft()">‹</button>
+            <button class="slider-btn right" onclick="slideRight()">›</button>
+            <div class="sports-slider" id="sportsSlider">
+                <div class="sports-item" data-sport="Running" data-image="/static/running.avif">
+                    <img src="/static/running.avif" alt="Sport 1" class="sports-image">
+                    <div class="sports-text">Running</div>
+                </div>
+                <div class="sports-item" data-sport="Basketball" data-image="/static/basketball.avif">
+                    <img src="/static/basketball.avif" alt="Sport 2" class="sports-image">
+                    <div class="sports-text">Basketball</div>
+                </div>
+                <div class="sports-item" data-sport="Football" data-image="/static/football.avif">
+                    <img src="/static/football.avif" alt="Sport 3" class="sports-image">
+                    <div class="sports-text">Football</div>
+                </div>
+                <div class="sports-item" data-sport="Golf" data-image="/static/golg.avif">
+                    <img src="/static/golg.avif" alt="Sport 4" class="sports-image">
+                    <div class="sports-text">Golf</div>
+                </div>
+                <div class="sports-item" data-sport="Skating" data-image="/static/skate.avif">
+                    <img src="/static/skate.avif" alt="Sport 5" class="sports-image">
+                    <div class="sports-text">Skating</div>
+                </div>
+                <div class="sports-item" data-sport="Tennis" data-image="/static/tennis.avif">
+                    <img src="/static/tennis.avif" alt="Sport 6" class="sports-image">
+                    <div class="sports-text">Tennis</div>
                 </div>
             </div>
-            <div class="slider-controls">
-                <button class="slider-btn left" onclick="slideLeft()">‹</button>
-                <button class="slider-btn right" onclick="slideRight()">›</button>
-            </div>
-            
-            <div class="select-icons-title">Select By Icons</div>
-            <div class="icons-slider-container">
-                <div class="icons-slider" id="iconsSlider">
-                    <a href="#airmax" class="icon-item">
-                        <img src="/static/airmax.png" alt="Air Max" class="icon-image">
-                    </a>
-                    <a href="#airforce" class="icon-item">
-                        <img src="/static/airforce.png" alt="Air Force" class="icon-image">
-                    </a>
-                    <a href="#blazer" class="icon-item">
-                        <img src="/static/blazer.png" alt="Blazer" class="icon-image">
-                    </a>
-                    <a href="#dunk" class="icon-item">
-                        <img src="/static/dunk.png" alt="Dunk" class="icon-image">
-                    </a>
-                    <a href="#cortez" class="icon-item">
-                        <img src="/static/cortez.png" alt="Cortez" class="icon-image">
-                    </a>
-                    <a href="#killshot" class="icon-item">
-                        <img src="/static/killshot.png" alt="Killshot" class="icon-image">
-                    </a>
-                    <a href="#jordans" class="icon-item">
-                        <img src="/static/jordan.png" alt="Jordans" class="icon-image">
-                    </a>
-                    <a href="#metcon" class="icon-item">
-                        <img src="/static/metcon.png" alt="Metcon" class="icon-image">
-                    </a>
-                    <a href="#p6000" class="icon-item">
-                        <img src="/static/p6000.png" alt="P-6000" class="icon-image">
-                    </a>
-                </div>
-            </div>
-            <div class="icons-slider-controls">
-                <button class="icons-slider-btn left" onclick="slideIconsLeft()">‹</button>
-                <button class="icons-slider-btn right" onclick="slideIconsRight()">›</button>
+        </div>
+        
+        <div class="select-icons-title">Select By Icons</div>
+        <div class="icons-slider-container">
+            <button class="icons-slider-btn left" onclick="slideIconsLeft()">‹</button>
+            <button class="icons-slider-btn right" onclick="slideIconsRight()">›</button>
+            <div class="icons-slider" id="iconsSlider">
+                <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
+                    <img src="/static/airmax.png" alt="Air Max" class="icon-image">
+                </a>
+                <a href="#airforce" class="icon-item" data-icon="Air Force" data-image="/static/airforce.png">
+                    <img src="/static/airforce.png" alt="Air Force" class="icon-image">
+                </a>
+                <a href="#blazer" class="icon-item" data-icon="Blazer" data-image="/static/blazer.png">
+                    <img src="/static/blazer.png" alt="Blazer" class="icon-image">
+                </a>
+                <a href="#dunk" class="icon-item" data-icon="Dunk" data-image="/static/dunk.png">
+                    <img src="/static/dunk.png" alt="Dunk" class="icon-image">
+                </a>
+                <a href="#cortez" class="icon-item" data-icon="Cortez" data-image="/static/cortez.png">
+                    <img src="/static/cortez.png" alt="Cortez" class="icon-image">
+                </a>
+                <a href="#killshot" class="icon-item" data-icon="Killshot" data-image="/static/killshot.png">
+                    <img src="/static/killshot.png" alt="Killshot" class="icon-image">
+                </a>
+                <a href="#jordans" class="icon-item" data-icon="Jordans" data-image="/static/jordan.png">
+                    <img src="/static/jordan.png" alt="Jordans" class="icon-image">
+                </a>
+                <a href="#metcon" class="icon-item" data-icon="Metcon" data-image="/static/metcon.png">
+                    <img src="/static/metcon.png" alt="Metcon" class="icon-image">
+                </a>
+                <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
+                    <img src="/static/p6000.png" alt="P-6000" class="icon-image">
+                </a>
             </div>
         </div>
     </div>
-    
+</div>
+            
     <div class="nba-section">
         <div class="content-wrapper">
             <div class="nba-section-title">Shop Nike X NBA</div>
             <div class="nba-slider-container">
                 <div class="nba-slider" id="nbaSlider">
-                    <div class="nba-item">
+                <div class="nba-item">
                         <img src="/static/nba1.avif" alt="NBA 1" class="nba-image">
                         <div class="nba-item-title">Milwaukee Bucks Icon Edition</div>
                         <div class="nba-description">Men's Nike Dri-FIT NBA Swingman Jersey</div>
@@ -1581,12 +1508,12 @@ HTML_TEMPLATE = '''
                         <div class="nba-description">Nike Dri-FIT NBA Swingman Jersey</div>
                         <div class="nba-price">MRP : ₹ 5 995.00</div>
                     </div>
-                    
                     <div class="nba-item">
                         <img src="/static/nba6.avif" alt="NBA 6" class="nba-image">
                         <div class="nba-item-title">San Antonio Spurs Icon Edition</div>
                         <div class="nba-description">Men's Nike Dri-FIT NBA Swingman Jersey</div>
                         <div class="nba-price">MRP : ₹ 5 995.00</div>
+                    </div>
                     <div class="nba-item">
                         <img src="/static/nba7.avif" alt="NBA 7" class="nba-image">
                         <div class="nba-item-title">Team 13</div>
@@ -1700,6 +1627,7 @@ HTML_TEMPLATE = '''
     <div class="icons-popup" id="iconsPopup"></div>
     
     <script>
+        // Slideshow functionality
         let currentIndex = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
@@ -1723,6 +1651,7 @@ HTML_TEMPLATE = '''
         
         setInterval(autoSlide, 5000);
         
+        // Sports slider functionality
         const sportsSlider = document.getElementById('sportsSlider');
         const leftBtn = document.querySelector('.slider-btn.left');
         const rightBtn = document.querySelector('.slider-btn.right');
@@ -1731,13 +1660,13 @@ HTML_TEMPLATE = '''
             const scrollLeft = sportsSlider.scrollLeft;
             const maxScroll = sportsSlider.scrollWidth - sportsSlider.clientWidth;
             
-            if (scrollLeft <= 0) {
+            if (scrollLeft <= 5) {
                 leftBtn.classList.add('hidden');
             } else {
                 leftBtn.classList.remove('hidden');
             }
             
-            if (scrollLeft >= maxScroll - 1) {
+            if (scrollLeft >= maxScroll - 5) {
                 rightBtn.classList.add('hidden');
             } else {
                 rightBtn.classList.remove('hidden');
@@ -1761,8 +1690,9 @@ HTML_TEMPLATE = '''
         }
         
         sportsSlider.addEventListener('scroll', updateArrowVisibility);
-        updateArrowVisibility();
+        window.addEventListener('load', updateArrowVisibility);
         
+        // Sports popup functionality
         const sportsPopup = document.getElementById('sportsPopup');
         const sportsItems = document.querySelectorAll('.sports-item');
         let popupTimeout;
@@ -1780,11 +1710,11 @@ HTML_TEMPLATE = '''
                 `;
                 
                 sportsPopup.classList.add('active');
-                sportsPopup.style.top = (rect.top + window.scrollY - 370) + 'px';
-                sportsPopup.style.left = (rect.left + rect.width / 2 - 200) + 'px';
+                sportsPopup.style.top = (rect.top + window.scrollY - 270) + 'px';
+                sportsPopup.style.left = (rect.left + rect.width / 2 - 150) + 'px';
             });
             
-            item.addEventListener('mouseleave',() => {
+            item.addEventListener('mouseleave', () => {
                 popupTimeout = setTimeout(() => {
                     sportsPopup.classList.remove('active');
                 }, 100);
@@ -1801,124 +1731,75 @@ HTML_TEMPLATE = '''
             }, 100);
         });
         
+        // Icons slider functionality
         const iconsSlider = document.getElementById('iconsSlider');
-        const originalItems = Array.from(document.querySelectorAll('.icon-item'));
-        const itemWidth = iconsSlider.querySelector('.icon-item').offsetWidth + 16;
-        const totalItems = originalItems.length;
-        let currentPosition = totalItems * 30;
-        let isScrolling = false;
-        let offset = 30;
+        const iconsLeftBtn = document.querySelector('.icons-slider-btn.left');
+        const iconsRightBtn = document.querySelector('.icons-slider-btn.right');
         
-        function initializeInfiniteCarousel() {
-            iconsSlider.innerHTML = '';
+        function updateIconsArrowVisibility() {
+            const scrollLeft = iconsSlider.scrollLeft;
+            const maxScroll = iconsSlider.scrollWidth - iconsSlider.clientWidth;
             
-            for (let i = 0; i < offset; i++) {
-                originalItems.forEach(item => {
-                    const clone = item.cloneNode(true);
-                    clone.setAttribute('data-icon', item.querySelector('img').alt);
-                    clone.setAttribute('data-image', item.querySelector('img').src);
-                    iconsSlider.appendChild(clone);
-                });
+            if (scrollLeft <= 5) {
+                iconsLeftBtn.classList.add('hidden');
+            } else {
+                iconsLeftBtn.classList.remove('hidden');
             }
             
-            originalItems.forEach(item => {
-                const clone = item.cloneNode(true);
-                clone.setAttribute('data-icon', item.querySelector('img').alt);
-                clone.setAttribute('data-image', item.querySelector('img').src);
-                iconsSlider.appendChild(clone);
-            });
-            
-            for (let i = 0; i < offset; i++) {
-                originalItems.forEach(item => {
-                    const clone = item.cloneNode(true);
-                    clone.setAttribute('data-icon', item.querySelector('img').alt);
-                    clone.setAttribute('data-image', item.querySelector('img').src);
-                    iconsSlider.appendChild(clone);
-                });
+            if (scrollLeft >= maxScroll - 5) {
+                iconsRightBtn.classList.add('hidden');
+            } else {
+                iconsRightBtn.classList.remove('hidden');
             }
-            
-            iconsSlider.scrollLeft = itemWidth * currentPosition;
-            setupIconHoverEvents();
         }
         
         function slideIconsLeft() {
-            if (isScrolling) return;
-            isScrolling = true;
-            currentPosition--;
-            iconsSlider.scrollTo({
-                left: itemWidth * currentPosition,
+            iconsSlider.scrollBy({
+                left: -iconsSlider.offsetWidth / 4,
                 behavior: 'smooth'
             });
-            setTimeout(() => {
-                isScrolling = false;
-                resetToMiddleIfNeeded();
-            }, 400);
+            setTimeout(updateIconsArrowVisibility, 300);
         }
         
         function slideIconsRight() {
-            if (isScrolling) return;
-            isScrolling = true;
-            currentPosition++;
-            iconsSlider.scrollTo({
-                left: itemWidth * currentPosition,
+            iconsSlider.scrollBy({
+                left: iconsSlider.offsetWidth / 4,
                 behavior: 'smooth'
             });
-            setTimeout(() => {
-                isScrolling = false;
-                resetToMiddleIfNeeded();
-            }, 400);
+            setTimeout(updateIconsArrowVisibility, 300);
         }
         
-        function resetToMiddleIfNeeded() {
-            if (currentPosition < totalItems * 15) {
-                iconsSlider.scrollLeft = itemWidth * (totalItems * 30);
-                currentPosition = totalItems * 30;
-            } else if (currentPosition > totalItems * 45) {
-                iconsSlider.scrollLeft = itemWidth * (totalItems * 30);
-                currentPosition = totalItems * 30;
-            }
-        }
+        iconsSlider.addEventListener('scroll', updateIconsArrowVisibility);
+        window.addEventListener('load', updateIconsArrowVisibility);
         
-        window.addEventListener('load', initializeInfiniteCarousel);
-        
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') {
-                slideIconsLeft();
-            } else if (e.key === 'ArrowRight') {
-                slideIconsRight();
-            }
-        });
-        
+        // Icons popup functionality
         const iconsPopup = document.getElementById('iconsPopup');
+        const iconItems = document.querySelectorAll('.icon-item');
         let iconPopupTimeout;
         
-        function setupIconHoverEvents() {
-            const iconItems = iconsSlider.querySelectorAll('.icon-item');
-            
-            iconItems.forEach(item => {
-                item.addEventListener('mouseenter', (e) => {
-                    clearTimeout(iconPopupTimeout);
-                    const iconName = item.dataset.icon;
-                    const imageUrl = item.dataset.image;
-                    const rect = item.getBoundingClientRect();
-                    
-                    iconsPopup.innerHTML = `
-                        <img src="${imageUrl}" alt="${iconName}" class="icons-popup-image">
-                        <div class="icons-popup-text">${iconName}</div>
-                    `;
-                    
-                    iconsPopup.classList.add('active');
-                    iconsPopup.style.top = (rect.top + window.scrollY - 720) + 'px';
-                    iconsPopup.style.left = (rect.left + rect.width / 2 - 350) + 'px';
-                });
+        iconItems.forEach(item => {
+            item.addEventListener('mouseenter', (e) => {
+                clearTimeout(iconPopupTimeout);
+                const iconName = item.dataset.icon;
+                const imageUrl = item.dataset.image;
+                const rect = item.getBoundingClientRect();
                 
-                item.addEventListener('mouseleave', () => {
-                    iconPopupTimeout = setTimeout(() => {
-                        iconsPopup.classList.remove('active');
-                    }, 100);
-                });
+                iconsPopup.innerHTML = `
+                    <img src="${imageUrl}" alt="${iconName}" class="icons-popup-image">
+                    <div class="icons-popup-text">${iconName}</div>
+                `;
+                
+                iconsPopup.classList.add('active');
+                iconsPopup.style.top = (rect.top + window.scrollY - 440) + 'px';
+                iconsPopup.style.left = (rect.left + rect.width / 2 - 350) + 'px';
             });
-        }
+            
+            item.addEventListener('mouseleave', () => {
+                iconPopupTimeout = setTimeout(() => {
+                    iconsPopup.classList.remove('active');
+                }, 100);
+            });
+        });
         
         iconsPopup.addEventListener('mouseenter', () => {
             clearTimeout(iconPopupTimeout);
@@ -1930,6 +1811,7 @@ HTML_TEMPLATE = '''
             }, 100);
         });
         
+        // NBA slider functionality
         const nbaSlider = document.getElementById('nbaSlider');
         const nbaLeftBtn = document.querySelector('.nba-slider-btn.left');
         const nbaRightBtn = document.querySelector('.nba-slider-btn.right');
@@ -1938,13 +1820,13 @@ HTML_TEMPLATE = '''
             const scrollLeft = nbaSlider.scrollLeft;
             const maxScroll = nbaSlider.scrollWidth - nbaSlider.clientWidth;
             
-            if (scrollLeft <= 0) {
+            if (scrollLeft <= 5) {
                 nbaLeftBtn.classList.add('hidden');
             } else {
                 nbaLeftBtn.classList.remove('hidden');
             }
             
-            if (scrollLeft >= maxScroll - 1) {
+            if (scrollLeft >= maxScroll - 5) {
                 nbaRightBtn.classList.add('hidden');
             } else {
                 nbaRightBtn.classList.remove('hidden');
@@ -1968,7 +1850,7 @@ HTML_TEMPLATE = '''
         }
         
         nbaSlider.addEventListener('scroll', updateNbaArrowVisibility);
-        updateNbaArrowVisibility();
+        window.addEventListener('load', updateNbaArrowVisibility);
     </script>
 </body>
 </html>
@@ -2028,3 +1910,6 @@ def basket():
 
 if __name__ == '__main__':
     app.run(debug=True)
+                    
+                       
+                        
