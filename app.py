@@ -27,6 +27,7 @@ HTML_TEMPLATE = '''
             color: black;
             font-family: Arial, sans-serif;
             font-size: 1rem;
+            overflow-x: hidden;
         }
         
         .header-container {
@@ -37,6 +38,7 @@ HTML_TEMPLATE = '''
             padding: 0;
             position: relative;
             height: 40px;
+            width: 100%;
         }
         
         .logo-container {
@@ -64,6 +66,7 @@ HTML_TEMPLATE = '''
             height: 40px;
             display: flex;
             align-items: center;
+            white-space: nowrap;
         }
         
         .top-right-menu {
@@ -92,7 +95,7 @@ HTML_TEMPLATE = '''
         
         .nav-menu {
             text-align: center;
-            margin-top: 15px;
+            margin-top: 0;
             background-color: white;
             padding: 0 40px;
             height: 60px;
@@ -102,6 +105,7 @@ HTML_TEMPLATE = '''
             position: sticky;
             z-index: 100;
             top: 0;
+            width: 100%;
         }
         
         .nav-logo {
@@ -110,6 +114,7 @@ HTML_TEMPLATE = '''
             display: flex;
             align-items: center;
             margin-right: 60px;
+            flex-shrink: 0;
         }
         
         .nav-logo img {
@@ -122,6 +127,7 @@ HTML_TEMPLATE = '''
             gap: 30px;
             align-items: center;
             flex: 1;
+            min-width: 0;
         }
         
         .nav-link {
@@ -155,6 +161,7 @@ HTML_TEMPLATE = '''
             padding: 1px;
             cursor: pointer;
             text-align: center;
+            white-space: nowrap;
         }
         
         .new-featured-link:hover, .men-link:hover, .women-link:hover, .kids-link:hover, .sale-link:hover, .snkrs-link:hover {
@@ -164,7 +171,7 @@ HTML_TEMPLATE = '''
         .new-featured-menu, .men-menu, .women-menu, .kids-menu, .sale-menu, .snkrs-menu {
             display: none;
             position: fixed;
-            top: 115px;
+            top: 100px;
             left: 0;
             right: 0;
             background-color: white;
@@ -176,6 +183,8 @@ HTML_TEMPLATE = '''
             white-space: normal;
             animation: slideDown 0.3s ease-out;
             margin: 0;
+            max-height: 400px;
+            overflow-y: auto;
         }
         
         .new-featured-trigger:hover .new-featured-menu, .men-trigger:hover .men-menu,
@@ -188,19 +197,20 @@ HTML_TEMPLATE = '''
             display: grid;
             gap: 40px;
             margin: 0 auto;
-            padding: 0 100px;
+            padding: 0 40px;
+            max-width: 1400px;
         }
         
         .new-featured-content, .men-content, .women-content, .kids-content, .sale-content {
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         }
         
         .snkrs-content {
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         }
         
         .new-featured-content {
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         }
         
         .new-featured-column, .men-column, .women-column, .kids-column, .sale-column, .snkrs-column {
@@ -253,6 +263,7 @@ HTML_TEMPLATE = '''
             font-size: 1rem;
             margin-left: auto;
             margin-right: 0;
+            flex-shrink: 0;
         }
         
         .search-bar {
@@ -302,7 +313,7 @@ HTML_TEMPLATE = '''
             position: relative;
             width: 100%;
             height: 100vh;
-            margin-top: 15px;
+            margin-top: 0;
             overflow: hidden;
         }
         
@@ -341,16 +352,19 @@ HTML_TEMPLATE = '''
         .content-wrapper {
             padding: 0 40px;
             margin: 0 auto;
+            max-width: 1600px;
         }
         
         .features-section {
             background-color: white;
             padding: 40px 0;
+            width: 100%;
         }
         
         .athlete-section {
             background-color: white;
             padding: 40px 0;
+            width: 100%;
         }
         
         .athlete-title {
@@ -376,6 +390,7 @@ HTML_TEMPLATE = '''
             width: 100%;
             height: 300px;
             object-fit: cover;
+            display: block;
         }
         
         .athlete-shop-button {
@@ -402,6 +417,7 @@ HTML_TEMPLATE = '''
             background-color: white;
             padding: 40px 0;
             text-align: center;
+            width: 100%;
         }
 
         .featured-main-title {
@@ -439,6 +455,7 @@ HTML_TEMPLATE = '''
         .discover-section {
             background-color: white;
             padding: 40px 0;
+            width: 100%;
         }
 
         .discover-title {
@@ -451,7 +468,7 @@ HTML_TEMPLATE = '''
         .discover-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 0;
             width: 100%;
             margin-bottom: 40px;
         }
@@ -463,7 +480,7 @@ HTML_TEMPLATE = '''
 
         .discover-image {
             width: 100%;
-            height: 400px;
+            height: 500px;
             object-fit: cover;
             display: block;
         }
@@ -485,17 +502,20 @@ HTML_TEMPLATE = '''
         
         .featured-image-wrapper {
             position: relative;
+            width: 100%;
         }
         
         .featured-image {
             width: 100%;
             height: 350px;
             object-fit: cover;
+            display: block;
         }
         
         .gear-section {
             background-color: white;
             padding: 40px 0;
+            width: 100%;
         }
         
         .gear-title {
@@ -516,11 +536,13 @@ HTML_TEMPLATE = '''
             width: 100%;
             height: 500px;
             object-fit: cover;
+            display: block;
         }
         
         .sports-section {
             background-color: white;
             padding: 40px 0;
+            width: 100%;
         }
         
         .sports-title {
@@ -533,6 +555,7 @@ HTML_TEMPLATE = '''
         .sports-slider-container {
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
         
         .sports-slider {
@@ -642,6 +665,7 @@ HTML_TEMPLATE = '''
             position: relative;
             margin-top: -200px;
             pointer-events: none;
+            margin-bottom: 180px;
         }
         
         .slider-btn {
@@ -684,7 +708,7 @@ HTML_TEMPLATE = '''
             font-size: 1.5rem;
             letter-spacing: 0.1px;
             text-align: left;
-            margin-top: 80px;
+            margin-top: 40px;
             margin-bottom: 20px;
         }
         
@@ -692,6 +716,7 @@ HTML_TEMPLATE = '''
             position: relative;
             overflow: hidden;
             margin-bottom: 40px;
+            width: 100%;
         }
         
         .icons-slider {
@@ -772,6 +797,7 @@ HTML_TEMPLATE = '''
         .nba-section {
             background-color: white;
             padding: 40px 0 80px 0;
+            width: 100%;
         }
         
         .nba-section-title {
@@ -784,6 +810,7 @@ HTML_TEMPLATE = '''
         .nba-slider-container {
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
         
         .nba-slider {
@@ -842,6 +869,7 @@ HTML_TEMPLATE = '''
             position: relative;
             margin-top: -200px;
             pointer-events: none;
+            margin-bottom: 180px;
         }
         
         .nba-slider-btn {
@@ -886,16 +914,15 @@ HTML_TEMPLATE = '''
             padding: 0 20px 60px 20px;
             margin-top: 100px;
             border-top: 1px solid #7A7777;
+            width: 100%;
         }
         
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(3, 1fr) 100px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 40px;
             max-width: 1200px;
-            margin: 0 20px;
-            margin-bottom: 40px;
-            margin-top: 30px;
+            margin: 30px auto 40px;
             font-weight: bold;
         }
         
@@ -933,7 +960,7 @@ HTML_TEMPLATE = '''
             align-items: center;
             gap: 8px;
             font-size: 0.875rem;
-            color: white;
+            color: black;
             margin-top: 20px;
         }
         
@@ -946,19 +973,22 @@ HTML_TEMPLATE = '''
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
             padding-top: 20px;
             border-top: none;
             max-width: 1200px;
-            margin: 0 20px;
+            margin: 0 auto;
             font-size: 0.875rem;
             color: #7e7e7e;
             font-weight: bold;
+            gap: 20px;
         }
         
         .footer-bottom-left {
             display: flex;
             gap: 30px;
             align-items: center;
+            flex-wrap: wrap;
         }
         
         .footer-bottom-right {
@@ -975,6 +1005,50 @@ HTML_TEMPLATE = '''
         .footer-bottom-link:hover {
             text-decoration: underline;
             color: black;
+        }
+
+        /* Responsive fixes */
+        @media (max-width: 1200px) {
+            .featured-images-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .icon-item {
+                flex: 0 0 calc(33.333% - 12px);
+                min-width: calc(33.333% - 12px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links-container {
+                gap: 15px;
+            }
+            
+            .new-featured-link, .men-link, .women-link, .kids-link, .sale-link, .snkrs-link {
+                font-size: 0.875rem;
+            }
+            
+            .search-bar {
+                width: 120px;
+            }
+            
+            .featured-images-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .discover-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .sports-item, .nba-item {
+                flex: 0 0 80%;
+                min-width: 80%;
+            }
+            
+            .icon-item {
+                flex: 0 0 50%;
+                min-width: 50%;
+            }
         }
         
     </style>
@@ -1069,23 +1143,15 @@ HTML_TEMPLATE = '''
                             <a href="#jordan" class="men-item">Jordan</a>
                             <a href="#running" class="men-item">Running</a>
                             <a href="#basketball" class="men-item">Basketball</a>
-                            <a href="#basketball" class="men-item">Football</a>
-                            <a href="#basketball" class="men-item">Gym and Training</a>
-                            <a href="#basketball" class="men-item">Skateboarding</a>
-                            <a href="#basketball" class="men-item">Sandals and Slides</a>
-                            <a href="#basketball" class="men-item">Nike By You</a>
                         </div>
                         <div class="men-column">
                             <div class="men-heading">Clothing</div>
                             <a href="#all-clothing" class="men-item">All Clothing</a>
                             <a href="#tops-shirts" class="men-item">Tops and T-Shirts</a>
                             <a href="#shorts" class="men-item">Shorts</a>
-                            <a href="#hoodies" class="men-item">Hoodies and Sweatshirts</a>
-                            <a href="#jackets" class="men-item">Jackets and Gilets</a>
-                            <a href="#jackets" class="men-item">Pants and Leggings</a>
-                            <a href="#jackets" class="men-item">Jerseys and Kits</a>
-                            <a href="#jackets" class="men-item">Jordans</a>
+                            <a href="#hoodies" class="men-item">Hoodies</a>
                         </div>
+                    <
                         <div class="men-column">
                             <div class="men-heading">Shop By Sport</div>
                             <a href="#running" class="men-item">Running</a>
@@ -1961,5 +2027,4 @@ def basket():
     return "<h1>Shopping Basket</h1><p>Your basket is empty</p>"
 
 if __name__ == '__main__':
-    app.run(debug=False)
-                    
+    app.run(debug=True)
