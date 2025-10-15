@@ -1327,9 +1327,8 @@ HTML_TEMPLATE = '''
     </div>
     
     <div class="slideshow-container">
-        <img src="/static/image1.avif" class="slide active" alt="SS 1">
-        <img src="/static/image2.avif" class="slide" alt="SS 2">
-        <img src="/static/ss.webp" class="slide" alt="SS 3">
+        <img src="/static/ssf1.avif" class="slide active" alt="SS 1">
+        <img src="/static/ssf2.avif" class="slide" alt="SS 2">
         <button class="shop-button">Shop</button>
     </div>
 
@@ -1339,11 +1338,9 @@ HTML_TEMPLATE = '''
             <div class="athlete-images-container">
                 <div class="athlete-image-wrapper">
                     <img src="/static/ath.avif" alt="Athlete 1" class="athlete-image">
-                    <button class="athlete-shop-button">Shop</button>
                 </div>
                 <div class="athlete-image-wrapper">
                     <img src="/static/ath2.avif" alt="Athlete 2" class="athlete-image">
-                    <button class="athlete-shop-button">Shop</button>
                 </div>
             </div>
         </div>
@@ -1457,8 +1454,8 @@ HTML_TEMPLATE = '''
                 <a href="#dunk" class="icon-item" data-icon="Dunk" data-image="/static/dunk.png">
                     <img src="/static/dunk.png" alt="Dunk" class="icon-image">
                 </a>
-                <a href="#cortez" class="icon-item" data-icon="Cortez" data-image="/static/cortez.png">
-                    <img src="/static/cortez.png" alt="Cortez" class="icon-image">
+                <a href="#cortez" class="icon-item" data-icon="Cortez" data-image="/static/cortezz.png">
+                    <img src="/static/cortezz.png" alt="Cortez" class="icon-image">
                 </a>
                 <a href="#killshot" class="icon-item" data-icon="Killshot" data-image="/static/killshot.png">
                     <img src="/static/killshot.png" alt="Killshot" class="icon-image">
