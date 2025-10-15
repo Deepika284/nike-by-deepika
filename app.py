@@ -480,7 +480,7 @@ HTML_TEMPLATE = '''
 
         .discover-image {
             width: 100%;
-            height: 500px;
+            height: 700px;
             object-fit: cover;
             display: block;
         }
@@ -582,7 +582,7 @@ HTML_TEMPLATE = '''
             height: 350px;
             object-fit: cover;
             display: block;
-            margin-bottom: 15px;
+            margin-bottom: 30px;
             transition: opacity 0.3s ease;
         }
         
@@ -708,7 +708,7 @@ HTML_TEMPLATE = '''
             font-size: 1.5rem;
             letter-spacing: 0.1px;
             text-align: left;
-            margin-top: 200px;
+            margin-top: 10px;
             margin-bottom: 40px;
         }
         
@@ -749,7 +749,7 @@ HTML_TEMPLATE = '''
         
         .icon-image {
             width: 100%;
-            height: 300px;
+            height: 400px;
             object-fit: cover;
             display: block;
         }
@@ -834,7 +834,7 @@ HTML_TEMPLATE = '''
         
         .nba-image {
             width: 100%;
-            height: 350px;
+            height: 450px;
             object-fit: cover;
             display: block;
             transition: opacity 0.3s ease;
@@ -1130,26 +1130,35 @@ HTML_TEMPLATE = '''
                 <a href="/men" class="men-link">Men</a>
                 <div class="men-menu">
                     <div class="men-content">
-                        <div class="men-column">
+                       <div class="men-column">
                             <div class="men-heading">Featured</div>
                             <a href="#new-arrivals" class="men-item">New Arrivals</a>
                             <a href="#bestsellers" class="men-item">Bestsellers</a>
                             <a href="#shop-all-sale" class="men-item">Shop All Sale</a>
                         </div>
-                        <div class="men-column">
+                         <div class="men-column">
                             <div class="men-heading">Shoes</div>
                             <a href="#all-shoes" class="men-item">All Shoes</a>
                             <a href="#lifestyle" class="men-item">Lifestyle</a>
                             <a href="#jordan" class="men-item">Jordan</a>
                             <a href="#running" class="men-item">Running</a>
                             <a href="#basketball" class="men-item">Basketball</a>
+                            <a href="#basketball" class="men-item">Football</a>
+                            <a href="#basketball" class="men-item">Gym and Training</a>
+                            <a href="#basketball" class="men-item">Skateboarding</a>
+                            <a href="#basketball" class="men-item">Sandals and Slides</a>
+                            <a href="#basketball" class="men-item">Nike By You</a>
                         </div>
                         <div class="men-column">
                             <div class="men-heading">Clothing</div>
                             <a href="#all-clothing" class="men-item">All Clothing</a>
                             <a href="#tops-shirts" class="men-item">Tops and T-Shirts</a>
                             <a href="#shorts" class="men-item">Shorts</a>
-                            <a href="#hoodies" class="men-item">Hoodies</a>
+                            <a href="#hoodies" class="men-item">Hoodies and Sweatshirts</a>
+                            <a href="#jackets" class="men-item">Jackets and Gilets</a>
+                            <a href="#jackets" class="men-item">Pants and Leggings</a>
+                            <a href="#jackets" class="men-item">Jerseys and Kits</a>
+                            <a href="#jackets" class="men-item">Jordans</a>
                         </div>
                         <div class="men-column">
                             <div class="men-heading">Shop By Sport</div>
@@ -1423,7 +1432,7 @@ HTML_TEMPLATE = '''
 
     <div class="discover-section">
         <div class="content-wrapper">
-            <div class="discover-title">Discover</div>
+            <div class="discover-title">Featured</div>
             <div class="discover-grid">
                 <div class="discover-item">
                     <img src="/static/f1.png" alt="Discover 1" class="discover-image">
