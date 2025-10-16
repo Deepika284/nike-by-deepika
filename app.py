@@ -382,15 +382,15 @@ HTML_TEMPLATE = '''
         }
 
         .featured-main-title {
-            font-size: 12px;
+            font-size: 24px;
             font-weight: bold;
             letter-spacing: 0.5px;
-            margin-bottom: 2px;
+            margin-bottom: 5px;
             text-transform: uppercase;
         }
 
         .featured-subtitle {
-            font-size: 10px;
+            font-size: 20px;
             color: #757575;
             letter-spacing: 0.5px;
             margin-bottom: 8px;
@@ -399,10 +399,10 @@ HTML_TEMPLATE = '''
         .featured-cta-button {
             background-color: black;
             color: white;
-            padding: 4px 4px;
+            padding: 4px 6px;
             border: none;
             cursor: pointer;
-            font-size: 8px;
+            font-size: 15px;
             text-transform: uppercase;
             letter-spacing: 0.3px;
             border-radius: 50px;
@@ -441,7 +441,7 @@ HTML_TEMPLATE = '''
 
         .discover-image {
             width: 100%;
-            height: 650px;
+            height: 60px;
             object-fit: cover;
             display: block;
         }
