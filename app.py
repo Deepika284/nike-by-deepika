@@ -3,13 +3,15 @@ import os
 
 app = Flask(__name__)
 
+if not os.path.exists('static'):
+    os.makedirs('static')
+
 HTML_TEMPLATE = '''
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0, user-scalable=yes">
-    <meta name="theme-color" content="#000000">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nike Store</title>
     <style>
         * {
@@ -18,70 +20,49 @@ HTML_TEMPLATE = '''
             box-sizing: border-box;
         }
         
-        html, body {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
             background-color: #F2EDED;
             color: black;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-            overflow-x: hidden;
+            font-family: Arial, sans-serif;
         }
         
+        /* Header - Responsive */
         .header-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
             background-color: black;
-            padding: 0;
-            position: relative;
-            height: 20px;
-            width: 100%;
+            padding: 8px 15px;
+            min-height: 40px;
         }
         
         .logo-container {
-            height: 20px;
             display: flex;
             align-items: center;
-            padding: 0 5px;
-            flex-shrink: 0;
         }
         
         .logo-container img {
-            width: 25px;
-            height: 15px;
+            width: 40px;
+            height: 24px;
         }
         
         .text-container {
             text-align: center;
-            font-size: 7px;
+            font-size: 14px;
             font-weight: bold;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            color: white;
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            color: white;
-            padding: 2px 15px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            white-space: nowrap;
         }
         
         .top-right-menu {
             display: flex;
             align-items: center;
-            gap: 2px;
-            font-size: 5px;
-            margin-right: 10px;
+            gap: 15px;
+            font-size: 12px;
             color: white;
-            padding: 2px 8px;
-            height: 20px;
-            flex-shrink: 0;
         }
         
         .top-right-menu a {
@@ -97,158 +78,126 @@ HTML_TEMPLATE = '''
             color: white;
         }
         
+        /* Navigation - Responsive */
         .nav-menu {
-            text-align: center;
-            margin-top: 15px;
             background-color: white;
-            padding: 0 20px;
-            height: 20px;
+            padding: 0 40px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: flex-start;
             position: sticky;
             z-index: 100;
             top: 0;
-            width: 100%;
-            overflow-x: auto;
-            overflow-y: hidden;
-        }
-        
-        .nav-menu::-webkit-scrollbar {
-            height: 0;
+            gap: 20px;
         }
         
         .nav-logo {
-            width: 25px;
-            height: 15px;
             display: flex;
             align-items: center;
-            margin-right: 30px;
-            flex-shrink: 0;
+            margin-right: 40px;
         }
         
         .nav-logo img {
-            width: 25px;
-            height: 15px;
+            width: 60px;
+            height: 36px;
         }
         
         .nav-links-container {
             display: flex;
-            gap: 15px;
+            gap: 25px;
             align-items: center;
             flex: 1;
         }
         
-        .nav-link {
+        .nav-link,
+        .new-featured-link, .men-link, .women-link, 
+        .kids-link, .sale-link, .snkrs-link {
             color: black;
             text-decoration: none;
-            font-size: 5px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: bold;
-            padding: 5px;
-            position: relative;
-            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 8px 12px;
+            cursor: pointer;
         }
         
-        .nav-link:hover {
-            text-decoration: underline;
+        .nav-link:hover,
+        .new-featured-link:hover, .men-link:hover, 
+        .women-link:hover, .kids-link:hover, 
+        .sale-link:hover, .snkrs-link:hover {
+            border-bottom: 2px solid black;
         }
         
-        .new-featured-trigger, .men-trigger, .women-trigger, .kids-trigger, .sale-trigger, .snkrs-trigger {
+        .new-featured-trigger, .men-trigger, .women-trigger, 
+        .kids-trigger, .sale-trigger, .snkrs-trigger {
             position: relative;
             display: inline-block;
-            flex-shrink: 0;
         }
         
-        .new-featured-link, .men-link, .women-link, .kids-link, .sale-link, .snkrs-link {
-            color: black;
-            text-decoration: none;
-            font-size: 5px;
-            text-transform: capitalize;
-            letter-spacing: 0.2px;
-            font-weight: bold;
-            padding: 0.5px;
-            cursor: pointer;
-            text-align: center;
-        }
-        
-        .new-featured-link:hover, .men-link:hover, .women-link:hover, .kids-link:hover, .sale-link:hover, .snkrs-link:hover {
-            text-decoration: underline;
-        }
-        
-        .new-featured-menu, .men-menu, .women-menu, .kids-menu, .sale-menu, .snkrs-menu {
+        /* Dropdown Menus - Responsive */
+        .new-featured-menu, .men-menu, .women-menu, 
+        .kids-menu, .sale-menu, .snkrs-menu {
             display: none;
             position: fixed;
-            top: 55px;
+            top: 100px;
             left: 0;
             right: 0;
             background-color: white;
-            color: black;
-            padding: 10px 10px;
+            padding: 40px 60px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
             z-index: 200;
-            width: 100%;
-            white-space: normal;
             animation: slideDown 0.3s ease-out;
-            margin: 0;
-            max-height: 80vh;
-            overflow-y: auto;
         }
         
-        .new-featured-trigger:hover .new-featured-menu, .men-trigger:hover .men-menu,
-        .women-trigger:hover .women-menu, .kids-trigger:hover .kids-menu,
-        .sale-trigger:hover .sale-menu, .snkrs-trigger:hover .snkrs-menu {
+        .new-featured-trigger:hover .new-featured-menu, 
+        .men-trigger:hover .men-menu,
+        .women-trigger:hover .women-menu, 
+        .kids-trigger:hover .kids-menu,
+        .sale-trigger:hover .sale-menu, 
+        .snkrs-trigger:hover .snkrs-menu {
             display: block;
         }
         
-        .new-featured-content, .men-content, .women-content, .kids-content, .sale-content, .snkrs-content {
+        .new-featured-content, .men-content, .women-content, 
+        .kids-content, .sale-content, .snkrs-content {
             display: grid;
-            gap: 10px;
+            gap: 40px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .new-featured-content, .men-content, .women-content, .kids-content, .sale-content {
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-        }
-        
-        .snkrs-content {
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
         }
         
         .new-featured-content {
-            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         }
         
-        .new-featured-column, .men-column, .women-column, .kids-column, .sale-column, .snkrs-column {
-            display: flex;
-            flex-direction: column;
-            text-align: left;
+        .men-content, .women-content, .kids-content, .sale-content {
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
         }
         
-        .new-featured-heading, .men-heading, .women-heading, .kids-heading, .sale-heading, .snkrs-heading {
-            font-size: 5px;
-            font-weight: bolder;
-            margin-bottom: 10px;
-            text-transform: capitalize;
-            letter-spacing: 0.1px;
+        .snkrs-content {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+        
+        .new-featured-heading, .men-heading, .women-heading, 
+        .kids-heading, .sale-heading, .snkrs-heading {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 20px;
             color: black;
         }
         
-        .new-featured-item, .men-item, .women-item, .kids-item, .sale-item, .snkrs-item {
-            font-size: 4px;
-            font-weight: bold;
-            margin-bottom: 4px;
-            text-transform: capitalize;
+        .new-featured-item, .men-item, .women-item, 
+        .kids-item, .sale-item, .snkrs-item {
+            font-size: 14px;
+            margin-bottom: 12px;
             color: #666;
             text-decoration: none;
-            letter-spacing: 0.1px;
             display: block;
-            gap: 5px;
         }
         
-        .new-featured-item:hover, .men-item:hover, .women-item:hover, .kids-item:hover, .sale-item:hover, .snkrs-item:hover {
+        .new-featured-item:hover, .men-item:hover, 
+        .women-item:hover, .kids-item:hover, 
+        .sale-item:hover, .snkrs-item:hover {
             color: black;
             text-decoration: underline;
         }
@@ -264,29 +213,22 @@ HTML_TEMPLATE = '''
             }
         }
         
+        /* Search Container - Responsive */
         .search-container {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 5px;
+            gap: 20px;
             margin-left: auto;
-            margin-right: 0;
-            flex-shrink: 0;
         }
         
         .search-bar {
             background-color: #f5f5f5;
             border: 1px solid #ccc;
             border-radius: 20px;
-            padding: 3px 15px;
-            font-size: 5px;
-            color: #333;
-            width: 65px;
+            padding: 8px 20px;
+            font-size: 14px;
+            width: 200px;
             outline: none;
-        }
-        
-        .search-bar::placeholder {
-            color: #999;
         }
         
         .search-bar:focus {
@@ -295,12 +237,9 @@ HTML_TEMPLATE = '''
         }
         
         .favorites-icon, .basket-icon {
-            font-size: 10px;
+            font-size: 24px;
             cursor: pointer;
-            text-decoration: none;
             color: black;
-            display: flex;
-            align-items: center;
         }
         
         .favorites-icon:hover .heart-outline {
@@ -319,30 +258,28 @@ HTML_TEMPLATE = '''
             display: none;
         }
         
+        /* Slideshow - Responsive */
         .slideshow-container {
             position: relative;
             width: 100%;
-            height: 100vh;
-            margin-top: 15px;
+            margin-top: 20px;
             overflow: hidden;
         }
         
         .shop-button {
             position: absolute;
-            bottom: 20px;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
             background-color: white;
             color: black;
-            padding: 8px 16px;
+            padding: 12px 24px;
             border: none;
             cursor: pointer;
-            font-size: 12px;
-            text-transform: capitalize;
-            letter-spacing: 0.1px;
+            font-size: 16px;
+            font-weight: 600;
             z-index: 10;
             border-radius: 50px;
-            font-weight: bold;
         }
         
         .shop-button:hover {
@@ -352,7 +289,7 @@ HTML_TEMPLATE = '''
         .slide {
             display: none;
             width: 100%;
-            height: 100%;
+            height: auto;
             object-fit: cover;
         }
         
@@ -360,479 +297,180 @@ HTML_TEMPLATE = '''
             display: block;
         }
         
+        /* Content Wrapper - Responsive */
         .content-wrapper {
-            padding: 0 20px;
+            padding: 0 40px;
+            max-width: 1400px;
             margin: 0 auto;
-            width: 100%;
         }
         
-        .features-section, .athlete-section, .featured-heading-section, .discover-section, .gear-section, .sports-section, .nba-section, .footer-section {
-            background-color: white;
-            width: 100%;
-        }
-        
-        .athlete-section {
-            padding: 20px 0;
-        }
-        
-        .athlete-title {
-            font-size: 14px;
-            letter-spacing: 0.1px;
-            margin-bottom: 15px;
-            margin-top: 15px;
+        /* Sections - Responsive Typography */
+        .athlete-title, .features-title, .gear-title, 
+        .sports-title, .discover-title, .nba-section-title,
+        .select-icons-title {
+            font-size: 28px;
             font-weight: bold;
+            margin: 30px 0 20px 0;
         }
         
+        .featured-main-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .featured-subtitle {
+            font-size: 24px;
+            color: #757575;
+            margin-bottom: 20px;
+        }
+        
+        .featured-cta-button {
+            background-color: black;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 50px;
+        }
+        
+        .featured-cta-button:hover {
+            background-color: #333;
+        }
+        
+        /* Image Grids - Responsive */
         .athlete-images-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 10px;
-            width: 100%;
-            margin-bottom: 0;
-        }
-        
-        .athlete-image-wrapper {
-            position: relative;
+            margin-bottom: 40px;
         }
         
         .athlete-image {
             width: 100%;
-            height: 200px;
+            height: 400px;
             object-fit: cover;
         }
         
-        .athlete-shop-button {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            background-color: white;
-            color: black;
-            padding: 6px 12px;
-            border: none;
-            cursor: pointer;
-            font-size: 10px;
-            text-transform: capitalize;
-            letter-spacing: 0.1px;
-            z-index: 10;
-            border-radius: 50px;
-            font-weight: bold;
-        }
-        
-        .athlete-shop-button:hover {
-            background-color: #f0f0f0;
-        }
-
-        .featured-heading-section {
-            padding: 30px 0;
-            text-align: center;
-        }
-
-        .featured-main-title {
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 0.5px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .featured-subtitle {
-            font-size: 14px;
-            color: #757575;
-            letter-spacing: 0.5px;
-            margin-bottom: 15px;
-        }
-
-        .featured-cta-button {
-            background-color: black;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            border-radius: 50px;
-            transition: background-color 0.3s;
-            font-weight: bold;
-        }
-
-        .featured-cta-button:hover {
-            background-color: #333;
-        }
-
-        .discover-section {
-            padding: 20px 0;
-        }
-
-        .discover-title {
-            font-size: 14px;
-            letter-spacing: 0.1px;
-            margin-bottom: 15px;
-            margin-top: 0px;
-            font-weight: bold;
-        }
-
         .discover-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 5px;
-            width: 100%;
-            margin-bottom: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 10px;
+            margin-bottom: 40px;
         }
-
-        .discover-item {
-            position: relative;
-            width: 100%;
-        }
-
+        
         .discover-image {
             width: 100%;
-            height: 200px;
+            height: 320px;
             object-fit: cover;
-            display: block;
-        }
-        
-        .features-section {
-            padding: 20px 0;
-        }
-        
-        .features-title {
-            font-size: 14px;
-            letter-spacing: 0.1px;
-            margin-bottom: 15px;
-            margin-top: 0px;
-            font-weight: bold;
         }
         
         .featured-images-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 5px;
-            width: 100%;
-            margin-bottom: 10px;
-        }
-        
-        .featured-image-wrapper {
-            position: relative;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+            margin-bottom: 40px;
         }
         
         .featured-image {
             width: 100%;
-            height: 150px;
+            height: 280px;
             object-fit: cover;
-        }
-        
-        .gear-section {
-            padding: 20px 0;
-        }
-        
-        .gear-title {
-            font-size: 14px;
-            letter-spacing: 0.1px;
-            margin-bottom: 15px;
-            margin-top: 0px;
-            font-weight: bold;
-        }
-        
-        .gear-image-container {
-            width: 100%;
-            margin-bottom: 10px;
-            margin-top: 10px;
-            position: relative;
         }
         
         .gear-image {
             width: 100%;
-            height: auto;
-            max-height: 350px;
+            height: 500px;
             object-fit: cover;
+            margin-bottom: 40px;
         }
         
-        .sports-section {
-            background-color: white;
+        /* Sliders - Responsive */
+        .sports-slider-container, .icons-slider-container {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 80px;
+        }
+        
+        .sports-slider, .icons-slider {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
             padding: 20px 0;
         }
         
-        .sports-title {
-            font-size: 14px;
-            letter-spacing: 0.1px;
-            margin-bottom: 15px;
-            margin-top: 0px;
-            font-weight: bold;
-        }
-        
-        .sports-slider-container {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .sports-slider {
-            display: flex;
-            gap: 5px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            scrollbar-width: none;
-            padding-bottom: 5px;
-        }
-        
-        .sports-slider::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .sports-item {
-            flex: 0 0 calc(50% - 3px);
-            min-width: calc(50% - 3px);
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .sports-image {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            display: block;
-            margin-bottom: 5px;
-            transition: opacity 0.3s ease;
-            border-radius: 5px;
-        }
-        
-        .sports-item:hover .sports-image {
-            opacity: 0.7;
-        }
-        
-        .sports-text {
-            text-align: center;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: bold;
-        }
-        
-        .sports-popup {
-            position: fixed;
-            display: none;
-            background-color: white;
-            border: 1px solid #ddd;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            z-index: 1000;
-            border-radius: 8px;
-            overflow: hidden;
-            max-width: 300px;
-            pointer-events: none;
-        }
-        
-        .sports-popup.active {
-            display: block;
-        }
-        
-        .sports-popup-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        
-        .sports-popup-text {
-            padding: 10px;
-            text-align: center;
-            font-size: 12px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .icons-popup {
-            position: fixed;
-            display: none;
-            background-color: white;
-            border: 1px solid #ddd;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            z-index: 5;
-            border-radius: 12px;
-            overflow: hidden;
-            max-width: 90vw;
-            pointer-events: none;
-        }
-        
-        .icons-popup.active {
-            display: block;
-        }
-        
-        .icons-popup-image {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
-        
-        .icons-popup-text {
-            padding: 15px;
-            text-align: center;
-            font-size: 14px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .slider-controls {
-            position: relative;
-            margin-top: -70px;
-            pointer-events: none;
-            z-index: 15;
-        }
-        
-        .slider-btn {
-            position: absolute;
-            background-color: rgba(0, 0, 0, 0.3);
-            border: none;
-            width: 35px;
-            height: 35px;
-            cursor: pointer;
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.3s;
-            pointer-events: auto;
-            top: 50%;
-            transform: translateY(-50%);
-            border-radius: 50%;
-        }
-        
-        .slider-btn:hover {
-            background-color: rgba(0, 0, 0, 0.6);
-        }
-        
-        .slider-btn.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-        
-        .slider-btn.left {
-            left: 5px;
-        }
-        
-        .slider-btn.right {
-            right: 5px;
-        }
-        
-        .select-icons-title {
-            font-size: 14px;
-            letter-spacing: 0.1px;
-            text-align: left;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-        
-        .icons-slider-container {
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 30px;
-        }
-        
-        .icons-slider {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            scrollbar-width: none;
-            padding: 5px 0;
-        }
-        
+        .sports-slider::-webkit-scrollbar, 
         .icons-slider::-webkit-scrollbar {
             display: none;
         }
         
-        .icon-item {
-            flex: 0 0 calc(50% - 4px);
-            min-width: calc(50% - 4px);
-            position: relative;
+        .sports-item, .icon-item {
+            flex: 0 0 calc(25% - 12px);
+            min-width: 280px;
             cursor: pointer;
-            transition: transform 0.2s ease;
-            text-decoration: none;
-            display: block;
         }
         
-        .icon-item:hover {
-            transform: scale(1.05);
-            z-index: 5;
-        }
-        
-        .icon-image {
+        .sports-image, .icon-image {
             width: 100%;
-            height: 100px;
+            height: 280px;
             object-fit: cover;
-            display: block;
-            border-radius: 5px;
+            margin-bottom: 12px;
         }
         
-        .icons-slider-controls {
-            position: relative;
-            margin-top: -60px;
-            pointer-events: none;
-            margin-bottom: 50px;
-            z-index: 9;
+        .sports-text {
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
         }
         
-        .icons-slider-btn {
+        .slider-btn, .icons-slider-btn {
             position: absolute;
-            background-color: rgba(0, 0, 0, 0.3);
+            background-color: rgba(255, 255, 255, 0.9);
             border: none;
-            width: 35px;
-            height: 35px;
+            width: 50px;
+            height: 50px;
             cursor: pointer;
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
+            font-size: 36px;
+            color: black;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.3s;
-            pointer-events: auto;
             top: 50%;
             transform: translateY(-50%);
-            z-index: 11;
             border-radius: 50%;
+            z-index: 10;
         }
         
-        .icons-slider-btn:hover {
-            background-color: rgba(0, 0, 0, 0.6);
+        .slider-btn:hover, .icons-slider-btn:hover {
+            background-color: rgba(255, 255, 255, 1);
         }
         
-        .icons-slider-btn.left {
-            left: 5px;
+        .slider-btn.hidden, .icons-slider-btn.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
         
-        .icons-slider-btn.right {
-            right: 5px;
+        .slider-btn.left, .icons-slider-btn.left {
+            left: 20px;
         }
         
-        .nba-section {
-            background-color: white;
-            padding: 20px 0 40px 0;
+        .slider-btn.right, .icons-slider-btn.right {
+            right: 20px;
         }
         
-        .nba-section-title {
-            font-size: 14px;
-            letter-spacing: 0.1px;
-            margin-bottom: 15px;
-            margin-top: 0px;
-            font-weight: bold;
-        }
-        
-        .nba-slider-container {
-            position: relative;
-            overflow: hidden;
-        }
-        
+        /* NBA Slider - Responsive */
         .nba-slider {
             display: flex;
-            gap: 5px;
+            gap: 15px;
             overflow-x: auto;
             scroll-behavior: smooth;
             scrollbar-width: none;
-            padding-bottom: 5px;
+            padding: 20px 0;
         }
         
         .nba-slider::-webkit-scrollbar {
@@ -840,76 +478,64 @@ HTML_TEMPLATE = '''
         }
         
         .nba-item {
-            flex: 0 0 calc(50% - 3px);
-            min-width: calc(50% - 3px);
-            position: relative;
-            cursor: pointer;
+            flex: 0 0 calc(25% - 12px);
+            min-width: 280px;
         }
         
         .nba-image {
             width: 100%;
-            height: 150px;
+            height: 320px;
             object-fit: cover;
-            display: block;
-            transition: opacity 0.3s ease;
-            margin-bottom: 8px;
-            border-radius: 5px;
-        }
-        
-        .nba-item:hover .nba-image {
-            opacity: 0.7;
+            margin-bottom: 12px;
         }
         
         .nba-item-title {
-            font-size: 12px;
-            color: black;
-            margin-bottom: 3px;
-            line-height: 1.3;
-            font-weight: bold;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
         }
         
         .nba-description {
-            font-size: 11px;
+            font-size: 14px;
             color: #757575;
-            margin-bottom: 5px;
-            line-height: 1.2;
+            margin-bottom: 8px;
         }
         
         .nba-price {
-            font-size: 11px;
+            font-size: 16px;
             font-weight: 600;
-            color: black;
-        }
-        
-        .nba-slider-controls {
-            position: relative;
-            margin-top: -70px;
-            pointer-events: none;
-            z-index: 15;
         }
         
         .nba-slider-btn {
             position: absolute;
-            background-color: rgba(0, 0, 0, 0.3);
+            background-color: rgba(255, 255, 255, 0.9);
             border: none;
-            width: 35px;
-            height: 35px;
+            width: 50px;
+            height: 50px;
             cursor: pointer;
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
+            font-size: 36px;
+            color: black;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.3s;
-            pointer-events: auto;
             top: 50%;
             transform: translateY(-50%);
             border-radius: 50%;
+            z-index: 10;
+        }
+        
+        .nba-slider-controls {
+            position: relative;
+            margin-top: -200px;
+            pointer-events: none;
+        }
+        
+        .nba-slider-btn {
+            pointer-events: auto;
         }
         
         .nba-slider-btn:hover {
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(255, 255, 255, 1);
         }
         
         .nba-slider-btn.hidden {
@@ -918,153 +544,195 @@ HTML_TEMPLATE = '''
         }
         
         .nba-slider-btn.left {
-            left: 5px;
+            left: 20px;
         }
         
         .nba-slider-btn.right {
-            right: 5px;
+            right: 20px;
         }
         
+        /* Footer - Responsive */
         .footer-section {
             background-color: white;
-            color: white;
-            padding: 30px 0 30px 0;
-            margin-top: 40px;
-            border-top: 1px solid #ddd;
-            width: 100%;
+            padding: 40px 40px;
+            margin-top: 80px;
+            border-top: 1px solid #ccc;
         }
         
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            max-width: 100%;
-            margin: 0 0 20px 0;
-            font-weight: bold;
-        }
-        
-        .footer-column {
-            display: flex;
-            flex-direction: column;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto 40px;
         }
         
         .footer-column-title {
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            text-transform: capitalize;
-            letter-spacing: 0.1px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 20px;
             color: black;
         }
         
         .footer-link {
             color: #7e7e7e;
             text-decoration: none;
-            font-size: 11px;
-            margin-bottom: 6px;
-            transition: color 0.3s;
-            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: block;
         }
         
         .footer-link:hover {
-            text-decoration: underline;
             color: black;
+            text-decoration: underline;
         }
         
         .footer-location {
             display: flex;
             align-items: center;
-            gap: 5px;
-            font-size: 11px;
-            color: #7e7e7e;
-            margin-top: 10px;
+            gap: 8px;
+            font-size: 14px;
+            margin-top: 20px;
         }
         
         .location-icon {
-            width: 15px;
-            height: 15px;
+            width: 20px;
+            height: 20px;
         }
         
         .footer-bottom {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-            padding-top: 15px;
-            border-top: 1px solid #ddd;
-            max-width: 100%;
-            font-size: 11px;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e5e5;
+            max-width: 1400px;
+            margin: 0 auto;
+            font-size: 12px;
             color: #7e7e7e;
-            font-weight: bold;
         }
         
         .footer-bottom-left {
             display: flex;
-            flex-direction: column;
-            gap: 5px;
-            align-items: flex-start;
+            gap: 20px;
+            flex-wrap: wrap;
         }
         
         .footer-bottom-right {
             display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
+            gap: 20px;
         }
         
         .footer-bottom-link {
             color: #7e7e7e;
             text-decoration: none;
-            transition: color 0.3s;
-            font-size: 11px;
-            font-weight: bold;
         }
         
         .footer-bottom-link:hover {
-            text-decoration: underline;
             color: black;
+            text-decoration: underline;
         }
-
-        @media (min-width: 768px) {
-            .athlete-images-container {
-                grid-template-columns: repeat(2, 1fr);
+        
+        /* Popups - Responsive */
+        .sports-popup, .icons-popup {
+            position: fixed;
+            display: none;
+            background-color: white;
+            border: 1px solid #ddd;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            border-radius: 12px;
+            overflow: hidden;
+            max-width: 400px;
+            pointer-events: none;
+        }
+        
+        .sports-popup.active, .icons-popup.active {
+            display: block;
+        }
+        
+        .sports-popup-image, .icons-popup-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        
+        .sports-popup-text, .icons-popup-text {
+            padding: 20px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        /* Mobile Responsive - Phone screens only */
+        @media (max-width: 768px) {
+            .text-container {
+                font-size: 10px;
+                letter-spacing: 1px;
             }
             
-            .discover-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .top-right-menu {
+                font-size: 9px;
+                gap: 8px;
             }
             
-            .featured-images-container {
-                grid-template-columns: repeat(4, 1fr);
+            .nav-menu {
+                padding: 0 20px;
+                height: 50px;
+                justify-content: center;
             }
             
-            .sports-item {
-                flex: 0 0 calc(33.333% - 4px);
-                min-width: calc(33.333% - 4px);
+            .nav-logo {
+                margin-right: 0;
             }
             
-            .icon-item {
-                flex: 0 0 calc(25% - 6px);
-                min-width: calc(25% - 6px);
+            .nav-logo img {
+                width: 45px;
+                height: 27px;
             }
             
-            .nba-item {
-                flex: 0 0 calc(33.333% - 4px);
-                min-width: calc(33.333% - 4px);
+            /* HIDE nav links, favorites, and basket on phone screens */
+            .nav-links-container,
+            .search-container {
+                display: none !important;
+            }
+            
+            .content-wrapper {
+                padding: 0 20px;
+            }
+            
+            .athlete-title, .features-title, .gear-title, 
+            .sports-title, .discover-title, .nba-section-title,
+            .select-icons-title {
+                font-size: 20px;
+                margin: 50px 0 15px 0;
+                font-weight: normsl;
+            }
+            
+            .featured-main-title {
+                font-size: 25px;
+            }
+            
+            .featured-subtitle {
+                font-size: 20px;
+            }
+            
+            .sports-item, .icon-item, .nba-item {
+                min-width: 200px;
+            }
+            
+            .slider-btn, .icons-slider-btn, .nba-slider-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 28px;
             }
             
             .footer-content {
-                grid-template-columns: repeat(3, 1fr) 100px;
-            }
-            
-            .footer-bottom {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-            
-            .footer-bottom-left {
-                flex-direction: row;
-                gap: 20px;
-                align-items: center;
+                grid-template-columns: 3fr;
+                gap: 30px;
             }
         }
     </style>
@@ -1095,38 +763,48 @@ HTML_TEMPLATE = '''
                 <a href="/new-featured" class="new-featured-link">New & Featured</a>
                 <div class="new-featured-menu">
                     <div class="new-featured-content">
-                        <div class="new-featured-column">
+                     <div class="new-featured-column">
                             <div class="new-featured-heading">Featured</div>
                             <a href="#new-drops" class="new-featured-item">New & Upcoming Drops</a>
                             <a href="#new-arrivals" class="new-featured-item">New Arrivals</a>
                             <a href="#bestsellers" class="new-featured-item">Bestsellers</a>
-                            <a href="#snkrs-calendar" class="new-featured-item">SNKRS Calendar</a>
-                            <a href="#customize" class="new-featured-item">Customize</a>
-                            <a href="#jordans" class="new-featured-item">Jordans</a>
+                            <a href="#snkrs-calendar" class="new-featured-item">SNKRS Launch Calendar</a>
+                            <a href="#snkrs-calendar" class="new-featured-item">Customise with Nike By You</a>
+                            <a href="#snkrs-calendar" class="new-featured-item">Jordans</a>
+                            <a href="#snkrs-calendar" class="new-featured-item">LeBron James</a>
                         </div>
                         <div class="new-featured-column">
                             <div class="new-featured-heading">Trending</div>
-                            <a href="#more-colors" class="new-featured-item">New Colors</a>
+                            <a href="#more-colors" class="new-featured-item">More Colours,More Running</a>
                             <a href="#trending" class="new-featured-item">What's Trending</a>
-                            <a href="#finder" class="new-featured-item">Shoe Finder</a>
-                            <a href="#collection" class="new-featured-item">Collections</a>
-                            <a href="#retro" class="new-featured-item">Retro</a>
+                            <a href="#trending" class="new-featured-item">Running Shoe Finder</a>
+                            <a href="#trending" class="new-featured-item">24.7 Collection</a>
+                            <a href="#trending" class="new-featured-item">Vomero Premium</a>
+                            <a href="#collections" class="new-featured-item">Collections</a>
+                            <a href="#retro-running" class="new-featured-item">Retro Running</a>
                         </div>
                         <div class="new-featured-column">
-                            <div class="new-featured-heading">Icons</div>
+                            <div class="new-featured-heading">Shop Icons</div>
                             <a href="#lifestyle" class="new-featured-item">Lifestyle</a>
                             <a href="#af1" class="new-featured-item">Air Force 1</a>
                             <a href="#aj1" class="new-featured-item">Air Jordan 1</a>
                             <a href="#airmax" class="new-featured-item">Air Max</a>
+                            <a href="#dunk" class="new-featured-item">Cortez</a>
+                            <a href="#dunk" class="new-featured-item">Blazer</a>
+                            <a href="#dunk" class="new-featured-item">Vomero</a>
                             <a href="#dunk" class="new-featured-item">Dunk</a>
+                            <a href="#dunk" class="new-featured-item">Pegasus</a>
                         </div>
                         <div class="new-featured-column">
-                            <div class="new-featured-heading">By Sport</div>
+                            <div class="new-featured-heading">Shop By Sport</div>
                             <a href="#running" class="new-featured-item">Running</a>
                             <a href="#basketball" class="new-featured-item">Basketball</a>
                             <a href="#football" class="new-featured-item">Football</a>
-                            <a href="#training" class="new-featured-item">Training</a>
+                            <a href="#golf" class="new-featured-item">Golf</a>
                             <a href="#tennis" class="new-featured-item">Tennis</a>
+                            <a href="#tennis" class="new-featured-item">Gym and Training</a>
+                            <a href="#tennis" class="new-featured-item">Yoga</a>
+                            <a href="#tennis" class="new-featured-item">Skateboarding</a>
                         </div>
                     </div>
                 </div>
@@ -1138,24 +816,24 @@ HTML_TEMPLATE = '''
                     <div class="men-content">
                         <div class="men-column">
                             <div class="men-heading">Featured</div>
-                            <a href="#new" class="men-item">New Arrivals</a>
-                            <a href="#best" class="men-item">Bestsellers</a>
-                            <a href="#sale" class="men-item">Sale</a>
+                            <a href="#new-arrivals" class="men-item">New Arrivals</a>
+                            <a href="#bestsellers" class="men-item">Bestsellers</a>
+                            <a href="#shop-all-sale" class="men-item">Shop All Sale</a>
                         </div>
                         <div class="men-column">
                             <div class="men-heading">Shoes</div>
-                            <a href="#all" class="men-item">All Shoes</a>
+                            <a href="#all-shoes" class="men-item">All Shoes</a>
                             <a href="#lifestyle" class="men-item">Lifestyle</a>
+                            <a href="#jordan" class="men-item">Jordan</a>
                             <a href="#running" class="men-item">Running</a>
                             <a href="#basketball" class="men-item">Basketball</a>
-                            <a href="#training" class="men-item">Training</a>
                         </div>
                         <div class="men-column">
                             <div class="men-heading">Clothing</div>
-                            <a href="#tops" class="men-item">Tops</a>
-                            <a href="#bottoms" class="men-item">Bottoms</a>
-                            <a href="#jackets" class="men-item">Jackets</a>
-                            <a href="#hoodies" class="men-item">Hoodies</a>
+                            <a href="#all-clothing" class="men-item">All Clothing</a>
+                            <a href="#tops-shirts" class="men-item">Tops and T-Shirts</a>
+                            <a href="#shorts" class="men-item">Shorts</a>
+                            <a href="#hoodies" class="men-item">Hoodies and Sweatshirts</a>
                         </div>
                     </div>
                 </div>
@@ -1167,23 +845,13 @@ HTML_TEMPLATE = '''
                     <div class="women-content">
                         <div class="women-column">
                             <div class="women-heading">Featured</div>
-                            <a href="#new" class="women-item">New Arrivals</a>
-                            <a href="#best" class="women-item">Bestsellers</a>
-                            <a href="#sale" class="women-item">Sale</a>
+                            <a href="#new-arrivals" class="women-item">New Arrivals</a>
+                            <a href="#bestsellers" class="women-item">Bestsellers</a>
                         </div>
                         <div class="women-column">
                             <div class="women-heading">Shoes</div>
-                            <a href="#all" class="women-item">All Shoes</a>
+                            <a href="#all-shoes" class="women-item">All Shoes</a>
                             <a href="#lifestyle" class="women-item">Lifestyle</a>
-                            <a href="#running" class="women-item">Running</a>
-                            <a href="#basketball" class="women-item">Basketball</a>
-                        </div>
-                        <div class="women-column">
-                            <div class="women-heading">Clothing</div>
-                            <a href="#tops" class="women-item">Tops</a>
-                            <a href="#sports-bra" class="women-item">Sports Bra</a>
-                            <a href="#bottoms" class="women-item">Bottoms</a>
-                            <a href="#jackets" class="women-item">Jackets</a>
                         </div>
                     </div>
                 </div>
@@ -1195,21 +863,7 @@ HTML_TEMPLATE = '''
                     <div class="kids-content">
                         <div class="kids-column">
                             <div class="kids-heading">Featured</div>
-                            <a href="#new" class="kids-item">New Arrivals</a>
-                            <a href="#best" class="kids-item">Bestsellers</a>
-                            <a href="#school" class="kids-item">Back to School</a>
-                        </div>
-                        <div class="kids-column">
-                            <div class="kids-heading">Shoes</div>
-                            <a href="#all" class="kids-item">All Shoes</a>
-                            <a href="#lifestyle" class="kids-item">Lifestyle</a>
-                            <a href="#running" class="kids-item">Running</a>
-                        </div>
-                        <div class="kids-column">
-                            <div class="kids-heading">Clothing</div>
-                            <a href="#tops" class="kids-item">Tops</a>
-                            <a href="#bottoms" class="kids-item">Bottoms</a>
-                            <a href="#hoodies" class="kids-item">Hoodies</a>
+                            <a href="#new-arrivals" class="kids-item">New Arrivals</a>
                         </div>
                     </div>
                 </div>
@@ -1220,11 +874,8 @@ HTML_TEMPLATE = '''
                 <div class="sale-menu">
                     <div class="sale-content">
                         <div class="sale-column">
-                            <div class="sale-heading">Sale</div>
-                            <a href="#all-sale" class="sale-item">All Sale</a>
-                            <a href="#men" class="sale-item">Men's Sale</a>
-                            <a href="#women" class="sale-item">Women's Sale</a>
-                            <a href="#kids" class="sale-item">Kids' Sale</a>
+                            <div class="sale-heading">Sale & Offers</div>
+                            <a href="#shop-all-sale" class="sale-item">Shop All Sale</a>
                         </div>
                     </div>
                 </div>
@@ -1236,8 +887,7 @@ HTML_TEMPLATE = '''
                     <div class="snkrs-content">
                         <div class="snkrs-column">
                             <div class="snkrs-heading">Featured</div>
-                            <a href="#calendar" class="snkrs-item">Launch Calendar</a>
-                            <a href="#releases" class="snkrs-item">Releases</a>
+                            <a href="#snkrs-launch-calendar" class="snkrs-item">SNKRS Launch Calendar</a>
                         </div>
                     </div>
                 </div>
@@ -1251,7 +901,7 @@ HTML_TEMPLATE = '''
                 <span class="heart-filled">♥</span>
             </a>
             <a href="/basket" class="basket-icon">
-                <svg width="10" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="9" cy="21" r="1"></circle>
                     <circle cx="20" cy="21" r="1"></circle>
                     <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -1261,10 +911,9 @@ HTML_TEMPLATE = '''
     </div>
     
     <div class="slideshow-container">
-        <img src="/static/image1.avif" class="slide active" alt="Nike Hero 1">
-        <img src="/static/image2.avif" class="slide" alt="Nike Hero 2">
-        <img src="/static/ss.webp" class="slide" alt="Nike Hero 3">
-        <button class="shop-button">Shop Now</button>
+        <img src="/static/ssf.avif" class="slide active" alt="SS 1">
+        <img src="/static/ssf2.avif" class="slide" alt="SS 2">
+        <button class="shop-button">Shop</button>
     </div>
 
     <div class="athlete-section">
@@ -1273,11 +922,9 @@ HTML_TEMPLATE = '''
             <div class="athlete-images-container">
                 <div class="athlete-image-wrapper">
                     <img src="/static/ath.avif" alt="Athlete 1" class="athlete-image">
-                    <button class="athlete-shop-button">Shop</button>
                 </div>
                 <div class="athlete-image-wrapper">
                     <img src="/static/ath2.avif" alt="Athlete 2" class="athlete-image">
-                    <button class="athlete-shop-button">Shop</button>
                 </div>
             </div>
         </div>
@@ -1335,7 +982,7 @@ HTML_TEMPLATE = '''
         <div class="content-wrapper">
             <div class="gear-title">You Can.</div>
             <div class="gear-image-container">
-                <img src="/static/youcan.png" alt="Gear" class="gear-image">
+                <img src="/static/youcan.png" alt="Gear Feature" class="gear-image">
             </div>
         </div>
     </div>
@@ -1344,68 +991,73 @@ HTML_TEMPLATE = '''
         <div class="content-wrapper">
             <div class="sports-title">Live For Sports</div>
             <div class="sports-slider-container">
+                <button class="slider-btn left" onclick="slideLeft()">‹</button>
+                <button class="slider-btn right" onclick="slideRight()">›</button>
                 <div class="sports-slider" id="sportsSlider">
                     <div class="sports-item" data-sport="Running" data-image="/static/running.avif">
-                        <img src="/static/running.avif" alt="Running" class="sports-image">
+                        <img src="/static/running.avif" alt="Sport 1" class="sports-image">
                         <div class="sports-text">Running</div>
                     </div>
                     <div class="sports-item" data-sport="Basketball" data-image="/static/basketball.avif">
-                        <img src="/static/basketball.avif" alt="Basketball" class="sports-image">
+                        <img src="/static/basketball.avif" alt="Sport 2" class="sports-image">
                         <div class="sports-text">Basketball</div>
                     </div>
                     <div class="sports-item" data-sport="Football" data-image="/static/football.avif">
-                        <img src="/static/football.avif" alt="Football" class="sports-image">
+                        <img src="/static/football.avif" alt="Sport 3" class="sports-image">
                         <div class="sports-text">Football</div>
                     </div>
                     <div class="sports-item" data-sport="Golf" data-image="/static/golg.avif">
-                        <img src="/static/golg.avif" alt="Golf" class="sports-image">
+                        <img src="/static/golg.avif" alt="Sport 4" class="sports-image">
                         <div class="sports-text">Golf</div>
                     </div>
                     <div class="sports-item" data-sport="Skating" data-image="/static/skate.avif">
-                        <img src="/static/skate.avif" alt="Skating" class="sports-image">
+                        <img src="/static/skate.avif" alt="Sport 5" class="sports-image">
                         <div class="sports-text">Skating</div>
                     </div>
                     <div class="sports-item" data-sport="Tennis" data-image="/static/tennis.avif">
-                        <img src="/static/tennis.avif" alt="Tennis" class="sports-image">
+                        <img src="/static/tennis.avif" alt="Sport 6" class="sports-image">
                         <div class="sports-text">Tennis</div>
                     </div>
                 </div>
             </div>
-            <div class="slider-controls">
-                <button class="slider-btn left" onclick="slideLeft()">‹</button>
-                <button class="slider-btn right" onclick="slideRight()">›</button>
-            </div>
             
             <div class="select-icons-title">Select By Icons</div>
             <div class="icons-slider-container">
+                <button class="icons-slider-btn left" onclick="slideIconsLeft()">‹</button>
+                <button class="icons-slider-btn right" onclick="slideIconsRight()">›</button>
                 <div class="icons-slider" id="iconsSlider">
-                    <a href="#airmax" class="icon-item">
+                    <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
                         <img src="/static/airmax.png" alt="Air Max" class="icon-image">
                     </a>
-                    <a href="#airforce" class="icon-item">
+                    <a href="#airforce" class="icon-item" data-icon="Air Force" data-image="/static/airforce.png">
                         <img src="/static/airforce.png" alt="Air Force" class="icon-image">
                     </a>
-                    <a href="#blazer" class="icon-item">
+                    <a href="#blazer" class="icon-item" data-icon="Blazer" data-image="/static/blazer.png">
                         <img src="/static/blazer.png" alt="Blazer" class="icon-image">
                     </a>
-                    <a href="#dunk" class="icon-item">
+                    <a href="#dunk" class="icon-item" data-icon="Dunk" data-image="/static/dunk.png">
                         <img src="/static/dunk.png" alt="Dunk" class="icon-image">
                     </a>
-                    <a href="#cortez" class="icon-item">
-                        <img src="/static/cortez.png" alt="Cortez" class="icon-image">
+                    <a href="#cortez" class="icon-item" data-icon="Cortez" data-image="/static/cortezz.png">
+                        <img src="/static/cortezz.png" alt="Cortez" class="icon-image">
                     </a>
-                    <a href="#jordan" class="icon-item">
-                        <img src="/static/jordan.png" alt="Jordan" class="icon-image">
+                    <a href="#killshot" class="icon-item" data-icon="Killshot" data-image="/static/killshot.png">
+                        <img src="/static/killshot.png" alt="Killshot" class="icon-image">
+                    </a>
+                    <a href="#jordans" class="icon-item" data-icon="Jordans" data-image="/static/jordan.png">
+                        <img src="/static/jordan.png" alt="Jordans" class="icon-image">
+                    </a>
+                    <a href="#metcon" class="icon-item" data-icon="Metcon" data-image="/static/metcon.png">
+                        <img src="/static/metcon.png" alt="Metcon" class="icon-image">
+                    </a>
+                    <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
+                        <img src="/static/p6000.png" alt="P-6000" class="icon-image">
                     </a>
                 </div>
             </div>
-            <div class="icons-slider-controls">
-                <button class="icons-slider-btn left" onclick="slideIconsLeft()">‹</button>
-                <button class="icons-slider-btn right" onclick="slideIconsRight()">›</button>
-            </div>
         </div>
     </div>
-    
+                
     <div class="nba-section">
         <div class="content-wrapper">
             <div class="nba-section-title">Shop Nike X NBA</div>
@@ -1413,75 +1065,51 @@ HTML_TEMPLATE = '''
                 <div class="nba-slider" id="nbaSlider">
                     <div class="nba-item">
                         <img src="/static/nba1.avif" alt="NBA 1" class="nba-image">
-                        <div class="nba-item-title">Milwaukee Bucks Edition</div>
-                        <div class="nba-description">Men's Nike Jersey</div>
-                        <div class="nba-price">₹ 5,995</div>
+                        <div class="nba-item-title">Milwaukee Bucks Icon Edition</div>
+                        <div class="nba-description">Men's Nike Dri-FIT NBA Swingman Jersey</div>
+                        <div class="nba-price">MRP : ₹ 5 995.00</div>
                     </div>
                     <div class="nba-item">
                         <img src="/static/nba2.avif" alt="NBA 2" class="nba-image">
-                        <div class="nba-item-title">Denver Nuggets Edition</div>
-                        <div class="nba-description">Men's Nike Jersey</div>
-                        <div class="nba-price">₹ 5,995</div>
+                        <div class="nba-item-title">Denver Nuggets Icon Edition</div>
+                        <div class="nba-description">Men's Nike Dri-FIT NBA Swingman Jersey</div>
+                        <div class="nba-price">MRP : ₹ 5 995.00</div>
                     </div>
                     <div class="nba-item">
                         <img src="/static/nba3.avif" alt="NBA 3" class="nba-image">
                         <div class="nba-item-title">Team 13</div>
                         <div class="nba-description">Nike WNBA T-shirt</div>
-                        <div class="nba-price">₹ 1,795</div>
+                        <div class="nba-price">MRP : ₹ 1 795.00</div>
                     </div>
                     <div class="nba-item">
                         <img src="/static/nba4.avif" alt="NBA 4" class="nba-image">
-                        <div class="nba-item-title">Los Angeles Lakers</div>
-                        <div class="nba-description">Men's Nike Jersey</div>
-                        <div class="nba-price">₹ 5,995</div>
+                        <div class="nba-item-title">Los Angeles Lakers Icon Edition</div>
+                        <div class="nba-description">Men's Nike Dri-FIT NBA Swingman Jersey</div>
+                        <div class="nba-price">MRP : ₹ 5 995.00</div>
                     </div>
                     <div class="nba-item">
                         <img src="/static/nba5.avif" alt="NBA 5" class="nba-image">
-                        <div class="nba-item-title">Sacramento Kings</div>
-                        <div class="nba-description">Nike Jersey</div>
-                        <div class="nba-price">₹ 5,995</div>
+                        <div class="nba-item-title">Sacramento Kings Icon Edition</div>
+                        <div class="nba-description">Nike Dri-FIT NBA Swingman Jersey</div>
+                        <div class="nba-price">MRP : ₹ 5 995.00</div>
                     </div>
                     <div class="nba-item">
                         <img src="/static/nba6.avif" alt="NBA 6" class="nba-image">
-                        <div class="nba-item-title">San Antonio Spurs</div>
-                        <div class="nba-description">Men's Nike Jersey</div>
-                        <div class="nba-price">₹ 5,995</div>
+                        <div class="nba-item-title">San Antonio Spurs Icon Edition</div>
+                        <div class="nba-description">Men's Nike Dri-FIT NBA Swingman Jersey</div>
+                        <div class="nba-price">MRP : ₹ 5 995.00</div>
                     </div>
                     <div class="nba-item">
                         <img src="/static/nba7.avif" alt="NBA 7" class="nba-image">
-                        <div class="nba-item-title">Team 13 Women's</div>
-                        <div class="nba-description">Nike WNBA T-Shirt</div>
-                        <div class="nba-price">₹ 2,087</div>
+                        <div class="nba-item-title">Team 13</div>
+                        <div class="nba-description">Women's Nike WNBA Boxy Crew-Neck T-Shirt</div>
+                        <div class="nba-price">₹ 2 087.00</div>
                     </div>
                     <div class="nba-item">
                         <img src="/static/nba8.avif" alt="NBA 8" class="nba-image">
-                        <div class="nba-item-title">Stephen Curry</div>
-                        <div class="nba-description">Men's Nike T-Shirt</div>
-                        <div class="nba-price">₹ 2,087</div>
-                    </div>
-                    <div class="nba-item">
-                        <img src="/static/nba10.avif" alt="NBA 10" class="nba-image">
-                        <div class="nba-item-title">Boston Celtics</div>
-                        <div class="nba-description">Men's Nike T-Shirt</div>
-                        <div class="nba-price">₹ 1,795</div>
-                    </div>
-                    <div class="nba-item">
-                        <img src="/static/nba12.avif" alt="NBA 12" class="nba-image">
-                        <div class="nba-item-title">Los Angeles Lakers</div>
-                        <div class="nba-description">Men's Nike T-Shirt</div>
-                        <div class="nba-price">₹ 1,795</div>
-                    </div>
-                    <div class="nba-item">
-                        <img src="/static/nba13.avif" alt="NBA 13" class="nba-image">
-                        <div class="nba-item-title">Miami Heat</div>
-                        <div class="nba-description">Men's Nike T-Shirt</div>
-                        <div class="nba-price">₹ 1,795</div>
-                    </div>
-                    <div class="nba-item">
-                        <img src="/static/nba14.avif" alt="NBA 14" class="nba-image">
-                        <div class="nba-item-title">New York Knicks</div>
-                        <div class="nba-description">Men's Nike Jersey</div>
-                        <div class="nba-price">₹ 5,995</div>
+                        <div class="nba-item-title">Stephen Curry Golden State Warriors</div>
+                        <div class="nba-description">Men's Nike NBA T-Shirt</div>
+                        <div class="nba-price">₹ 2 087.00</div>
                     </div>
                 </div>
             </div>
@@ -1493,51 +1121,51 @@ HTML_TEMPLATE = '''
     </div>
     
     <footer class="footer-section">
-        <div class="content-wrapper">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <div class="footer-column-title">Resources</div>
-                    <a href="#store" class="footer-link">Find A Store</a>
-                    <a href="#member" class="footer-link">Become A Member</a>
-                    <a href="#shoes" class="footer-link">Shoe Finder</a>
-                    <a href="#feedback" class="footer-link">Send Feedback</a>
-                </div>
-                
-                <div class="footer-column">
-                    <div class="footer-column-title">Help</div>
-                    <a href="#help" class="footer-link">Get Help</a>
-                    <a href="#status" class="footer-link">Order Status</a>
-                    <a href="#delivery" class="footer-link">Delivery</a>
-                    <a href="#returns" class="footer-link">Returns</a>
-                </div>
-                
-                <div class="footer-column">
-                    <div class="footer-column-title">Company</div>
-                    <a href="#about" class="footer-link">About Nike</a>
-                    <a href="#news" class="footer-link">News</a>
-                    <a href="#careers" class="footer-link">Careers</a>
-                    <a href="#sustainability" class="footer-link">Sustainability</a>
-                </div>
-                
-                <div class="footer-column">
-                    <div class="footer-location">
-                        <svg class="location-icon" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        </svg>
-                        <span>India</span>
-                    </div>
-                </div>
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="footer-column-title">Resources</div>
+                <a href="/find-store" class="footer-link">Find A Store</a>
+                <a href="/become-member" class="footer-link">Become A Member</a>
+                <a href="/shoe-finder" class="footer-link">Running Shoe Finder</a>
+                <a href="/feedback" class="footer-link">Send Us Feedback</a>
             </div>
             
-            <div class="footer-bottom">
-                <div class="footer-bottom-left">
-                    <span>© 2025 Nike, Inc. All rights reserved</span>
-                    <a href="#terms" class="footer-bottom-link">Terms of Sale</a>
-                    <a href="#privacy" class="footer-bottom-link">Privacy Policy</a>
+            <div class="footer-column">
+                <div class="footer-column-title">Help</div>
+                <a href="/help" class="footer-link">Get Help</a>
+                <a href="/order-status" class="footer-link">Order Status</a>
+                <a href="/delivery" class="footer-link">Delivery</a>
+                <a href="/returns" class="footer-link">Returns</a>
+                <a href="/contact-nike" class="footer-link">Contact Us</a>
+            </div>
+            
+            <div class="footer-column">
+                <div class="footer-column-title">Company</div>
+                <a href="/about" class="footer-link">About Nike</a>
+                <a href="/news" class="footer-link">News</a>
+                <a href="/careers" class="footer-link">Careers</a>
+                <a href="/sustainability" class="footer-link">Sustainability</a>
+            </div>
+            
+            <div class="footer-column">
+                <div class="footer-location">
+                    <svg class="location-icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    <span>India</span>
                 </div>
-                <div class="footer-bottom-right">
-                    <a href="#settings" class="footer-bottom-link">Privacy Settings</a>
-                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-bottom-left">
+                <span>© 2025 Nike, Inc. All rights reserved</span>
+                <a href="/terms-of-sale" class="footer-bottom-link">Terms of Sale</a>
+                <a href="/terms-of-use" class="footer-bottom-link">Terms of Use</a>
+                <a href="/privacy-policy" class="footer-bottom-link">Privacy Policy</a>
+            </div>
+            <div class="footer-bottom-right">
+                <a href="/privacy-settings" class="footer-bottom-link">Privacy Settings</a>
             </div>
         </div>
     </footer>
@@ -1577,13 +1205,13 @@ HTML_TEMPLATE = '''
             const scrollLeft = sportsSlider.scrollLeft;
             const maxScroll = sportsSlider.scrollWidth - sportsSlider.clientWidth;
             
-            if (scrollLeft <= 0) {
+            if (scrollLeft <= 5) {
                 leftBtn.classList.add('hidden');
             } else {
                 leftBtn.classList.remove('hidden');
             }
             
-            if (scrollLeft >= maxScroll - 1) {
+            if (scrollLeft >= maxScroll - 5) {
                 rightBtn.classList.add('hidden');
             } else {
                 rightBtn.classList.remove('hidden');
@@ -1592,7 +1220,7 @@ HTML_TEMPLATE = '''
         
         function slideLeft() {
             sportsSlider.scrollBy({
-                left: -200,
+                left: -sportsSlider.offsetWidth / 2,
                 behavior: 'smooth'
             });
             setTimeout(updateArrowVisibility, 300);
@@ -1600,173 +1228,54 @@ HTML_TEMPLATE = '''
         
         function slideRight() {
             sportsSlider.scrollBy({
-                left: 200,
+                left: sportsSlider.offsetWidth / 2,
                 behavior: 'smooth'
             });
             setTimeout(updateArrowVisibility, 300);
         }
         
         sportsSlider.addEventListener('scroll', updateArrowVisibility);
-        updateArrowVisibility();
-        
-        const sportsPopup = document.getElementById('sportsPopup');
-        const sportsItems = document.querySelectorAll('.sports-item');
-        let popupTimeout;
-        
-        sportsItems.forEach(item => {
-            item.addEventListener('mouseenter', (e) => {
-                clearTimeout(popupTimeout);
-                const sport = item.dataset.sport;
-                const imageUrl = item.dataset.image;
-                const rect = item.getBoundingClientRect();
-                
-                sportsPopup.innerHTML = `
-                    <img src="${imageUrl}" alt="${sport}" class="sports-popup-image">
-                    <div class="sports-popup-text">${sport}</div>
-                `;
-                
-                sportsPopup.classList.add('active');
-                sportsPopup.style.top = (rect.top + window.scrollY - 200) + 'px';
-                sportsPopup.style.left = Math.min(rect.left + rect.width / 2 - 150, window.innerWidth - 320) + 'px';
-            });
-            
-            item.addEventListener('mouseleave', () => {
-                popupTimeout = setTimeout(() => {
-                    sportsPopup.classList.remove('active');
-                }, 100);
-            });
-        });
-        
-        sportsPopup.addEventListener('mouseenter', () => {
-            clearTimeout(popupTimeout);
-        });
-        
-        sportsPopup.addEventListener('mouseleave', () => {
-            popupTimeout = setTimeout(() => {
-                sportsPopup.classList.remove('active');
-            }, 100);
-        });
+        window.addEventListener('load', updateArrowVisibility);
         
         const iconsSlider = document.getElementById('iconsSlider');
-        const originalItems = Array.from(document.querySelectorAll('.icon-item'));
-        const itemWidth = iconsSlider.querySelector('.icon-item').offsetWidth + 8;
-        const totalItems = originalItems.length;
-        let currentPosition = totalItems * 20;
-        let isScrolling = false;
-        let offset = 20;
+        const iconsLeftBtn = document.querySelector('.icons-slider-btn.left');
+        const iconsRightBtn = document.querySelector('.icons-slider-btn.right');
         
-        function initializeInfiniteCarousel() {
-            iconsSlider.innerHTML = '';
+        function updateIconsArrowVisibility() {
+            const scrollLeft = iconsSlider.scrollLeft;
+            const maxScroll = iconsSlider.scrollWidth - iconsSlider.clientWidth;
             
-            for (let i = 0; i < offset; i++) {
-                originalItems.forEach(item => {
-                    const clone = item.cloneNode(true);
-                    clone.setAttribute('data-icon', item.querySelector('img').alt);
-                    clone.setAttribute('data-image', item.querySelector('img').src);
-                    iconsSlider.appendChild(clone);
-                });
+            if (scrollLeft <= 5) {
+                iconsLeftBtn.classList.add('hidden');
+            } else {
+                iconsLeftBtn.classList.remove('hidden');
             }
             
-            originalItems.forEach(item => {
-                const clone = item.cloneNode(true);
-                clone.setAttribute('data-icon', item.querySelector('img').alt);
-                clone.setAttribute('data-image', item.querySelector('img').src);
-                iconsSlider.appendChild(clone);
-            });
-            
-            for (let i = 0; i < offset; i++) {
-                originalItems.forEach(item => {
-                    const clone = item.cloneNode(true);
-                    clone.setAttribute('data-icon', item.querySelector('img').alt);
-                    clone.setAttribute('data-image', item.querySelector('img').src);
-                    iconsSlider.appendChild(clone);
-                });
+            if (scrollLeft >= maxScroll - 5) {
+                iconsRightBtn.classList.add('hidden');
+            } else {
+                iconsRightBtn.classList.remove('hidden');
             }
-            
-            iconsSlider.scrollLeft = itemWidth * currentPosition;
-            setupIconHoverEvents();
         }
         
         function slideIconsLeft() {
-            if (isScrolling) return;
-            isScrolling = true;
-            currentPosition--;
-            iconsSlider.scrollTo({
-                left: itemWidth * currentPosition,
+            iconsSlider.scrollBy({
+                left: -iconsSlider.offsetWidth / 2,
                 behavior: 'smooth'
             });
-            setTimeout(() => {
-                isScrolling = false;
-                resetToMiddleIfNeeded();
-            }, 400);
+            setTimeout(updateIconsArrowVisibility, 300);
         }
         
         function slideIconsRight() {
-            if (isScrolling) return;
-            isScrolling = true;
-            currentPosition++;
-            iconsSlider.scrollTo({
-                left: itemWidth * currentPosition,
+            iconsSlider.scrollBy({
+                left: iconsSlider.offsetWidth / 2,
                 behavior: 'smooth'
             });
-            setTimeout(() => {
-                isScrolling = false;
-                resetToMiddleIfNeeded();
-            }, 400);
+            setTimeout(updateIconsArrowVisibility, 300);
         }
         
-        function resetToMiddleIfNeeded() {
-            if (currentPosition < totalItems * 10) {
-                iconsSlider.scrollLeft = itemWidth * (totalItems * 20);
-                currentPosition = totalItems * 20;
-            } else if (currentPosition > totalItems * 30) {
-                iconsSlider.scrollLeft = itemWidth * (totalItems * 20);
-                currentPosition = totalItems * 20;
-            }
-        }
-        
-        window.addEventListener('load', initializeInfiniteCarousel);
-        
-        const iconsPopup = document.getElementById('iconsPopup');
-        let iconPopupTimeout;
-        
-        function setupIconHoverEvents() {
-            const iconItems = iconsSlider.querySelectorAll('.icon-item');
-            
-            iconItems.forEach(item => {
-                item.addEventListener('mouseenter', (e) => {
-                    clearTimeout(iconPopupTimeout);
-                    const iconName = item.dataset.icon;
-                    const imageUrl = item.dataset.image;
-                    const rect = item.getBoundingClientRect();
-                    
-                    iconsPopup.innerHTML = `
-                        <img src="${imageUrl}" alt="${iconName}" class="icons-popup-image">
-                        <div class="icons-popup-text">${iconName}</div>
-                    `;
-                    
-                    iconsPopup.classList.add('active');
-                    iconsPopup.style.top = (rect.top + window.scrollY - 350) + 'px';
-                    iconsPopup.style.left = Math.min(rect.left + rect.width / 2 - 180, window.innerWidth - 360) + 'px';
-                });
-                
-                item.addEventListener('mouseleave', () => {
-                    iconPopupTimeout = setTimeout(() => {
-                        iconsPopup.classList.remove('active');
-                    }, 100);
-                });
-            });
-        }
-        
-        iconsPopup.addEventListener('mouseenter', () => {
-            clearTimeout(iconPopupTimeout);
-        });
-        
-        iconsPopup.addEventListener('mouseleave', () => {
-            iconPopupTimeout = setTimeout(() => {
-                iconsPopup.classList.remove('active');
-            }, 100);
-        });
+        iconsSlider.addEventListener('scroll', updateIconsArrowVisibility);
+        window.addEventListener('load', updateIconsArrowVisibility);
         
         const nbaSlider = document.getElementById('nbaSlider');
         const nbaLeftBtn = document.querySelector('.nba-slider-btn.left');
@@ -1776,13 +1285,13 @@ HTML_TEMPLATE = '''
             const scrollLeft = nbaSlider.scrollLeft;
             const maxScroll = nbaSlider.scrollWidth - nbaSlider.clientWidth;
             
-            if (scrollLeft <= 0) {
+            if (scrollLeft <= 5) {
                 nbaLeftBtn.classList.add('hidden');
             } else {
                 nbaLeftBtn.classList.remove('hidden');
             }
             
-            if (scrollLeft >= maxScroll - 1) {
+            if (scrollLeft >= maxScroll - 5) {
                 nbaRightBtn.classList.add('hidden');
             } else {
                 nbaRightBtn.classList.remove('hidden');
@@ -1791,7 +1300,7 @@ HTML_TEMPLATE = '''
         
         function slideNbaLeft() {
             nbaSlider.scrollBy({
-                left: -200,
+                left: -nbaSlider.offsetWidth / 2,
                 behavior: 'smooth'
             });
             setTimeout(updateNbaArrowVisibility, 300);
@@ -1799,14 +1308,14 @@ HTML_TEMPLATE = '''
         
         function slideNbaRight() {
             nbaSlider.scrollBy({
-                left: 200,
+                left: nbaSlider.offsetWidth / 2,
                 behavior: 'smooth'
             });
             setTimeout(updateNbaArrowVisibility, 300);
         }
         
         nbaSlider.addEventListener('scroll', updateNbaArrowVisibility);
-        updateNbaArrowVisibility();
+        window.addEventListener('load', updateNbaArrowVisibility);
     </script>
 </body>
 </html>
@@ -1818,51 +1327,52 @@ def home():
 
 @app.route('/new-featured')
 def new_featured():
-    return "<h1>New & Featured</h1><p>Coming Soon...</p>"
+    return "<h1>New & Featured Section</h1><p>Coming Soon...</p>"
 
 @app.route('/men')
 def men():
-    return "<h1>Men's Collection</h1><p>Coming Soon...</p>"
+    return "<h1>Men's Section</h1><p>Coming Soon...</p>"
 
 @app.route('/women')
 def women():
-    return "<h1>Women's Collection</h1><p>Coming Soon...</p>"
+    return "<h1>Women's Section</h1><p>Coming Soon...</p>"
 
 @app.route('/kids')
 def kids():
-    return "<h1>Kids' Collection</h1><p>Coming Soon...</p>"
+    return "<h1>Kids' Section</h1><p>Coming Soon...</p>"
 
 @app.route('/sale')
 def sale():
-    return "<h1>Sale</h1><p>Coming Soon...</p>"
+    return "<h1>Sale Section</h1><p>Coming Soon...</p>"
 
 @app.route('/snkrs')
 def snkrs():
-    return "<h1>SNKRS</h1><p>Coming Soon...</p>"
+    return "<h1>SNKRS Section</h1><p>Coming Soon...</p>"
 
 @app.route('/find-stores')
 def find_stores():
-    return "<h1>Find Stores</h1><p>Coming Soon...</p>"
+    return "<h1>Find Stores</h1><p>Store locator coming soon...</p>"
 
 @app.route('/help')
 def help_page():
-    return "<h1>Help</h1><p>Coming Soon...</p>"
+    return "<h1>Help Center</h1><p>How can we help you?</p>"
 
 @app.route('/join')
 def join():
-    return "<h1>Join Nike</h1><p>Coming Soon...</p>"
+    return "<h1>Join Us</h1><p>Become a Nike Member</p>"
 
 @app.route('/signin')
 def signin():
-    return "<h1>Sign In</h1><p>Coming Soon...</p>"
+    return "<h1>Sign In</h1><p>Sign in to your Nike account</p>"
 
 @app.route('/favorites')
 def favorites():
-    return "<h1>Favorites</h1><p>No favorites yet</p>"
+    return "<h1>Your Favorites</h1><p>No favorites yet</p>"
 
 @app.route('/basket')
 def basket():
-    return "<h1>Basket</h1><p>Your basket is empty</p>"
+    return "<h1>Shopping Basket</h1><p>Your basket is empty</p>"
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
