@@ -371,7 +371,7 @@ HTML_TEMPLATE = '''
         
         .athlete-image {
             width: 100%;
-            height: 300;
+            height: 260;
             object-fit: cover;
         }
         
