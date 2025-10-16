@@ -351,7 +351,7 @@ HTML_TEMPLATE = '''
         }
         
         .athlete-title {
-            font-size: 24x;
+            font-size: 28x;
             letter-spacing: 0.1px;
             margin-bottom: 10px;
             margin-top: 15px;
@@ -374,35 +374,15 @@ HTML_TEMPLATE = '''
             height: 350px;
             object-fit: cover;
         }
-        
-        .athlete-shop-button {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            background-color: white;
-            color: black;
-            padding: 1px 4px;
-            border: none;
-            cursor: pointer;
-            font-size: 7px;
-            text-transform: capitalize;
-            letter-spacing: 0.1px;
-            z-index: 10;
-            border-radius: 50px;
-        }
-        
-        .athlete-shop-button:hover {
-            background-color: #f0f0f0;
-        }
 
         .featured-heading-section {
             background-color: white;
-            padding: 20px 0;
+            padding: 10px 0;
             text-align: center;
         }
 
         .featured-main-title {
-            font-size: 9px;
+            font-size: 12px;
             font-weight: bold;
             letter-spacing: 0.5px;
             margin-bottom: 2px;
@@ -419,7 +399,7 @@ HTML_TEMPLATE = '''
         .featured-cta-button {
             background-color: black;
             color: white;
-            padding: 4px 8px;
+            padding: 4px 4px;
             border: none;
             cursor: pointer;
             font-size: 8px;
@@ -435,14 +415,14 @@ HTML_TEMPLATE = '''
 
         .discover-section {
             background-color: white;
-            padding: 20px 0;
+            padding: 15px 0;
         }
 
         .discover-title {
-            font-size: 9px;
+            font-size: 28px;
             letter-spacing: 0.1px;
             margin-bottom: 10px;
-            margin-top: 2px;
+            margin-top: 15px;
         }
 
         .discover-grid {
@@ -450,7 +430,10 @@ HTML_TEMPLATE = '''
             grid-template-columns: repeat(2, 1fr);
             gap: 0;
             width: 100%;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            padding-left: 0;
+            padding-right: 0;
+
         }
 
         .discover-item {
