@@ -441,7 +441,7 @@ HTML_TEMPLATE = '''
 
         .discover-image {
             width: 100%;
-            height: 600px;
+            height: 650px;
             object-fit: cover;
             display: block;
         }
