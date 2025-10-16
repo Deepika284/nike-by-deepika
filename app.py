@@ -6,6 +6,7 @@ app = Flask(__name__)
 if not os.path.exists('static'):
     os.makedirs('static')
 
+HTML_TEMPLATE = '''
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -263,7 +264,7 @@ if not os.path.exists('static'):
             width: 100%;
             margin-top: 20px;
             overflow: hidden;
-            height: 200px; /* Reduced height for laptop */
+            height: 200px;
         }
         
         .shop-button {
@@ -679,25 +680,19 @@ if not os.path.exists('static'):
                 gap: 8px;
             }
             
-            /* SLIDESHOW - Keep original height for mobile */
-            .slideshow-container {
-                height: auto;
-            }
-            
-            .slide {
-                height: auto;
-            }
-            
-            .shop-button {
-                bottom: 20px;
-                padding: 10px 20px;
-                font-size: 14px;
-            }
-            
             .nav-menu {
                 padding: 0 20px;
                 height: 50px;
                 justify-content: center;
+            }
+            
+            /* Slideshow mobile override */
+            .slideshow-container {
+                height: auto;
+            }
+
+            .slide {
+                height: auto;
             }
             
             .nav-logo {
