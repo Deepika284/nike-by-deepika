@@ -358,19 +358,20 @@ HTML_TEMPLATE = '''
             height: 400px;
             object-fit: cover;
         }
-        
         .discover-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             grid-template-rows: repeat(2, 1fr);
             gap: 0;
             margin-bottom: 40px;
+            line-height: 0;
         }
         
         .discover-image {
             width: 100%;
-            height: 620px;
+            height: 320px;
             object-fit: cover;
+            display: block;
         }
         
         .featured-images-container {
