@@ -369,7 +369,7 @@ HTML_TEMPLATE = '''
         
         .discover-image {
             width: 100%;
-            height: 600px;
+            height: 620px;
             object-fit: cover;
         }
         
