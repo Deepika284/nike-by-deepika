@@ -309,12 +309,12 @@ HTML_TEMPLATE = '''
         .sports-title, .discover-title, .nba-section-title,
         .select-icons-title {
             font-size: 28px;
-            font-weight: bold;
-            margin: 30px 0 20px 0;
+            font-weight: normal;
+            margin: 50px 0 30px 0;
         }
         
         .featured-main-title {
-            font-size: 48px;
+            font-size: 40px;
             font-weight: bold;
             margin-bottom: 15px;
         }
@@ -356,8 +356,8 @@ HTML_TEMPLATE = '''
         
         .discover-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 2fr));
+            gap: 0;
             margin-bottom: 40px;
         }
         
@@ -376,13 +376,13 @@ HTML_TEMPLATE = '''
         
         .featured-image {
             width: 100%;
-            height: 280px;
+            height: 380px;
             object-fit: cover;
         }
         
         .gear-image {
             width: 100%;
-            height: 500px;
+            height: 600px;
             object-fit: cover;
             margin-bottom: 40px;
         }
@@ -395,7 +395,7 @@ HTML_TEMPLATE = '''
         }
         
         .sports-slider, .icons-slider {
-            display: flex;
+            display: flex; 
             gap: 15px;
             overflow-x: auto;
             scroll-behavior: smooth;
