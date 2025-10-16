@@ -403,6 +403,7 @@ HTML_TEMPLATE = '''
             border: none;
             cursor: pointer;
             font-size: 15px;
+            font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 0.3px;
             border-radius: 50px;
@@ -419,7 +420,7 @@ HTML_TEMPLATE = '''
         }
 
         .discover-title {
-            font-size: 24px;
+            font-size: 20px;
             letter-spacing: 0.1px;
             margin-bottom: 10px;
             margin-top: 15px;
@@ -441,7 +442,7 @@ HTML_TEMPLATE = '''
 
         .discover-image {
             width: 100%;
-            height: 60px;
+            height: 260px;
             object-fit: cover;
             display: block;
         }
