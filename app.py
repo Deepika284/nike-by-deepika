@@ -314,20 +314,22 @@ HTML_TEMPLATE = '''
         .sports-title, .discover-title, .nba-section-title,
         .select-icons-title {
             font-size: 28px;
-            font-weight: normal;
+            font-weight: 600;
             margin: 50px 0 30px 0;
         }
         
         .featured-main-title {
-            font-size: 40px;
+            font-size: 30px;
             font-weight: bold;
             margin-bottom: 15px;
+            text-align: center;
         }
         
         .featured-subtitle {
             font-size: 24px;
             color: #757575;
             margin-bottom: 20px;
+            text-align: center;
         }
         
         .featured-cta-button {
@@ -339,6 +341,7 @@ HTML_TEMPLATE = '''
             font-size: 16px;
             font-weight: bold;
             border-radius: 50px;
+            text-align: center;
         }
         
         .featured-cta-button:hover {
@@ -355,7 +358,7 @@ HTML_TEMPLATE = '''
         
         .athlete-image {
             width: 100%;
-            height: 400px;
+            height: 620px;
             object-fit: cover;
         }
         .discover-grid {
@@ -383,13 +386,13 @@ HTML_TEMPLATE = '''
         
         .featured-image {
             width: 100%;
-            height: 380px;
+            height: 400px;
             object-fit: cover;
         }
         
         .gear-image {
             width: 100%;
-            height: 600px;
+            height: 680px;
             object-fit: cover;
             margin-bottom: 40px;
         }
@@ -403,7 +406,7 @@ HTML_TEMPLATE = '''
         
         .sports-slider, .icons-slider {
             display: flex; 
-            gap: 15px;
+            gap: 8px;
             overflow-x: auto;
             scroll-behavior: smooth;
             scrollbar-width: none;
@@ -423,15 +426,15 @@ HTML_TEMPLATE = '''
         
         .sports-image, .icon-image {
             width: 100%;
-            height: 280px;
+            height: 350px;
             object-fit: cover;
             margin-bottom: 12px;
         }
         
         .sports-text {
             text-align: center;
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 20px;
+            font-weight: normal;
             text-transform: uppercase;
         }
         
@@ -1127,7 +1130,7 @@ HTML_TEMPLATE = '''
     <div class="featured-heading-section">
         <div class="content-wrapper">
             <p class="featured-main-title">New Season Arrivals</p>
-            <p class="featured-subtitle">Discovre latest styles and innovations</p>
+            <p class="featured-subtitle">Discover latest styles and innovations</p>
             <button class="featured-cta-button">Shop Now</button>
         </div>
     </div>
