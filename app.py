@@ -1375,27 +1375,3 @@ def basket():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=False)
-
-@app.route('/help')
-def help_page():
-    return "<h1>Help Center</h1><p>How can we help you?</p>"
-
-@app.route('/join')
-def join():
-    return "<h1>Join Us</h1><p>Become a Nike Member</p>"
-
-@app.route('/signin')
-def signin():
-    return "<h1>Sign In</h1><p>Sign in to your Nike account</p>"
-
-@app.route('/favorites')
-def favorites():
-    return "<h1>Your Favorites</h1><p>No favorites yet</p>"
-
-@app.route('/basket')
-def basket():
-    return "<h1>Shopping Basket</h1><p>Your basket is empty</p>"
-
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
