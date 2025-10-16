@@ -213,12 +213,14 @@ HTML_TEMPLATE = '''
             }
         }
         
-        /* Search Container - Responsive */
-        .search-container {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin-left: auto;
+        /* Slideshow - Responsive */
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            margin-top: 20px;
+            overflow: hidden;
+            height: calc(100vh - 100px);
+            max-height: 800px;
         }
         
         .search-bar {
@@ -293,6 +295,7 @@ HTML_TEMPLATE = '''
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: top center;
         }
         
         .slide.active {
@@ -689,6 +692,7 @@ HTML_TEMPLATE = '''
 
             .slide {
                 height: auto;
+                object-position: center center;
             }
             
             .nav-menu {
