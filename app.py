@@ -351,7 +351,7 @@ HTML_TEMPLATE = '''
         }
         
         .athlete-title {
-            font-size: 9px;
+            font-size: 24x;
             letter-spacing: 0.1px;
             margin-bottom: 10px;
             margin-top: 15px;
@@ -371,7 +371,7 @@ HTML_TEMPLATE = '''
         
         .athlete-image {
             width: 100%;
-            height: 110px;
+            height: 180px;
             object-fit: cover;
         }
         
