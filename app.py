@@ -372,7 +372,7 @@ HTML_TEMPLATE = '''
         
         .discover-image {
             width: 100%;
-            height: 320px;
+            height: 600px;
             object-fit: cover;
             display: block;
         }
@@ -386,13 +386,13 @@ HTML_TEMPLATE = '''
         
         .featured-image {
             width: 100%;
-            height: 400px;
+            height: 500px;
             object-fit: cover;
         }
         
         .gear-image {
             width: 100%;
-            height: 680px;
+            height: 700px;
             object-fit: cover;
             margin-bottom: 40px;
         }
@@ -426,7 +426,7 @@ HTML_TEMPLATE = '''
         
         .sports-image, .icon-image {
             width: 100%;
-            height: 350px;
+            height: 400px;
             object-fit: cover;
             margin-bottom: 12px;
         }
