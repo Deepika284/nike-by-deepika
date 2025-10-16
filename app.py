@@ -264,7 +264,8 @@ HTML_TEMPLATE = '''
             width: 100%;
             margin-top: 20px;
             overflow: hidden;
-            height: 200px;
+            height: calc(100vh - 100px);
+            max-height: 800px;
         }
         
         .shop-button {
@@ -679,20 +680,21 @@ HTML_TEMPLATE = '''
                 font-size: 9px;
                 gap: 8px;
             }
+
+            /* Slideshow mobile override */
+            .slideshow-container {
+                height: auto;
+                max-height: none;
+            }
+
+            .slide {
+                height: auto;
+            }
             
             .nav-menu {
                 padding: 0 20px;
                 height: 50px;
                 justify-content: center;
-            }
-            
-            /* Slideshow mobile override */
-            .slideshow-container {
-                height: auto;
-            }
-
-            .slide {
-                height: auto;
             }
             
             .nav-logo {
