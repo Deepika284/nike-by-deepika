@@ -708,7 +708,7 @@ HTML_TEMPLATE = '''
             .sports-title, .discover-title, .nba-section-title,
             .select-icons-title {
                 font-size: 20px;
-                margin: 20px 0 15px 0;
+                margin: 30px 0 15px 0;
             }
             
             .featured-main-title {
