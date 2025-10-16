@@ -708,15 +708,16 @@ HTML_TEMPLATE = '''
             .sports-title, .discover-title, .nba-section-title,
             .select-icons-title {
                 font-size: 20px;
-                margin: 30px 0 15px 0;
+                margin: 50px 0 15px 0;
+                font-weight: normsl;
             }
             
             .featured-main-title {
-                font-size: 32px;
+                font-size: 25px;
             }
             
             .featured-subtitle {
-                font-size: 18px;
+                font-size: 20px;
             }
             
             .sports-item, .icon-item, .nba-item {
@@ -730,7 +731,7 @@ HTML_TEMPLATE = '''
             }
             
             .footer-content {
-                grid-template-columns: 1fr;
+                grid-template-columns: 3fr;
                 gap: 30px;
             }
         }
