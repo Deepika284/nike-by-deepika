@@ -709,7 +709,7 @@ HTML_TEMPLATE = '''
             .select-icons-title {
                 font-size: 20px;
                 margin: 50px 0 15px 0;
-                font-weight: normsl;
+                font-weight: normal;
             }
             
             .featured-main-title {
