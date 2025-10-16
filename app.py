@@ -361,7 +361,8 @@ HTML_TEMPLATE = '''
         
         .discover-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 2fr));
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
             gap: 0;
             margin-bottom: 40px;
         }
