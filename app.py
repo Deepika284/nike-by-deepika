@@ -667,7 +667,7 @@ HTML_TEMPLATE = '''
             text-transform: uppercase;
         }
         
-        /* Mobile Responsive */
+        /* Mobile Responsive - Phone screens only */
         @media (max-width: 768px) {
             .text-container {
                 font-size: 10px;
@@ -682,6 +682,11 @@ HTML_TEMPLATE = '''
             .nav-menu {
                 padding: 0 20px;
                 height: 50px;
+                justify-content: center;
+            }
+            
+            .nav-logo {
+                margin-right: 0;
             }
             
             .nav-logo img {
@@ -689,20 +694,10 @@ HTML_TEMPLATE = '''
                 height: 27px;
             }
             
-            .nav-links-container {
-                gap: 15px;
-            }
-            
-            .nav-link, .new-featured-link, .men-link, 
-            .women-link, .kids-link, .sale-link, .snkrs-link {
-                font-size: 13px;
-                padding: 6px 8px;
-            }
-            
-            .search-bar {
-                width: 120px;
-                font-size: 12px;
-                padding: 6px 15px;
+            /* HIDE nav links, favorites, and basket on phone screens */
+            .nav-links-container,
+            .search-container {
+                display: none !important;
             }
             
             .content-wrapper {
@@ -1356,6 +1351,30 @@ def snkrs():
 @app.route('/find-stores')
 def find_stores():
     return "<h1>Find Stores</h1><p>Store locator coming soon...</p>"
+
+@app.route('/help')
+def help_page():
+    return "<h1>Help Center</h1><p>How can we help you?</p>"
+
+@app.route('/join')
+def join():
+    return "<h1>Join Us</h1><p>Become a Nike Member</p>"
+
+@app.route('/signin')
+def signin():
+    return "<h1>Sign In</h1><p>Sign in to your Nike account</p>"
+
+@app.route('/favorites')
+def favorites():
+    return "<h1>Your Favorites</h1><p>No favorites yet</p>"
+
+@app.route('/basket')
+def basket():
+    return "<h1>Shopping Basket</h1><p>Your basket is empty</p>"
+
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
 
 @app.route('/help')
 def help_page():
