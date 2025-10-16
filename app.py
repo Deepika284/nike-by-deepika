@@ -297,7 +297,7 @@ HTML_TEMPLATE = '''
         
         .slideshow-container {
             position: relative;
-            width: 780px;
+            width: 100%;
             height: 100%;
             margin-top: 15px;
             overflow: hidden;
@@ -1327,7 +1327,7 @@ HTML_TEMPLATE = '''
     </div>
     
     <div class="slideshow-container">
-        <img src="/static/ssf1.avif" class="slide active" alt="SS 1">
+        <img src="/static/ssf.avif" class="slide active" alt="SS 1">
         <img src="/static/ssf2.avif" class="slide" alt="SS 2">
         <button class="shop-button">Shop</button>
     </div>
