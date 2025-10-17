@@ -253,7 +253,7 @@ HTML_TEMPLATE = '''
         }
         
         .heart-outline {
-            display: inline;
+            display: none;
         }
         
         .heart-filled {
