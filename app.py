@@ -233,13 +233,14 @@ HTML_TEMPLATE = '''
             background-color: #e8e8e8;
             border-color: #999;
         }
-
-        .favorites-icon, .basket-icon {
-            font-size: 24px;
+        
+        .favorites-icon {
+            font-size: 30px;
             cursor: pointer;
             color: black;
+            display: inline-block;
+            position: relative;
         }
-        
 
         .favorites-icon:hover {
             text-decoration: none;
