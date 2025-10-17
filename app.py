@@ -234,12 +234,10 @@ HTML_TEMPLATE = '''
             border-color: #999;
         }
         
-        .favorites-icon {
-            font-size: 35px;
+        .favorites-icon, .basket-icon {
+            font-size: 24px;
             cursor: pointer;
             color: black;
-            display: inline-block;
-            position: relative;
         }
 
         .favorites-icon:hover {
