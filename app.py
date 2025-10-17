@@ -139,7 +139,7 @@ HTML_TEMPLATE = '''
         .kids-menu, .sale-menu, .snkrs-menu {
             display: none;
             position: fixed;
-            top: 100px;
+            top: 90px;
             left: 0;
             right: 0;
             background-color: white;
