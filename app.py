@@ -48,7 +48,7 @@ HTML_TEMPLATE = '''
         
         .text-container {
             text-align: center;
-            font-size: 20px;
+            font-size: 15px;
             font-weight: bold;
             letter-spacing: 2px;
             color: white;
@@ -346,8 +346,8 @@ HTML_TEMPLATE = '''
             font-size: 16px;
             font-weight: bold;
             border-radius: 50px;
-            text-align: center;
-            align-item: center;
+            display: block;           /* Add this */
+            margin: 0 auto;          /* Add this */
         }
         
         .featured-cta-button:hover {
