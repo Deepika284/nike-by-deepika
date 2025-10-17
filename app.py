@@ -608,7 +608,7 @@ HTML_TEMPLATE = '''
             align-items: center;
             gap: 8px;
             font-size: 14px;
-            margin-top: 60px;
+            margin-top: 200px;
         }
         
         .location-icon {
