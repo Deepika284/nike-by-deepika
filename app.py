@@ -235,7 +235,7 @@ HTML_TEMPLATE = '''
         }
         
         .favorites-icon {
-            font-size: 30px;
+            font-size: 35px;
             cursor: pointer;
             color: black;
             display: inline-block;
