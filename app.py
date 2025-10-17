@@ -326,14 +326,14 @@ HTML_TEMPLATE = '''
         .featured-main-title {
             font-size: 30px;
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             text-align: center;
         }
         
         .featured-subtitle {
             font-size: 24px;
             color: #757575;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-align: center;
         }
         
