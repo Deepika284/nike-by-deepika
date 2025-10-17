@@ -238,26 +238,32 @@ HTML_TEMPLATE = '''
             border-color: #999;
         }
         
-        .favorites-icon, .basket-icon {
+        .favorites-icon {
             font-size: 24px;
             cursor: pointer;
             color: black;
+            display: inline-block;
+            position: relative;
         }
-        
+
+        .favorites-icon:hover {
+            text-decoration: none;
+        }
+
+        .heart-outline {
+            display: inline-block;
+        }
+
+        .heart-filled {
+            display: none;
+        }
+
         .favorites-icon:hover .heart-outline {
             display: none;
         }
-        
+
         .favorites-icon:hover .heart-filled {
-            display: inline;
-        }
-        
-        .heart-outline {
-            display: inline;
-        }
-        
-        .heart-filled {
-            display: none;
+            display: inline-block;
         }
         
         /* Slideshow - Responsive */
