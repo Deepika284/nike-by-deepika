@@ -228,7 +228,7 @@ HTML_TEMPLATE = '''
             border: 1px solid #ccc;
             border-radius: 20px;
             padding: 8px 20px;
-            font-size: 14px;
+            font-size: 16px;
             width: 200px;
             outline: none;
         }
@@ -253,7 +253,7 @@ HTML_TEMPLATE = '''
         }
         
         .heart-outline {
-            display: none;
+            display: inline;
         }
         
         .heart-filled {
@@ -314,8 +314,8 @@ HTML_TEMPLATE = '''
         .sports-title, .discover-title, .nba-section-title,
         .select-icons-title {
             font-size: 28px;
-            font-weight: 600;
-            margin: 50px 0 30px 0;
+            font-weight: normal;
+            margin: 100px 0 30px 0;
         }
         
         .featured-main-title {
@@ -342,6 +342,7 @@ HTML_TEMPLATE = '''
             font-weight: bold;
             border-radius: 50px;
             text-align: center;
+            align-item: center;
         }
         
         .featured-cta-button:hover {
@@ -358,7 +359,7 @@ HTML_TEMPLATE = '''
         
         .athlete-image {
             width: 100%;
-            height: 620px;
+            height: 300px;
             object-fit: cover;
         }
         .discover-grid {
@@ -372,7 +373,7 @@ HTML_TEMPLATE = '''
         
         .discover-image {
             width: 100%;
-            height: 600px;
+            height: 620px;
             object-fit: cover;
             display: block;
         }
