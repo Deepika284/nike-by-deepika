@@ -139,7 +139,7 @@ HTML_TEMPLATE = '''
         .kids-menu, .sale-menu, .snkrs-menu {
             display: none;
             position: fixed;
-            top: 90px;
+            top: 85px;
             left: 0;
             right: 0;
             background-color: white;
@@ -608,7 +608,7 @@ HTML_TEMPLATE = '''
             align-items: center;
             gap: 8px;
             font-size: 14px;
-            margin-top: 20px;
+            margin-top: 60px;
         }
         
         .location-icon {
