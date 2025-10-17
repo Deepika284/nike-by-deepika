@@ -213,16 +213,12 @@ HTML_TEMPLATE = '''
             }
         }
         
-        /* Slideshow - Responsive */
-        .slideshow-container {
-            position: relative;
-            width: 100%;
-            margin-top: 20px;
-            overflow: hidden;
-            height: calc(100vh - 100px);
-            max-height: 800px;
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;  /* Add this line - adjust the value (20px, 25px, 30px, etc.) as needed */
         }
-        
+
         .search-bar {
             background-color: #f5f5f5;
             border: 1px solid #ccc;
@@ -232,19 +228,18 @@ HTML_TEMPLATE = '''
             width: 200px;
             outline: none;
         }
-        
+
         .search-bar:focus {
             background-color: #e8e8e8;
             border-color: #999;
         }
-        
-        .favorites-icon {
+
+        .favorites-icon, .basket-icon {
             font-size: 24px;
             cursor: pointer;
             color: black;
-            display: inline-block;
-            position: relative;
         }
+        
 
         .favorites-icon:hover {
             text-decoration: none;
