@@ -371,13 +371,13 @@ HTML_TEMPLATE = '''
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.4);
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .slide-dot.active {
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: white;
             width: 10px;
             height: 10px;
         }
