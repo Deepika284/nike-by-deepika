@@ -515,6 +515,7 @@ HTML_TEMPLATE = '''
             font-size: 14px;
             color: #757575;
             margin-bottom: 8px;
+            font-weight: normal;
         }
         
         .nba-price {
@@ -571,7 +572,7 @@ HTML_TEMPLATE = '''
         .footer-section {
             background-color: white;
             padding: 40px 40px;
-            margin-top: 80px;
+            margin-top: 200px;
             border-top: 1px solid #ccc;
         }
         
@@ -580,7 +581,7 @@ HTML_TEMPLATE = '''
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 40px;
             max-width: 1400px;
-            margin: 0 auto 40px;
+            margin: 50 auto 40px;
         }
         
         .footer-column-title {
