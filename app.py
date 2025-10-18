@@ -14,7 +14,7 @@ HTML_TEMPLATE = '''
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nike Store</title>
     <style>
-        * {
+    `    * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -325,7 +325,7 @@ HTML_TEMPLATE = '''
             object-position: top center;
         }
 
-        /* Slideshow Controls - Laptop Only */
+        /* Slideshow Controls - Updated with realistic icons and progress */
         .slideshow-controls {
             position: absolute;
             bottom: 40px;
@@ -336,24 +336,79 @@ HTML_TEMPLATE = '''
         }
 
         .slideshow-control-btn {
-            width: 50px;
-            height: 50px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            background-color: white;
+            background-color: rgba(245, 245, 245, 0.85);
+            backdrop-filter: blur(10px);
             border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            font-weight: bold;
-            color: black;
-            transition: all 0.3s;
+            font-size: 20px;
+            font-weight: 600;
+            color: #111;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .slideshow-control-btn:hover {
-            background-color: #f0f0f0;
-            transform: scale(1.1);
+            background-color: rgba(255, 255, 255, 0.95);
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .slideshow-control-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Pause/Play button with circular progress */
+        #pauseBtn {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        #pauseBtn::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #111 var(--progress, 0deg),
+                transparent var(--progress, 0deg)
+            );
+            mask: radial-gradient(
+                circle,
+                transparent 0,
+                transparent 22px,
+                black 22px,
+                black 25px,
+                transparent 25px
+            );
+            -webkit-mask: radial-gradient(
+                circle,
+                transparent 0,
+                transparent 22px,
+                black 22px,
+                black 25px,
+                transparent 25px
+            );
+            transition: --progress 0.1s linear;
+        }
+
+        /* Arrow buttons styling */
+        .slideshow-control-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         /* Content Wrapper - Responsive */
@@ -899,7 +954,7 @@ HTML_TEMPLATE = '''
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
-        }
+        }`
     </style>
 </head>
 <body>
@@ -1260,11 +1315,23 @@ HTML_TEMPLATE = '''
         </video>
         <button class="shop-button">Shop</button>
         <div class="slideshow-controls">
-            <button class="slideshow-control-btn" onclick="togglePause()" id="pauseBtn">||</button>
-            <button class="slideshow-control-btn" onclick="prevSlide()">&#60;</button>
-            <button class="slideshow-control-btn" onclick="nextSlide()">&#62;</button>
+            <button class="slideshow-control-btn" onclick="togglePause()" id="pauseBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="6" y="4" width="4" height="16"></rect>
+                    <rect x="14" y="4" width="4" height="16"></rect>
+                </svg>
+            </button>
+            <button class="slideshow-control-btn" onclick="prevSlide()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <button class="slideshow-control-btn" onclick="nextSlide()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
         </div>
-    </div>
 
     <div class="athlete-section">
         <div class="content-wrapper">
@@ -2210,18 +2277,47 @@ HTML_TEMPLATE = '''
     <div class="icons-popup" id="iconsPopup"></div>
     
     <script>
-        // Slideshow functionality
+        //slideshow
+
         let currentIndex = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
         let slideTimeout;
         let isPaused = false;
+        let progressInterval;
+        let currentProgress = 0;
+        let slideDuration = 3000; // default duration in ms
+
+        function updateProgress() {
+            const pauseBtn = document.getElementById('pauseBtn');
+            const progressDeg = (currentProgress / slideDuration) * 360;
+            pauseBtn.style.setProperty('--progress', `${progressDeg}deg`);
+        }
+
+        function startProgress(duration) {
+            currentProgress = 0;
+            slideDuration = duration;
+            clearInterval(progressInterval);
+            
+            const pauseBtn = document.getElementById('pauseBtn');
+            pauseBtn.style.setProperty('--progress', '0deg');
+            
+            progressInterval = setInterval(() => {
+                if (!isPaused) {
+                    currentProgress += 100;
+                    if (currentProgress >= slideDuration) {
+                        currentProgress = slideDuration;
+                        clearInterval(progressInterval);
+                    }
+                    updateProgress();
+                }
+            }, 100);
+        }
 
         function showSlide(index) {
-            // Clear any existing timeout
             clearTimeout(slideTimeout);
+            clearInterval(progressInterval);
             
-            // Stop all videos
             document.querySelectorAll('.slide').forEach(slide => {
                 if (slide.tagName === 'VIDEO') {
                     slide.pause();
@@ -2241,50 +2337,44 @@ HTML_TEMPLATE = '''
             const currentSlide = document.querySelectorAll('.slide')[currentIndex];
             currentSlide.classList.add('active');
             
-            // Don't auto-advance if paused
             if (isPaused) {
                 return;
             }
             
-            // Handle timing based on slide type
             if (currentSlide.tagName === 'VIDEO') {
                 const video = currentSlide;
-                
-                // Remove any existing listeners
                 video.onended = null;
                 
-                // Set up ended event
                 video.onended = function() {
                     console.log('Video ended, moving to next slide');
                     currentIndex++;
                     showSlide(currentIndex);
                 };
                 
-                // Also set up a backup timeout in case video doesn't load
                 video.onloadedmetadata = function() {
-                    console.log('Video duration:', video.duration);
-                    // Set backup timeout slightly longer than video duration
+                    const duration = video.duration * 1000;
+                    startProgress(duration);
+                    
                     slideTimeout = setTimeout(() => {
                         console.log('Backup timeout triggered');
                         currentIndex++;
                         showSlide(currentIndex);
-                    }, (video.duration + 1) * 1000);
+                    }, duration + 1000);
                 };
                 
-                // Play the video
                 video.play().then(() => {
                     console.log('Video playing successfully');
                 }).catch(err => {
                     console.log('Video play failed:', err);
-                    // If video fails, move to next slide after 5 seconds
+                    startProgress(5000);
                     slideTimeout = setTimeout(() => {
                         currentIndex++;
                         showSlide(currentIndex);
                     }, 5000);
                 });
             } else {
-                // Image slide - show for 3 seconds
                 console.log('Showing image slide');
+                startProgress(3000);
                 slideTimeout = setTimeout(() => {
                     currentIndex++;
                     showSlide(currentIndex);
@@ -2295,34 +2385,39 @@ HTML_TEMPLATE = '''
         function togglePause() {
             isPaused = !isPaused;
             const pauseBtn = document.getElementById('pauseBtn');
+            const pauseSvg = pauseBtn.querySelector('svg');
             
             if (isPaused) {
-                pauseBtn.textContent = '▶';
+                // Change to play icon
+                pauseSvg.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
                 clearTimeout(slideTimeout);
+                clearInterval(progressInterval);
                 
-                // Pause video if currently playing
                 const currentSlide = document.querySelectorAll('.slide')[currentIndex];
                 if (currentSlide.tagName === 'VIDEO') {
                     currentSlide.pause();
                 }
             } else {
-                pauseBtn.textContent = '||';
+                // Change to pause icon
+                pauseSvg.innerHTML = '<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>';
                 
-                // Resume video if it's a video slide
                 const currentSlide = document.querySelectorAll('.slide')[currentIndex];
                 if (currentSlide.tagName === 'VIDEO') {
                     currentSlide.play();
-                    // Re-setup the onended event
+                    const remainingTime = (currentSlide.duration - currentSlide.currentTime) * 1000;
+                    startProgress(remainingTime);
+                    
                     currentSlide.onended = function() {
                         currentIndex++;
                         showSlide(currentIndex);
                     };
                 } else {
-                    // If it's an image, move to next slide after remaining time
+                    const remainingTime = slideDuration - currentProgress;
+                    startProgress(remainingTime);
                     slideTimeout = setTimeout(() => {
                         currentIndex++;
                         showSlide(currentIndex);
-                    }, 3000);
+                    }, remainingTime);
                 }
             }
         }
@@ -2337,7 +2432,6 @@ HTML_TEMPLATE = '''
             showSlide(currentIndex);
         }
 
-        // Start the slideshow
         window.addEventListener('load', () => {
             showSlide(0);
         });
