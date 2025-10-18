@@ -114,7 +114,7 @@ HTML_TEMPLATE = '''
             color: black;
             text-decoration: none;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 700;
             padding: 8px 10px;
             cursor: pointer;
         }
@@ -165,7 +165,7 @@ HTML_TEMPLATE = '''
         .new-featured-heading, .men-heading, .women-heading, 
         .kids-heading, .sale-heading, .snkrs-heading {
             font-size: 16px;
-            font-weight: 400;
+            font-weight: 600;
             margin-bottom: 20px;
             color: black;
         }
@@ -237,83 +237,82 @@ HTML_TEMPLATE = '''
         }
 
         /* Slideshow Container */
-        .slideshow-container {
-            position: relative;
-            width: 100%;
-            height: 600px;
-            overflow: hidden;
-            background: #000;
-        }
-
-        .slide {
-            display: none;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .slide.active {
-            display: block;
-        }
-
-        /* Shop Button */
-        .shop-button {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: white;
-            color: black;
-            padding: 12px 24px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            z-index: 10;
-            border-radius: 50px;
-        }
-
-        .shop-button:hover {
-            background-color: #f0f0f0;
-        }
-
-        /* Slideshow Controls */
         .slideshow-controls {
             position: absolute;
-            bottom: 40px;
-            right: 40px;
+            bottom: 30px;
+            left: 40px;
             display: flex;
-            gap: 15px;
+            gap: 10px;
             z-index: 20;
         }
 
         .slideshow-control-btn {
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            background-color: rgba(245, 245, 245, 0.85);
-            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
             border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
-            color: #111;
-            transition: all 0.3s ease;
+            color: #000;
+            transition: all 0.2s ease;
             position: relative;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: none;
         }
 
         .slideshow-control-btn:hover {
-            background-color: rgba(255, 255, 255, 0.95);
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            background-color: rgba(255, 255, 255, 0.5);
+            transform: scale(1.02);
+            box-shadow: none;
         }
 
         .slideshow-control-btn:active {
             transform: scale(0.95);
+        }
+
+        /* Pause/Play Icons */
+        .pause-icon,
+        .play-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pause-icon {
+            gap: 4px;
+        }
+
+        .pause-bar {
+            width: 2.5px;
+            height: 14px;
+            background-color: #000;
+            border-radius: 1px;
+        }
+
+        .play-icon::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 10px solid #000;
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            margin-left: 2px;
+        }
+
+        /* Arrow Buttons */
+        .slideshow-control-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         /* Pause/Play Icons */
