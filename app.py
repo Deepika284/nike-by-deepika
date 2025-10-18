@@ -254,17 +254,21 @@ HTML_TEMPLATE = '''
             object-fit: cover;
             opacity: 0;
             transform: translateX(100%);
-            transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+            transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.8s ease;
+            pointer-events: none;
         }
 
         .slide.active {
             opacity: 1;
             transform: translateX(0);
+            pointer-events: auto;
+            z-index: 2;
         }
 
         .slide.slide-out {
             transform: translateX(-100%);
-            opacity: 0;
+            opacity: 1;
+            z-index: 1;
         }
 
         /* Shop Button */
@@ -2263,7 +2267,7 @@ HTML_TEMPLATE = '''
                 <a href="/privacy-policy" class="footer-bottom-link">Nike Privacy Policy</a>
             </div>
             <div class="footer-bottom-right">
-                <a href="/privacy-settings" class="footer-bottom-link">Privacy Settings</a>
+                <a href="/privacy-settings" class="footer-bottom-link">Privaslidescy Settings</a>
             </div>
         </div>
     </footer>
@@ -2299,23 +2303,35 @@ HTML_TEMPLATE = '''
                 currentIndex = index;
             }
             
+            // Get previous slide
+            let prevIndex = currentIndex - 1;
+            if (prevIndex < 0) prevIndex = totalSlides - 1;
             
-            // Hide all slides with slide-out animation
+            // Reset all slides except current and previous
             slides.forEach((slide, idx) => {
-                if (idx !== currentIndex) {
-                    slide.classList.remove('active');
-                    slide.classList.add('slide-out');
+                if (idx !== currentIndex && idx !== prevIndex) {
+                    slide.classList.remove('active', 'slide-out');
+                    slide.style.transform = 'translateX(100%)';
+                    slide.style.opacity = '0';
                 }
             });
             
-            // Show current slide with slide-in animation
+            // Slide out previous slide
+            if (slides[prevIndex]) {
+                slides[prevIndex].classList.remove('active');
+                slides[prevIndex].classList.add('slide-out');
+            }
+            
+            // Slide in current slide
             const currentSlide = slides[currentIndex];
-            // Remove slide-out class and reset position
             currentSlide.classList.remove('slide-out');
-            // Small delay to ensure animation triggers
+            currentSlide.style.transform = 'translateX(100%)';
+            currentSlide.style.opacity = '0';
+            
+            // Trigger animation
             setTimeout(() => {
                 currentSlide.classList.add('active');
-            }, 10);
+            }, 50);
             
             // Update dots
             updateDots();
@@ -2429,7 +2445,7 @@ HTML_TEMPLATE = '''
                     }, remainingTime);
                 } else {
                     // For images, just restart the timer
-                    const imageDuration = 4000;
+                    const imageDuration = 2000;
                     slideTimeout = setTimeout(() => {
                         currentIndex++;
                         showSlide(currentIndex);
@@ -2451,26 +2467,6 @@ HTML_TEMPLATE = '''
             currentIndex--;
             showSlide(currentIndex);
         }
-
-        function nextSlide() {
-            clearTimeout(slideTimeout);
-            
-            // Reset pause state
-            isPaused = false;
-            const pauseBtn = document.getElementById('pauseBtn');
-            const iconContainer = pauseBtn.querySelector('.pause-icon, .play-icon');
-            iconContainer.className = 'pause-icon';
-            iconContainer.innerHTML = '<div class="pause-bar"></div><div class="pause-bar"></div>';
-            
-            currentIndex++;
-            showSlide(currentIndex);
-        }
-
-        // Start slideshow on page load
-        window.addEventListener('load', () => {
-            showSlide(0);
-        });
-
 
         function nextSlide() {
             clearTimeout(slideTimeout);
