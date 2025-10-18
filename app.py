@@ -359,7 +359,7 @@ HTML_TEMPLATE = '''
                 /* Slide Indicators/Dots */
         .slide-indicators {
             position: absolute;
-            bottom: 30px;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -371,7 +371,7 @@ HTML_TEMPLATE = '''
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.4);
+            background-color: white;
             cursor: pointer;
             transition: all 0.3s ease;
         }
