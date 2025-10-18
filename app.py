@@ -1305,6 +1305,8 @@ HTML_TEMPLATE = '''
         
         <div class="select-icons-title">Select By Icons</div>
         <div class="icons-slider-container">
+            <button class="icons-slider-btn left" onclick="slideIconsLeft()">‹</button>
+            <button class="icons-slider-btn right" onclick="slideIconsRight()">›</button>
             <div class="icons-slider" id="iconsSlider">
                 <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
                     <img src="/static/airmax.png" alt="Air Max" class="icon-image">
@@ -1333,8 +1335,371 @@ HTML_TEMPLATE = '''
                 <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
                     <img src="/static/p6000.png" alt="P-6000" class="icon-image">
                 </a>
-                
-                <!-- DUPLICATE FOR INFINITE LOOP -->
+            <div class="icons-slider" id="iconsSlider">
+                <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
+                    <img src="/static/airmax.png" alt="Air Max" class="icon-image">
+                </a>
+                <a href="#airforce" class="icon-item" data-icon="Air Force" data-image="/static/airforce.png">
+                    <img src="/static/airforce.png" alt="Air Force" class="icon-image">
+                </a>
+                <a href="#blazer" class="icon-item" data-icon="Blazer" data-image="/static/blazer.png">
+                    <img src="/static/blazer.png" alt="Blazer" class="icon-image">
+                </a>
+                <a href="#dunk" class="icon-item" data-icon="Dunk" data-image="/static/dunk.png">
+                    <img src="/static/dunk.png" alt="Dunk" class="icon-image">
+                </a>
+                <a href="#cortez" class="icon-item" data-icon="Cortez" data-image="/static/cortez.png">
+                    <img src="/static/cortezz.png" alt="Cortez" class="icon-image">
+                </a>
+                <a href="#killshot" class="icon-item" data-icon="Killshot" data-image="/static/killshot.png">
+                    <img src="/static/killshot.png" alt="Killshot" class="icon-image">
+                </a>
+                <a href="#jordans" class="icon-item" data-icon="Jordans" data-image="/static/jordan.png">
+                    <img src="/static/jordan.png" alt="Jordans" class="icon-image">
+                </a>
+                <a href="#metcon" class="icon-item" data-icon="Metcon" data-image="/static/metcon.png">
+                    <img src="/static/metcon.png" alt="Metcon" class="icon-image">
+                </a>
+                <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
+                    <img src="/static/p6000.png" alt="P-6000" class="icon-image">
+                </a>
+            <div class="icons-slider" id="iconsSlider">
+                <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
+                    <img src="/static/airmax.png" alt="Air Max" class="icon-image">
+                </a>
+                <a href="#airforce" class="icon-item" data-icon="Air Force" data-image="/static/airforce.png">
+                    <img src="/static/airforce.png" alt="Air Force" class="icon-image">
+                </a>
+                <a href="#blazer" class="icon-item" data-icon="Blazer" data-image="/static/blazer.png">
+                    <img src="/static/blazer.png" alt="Blazer" class="icon-image">
+                </a>
+                <a href="#dunk" class="icon-item" data-icon="Dunk" data-image="/static/dunk.png">
+                    <img src="/static/dunk.png" alt="Dunk" class="icon-image">
+                </a>
+                <a href="#cortez" class="icon-item" data-icon="Cortez" data-image="/static/cortez.png">
+                    <img src="/static/cortezz.png" alt="Cortez" class="icon-image">
+                </a>
+                <a href="#killshot" class="icon-item" data-icon="Killshot" data-image="/static/killshot.png">
+                    <img src="/static/killshot.png" alt="Killshot" class="icon-image">
+                </a>
+                <a href="#jordans" class="icon-item" data-icon="Jordans" data-image="/static/jordan.png">
+                    <img src="/static/jordan.png" alt="Jordans" class="icon-image">
+                </a>
+                <a href="#metcon" class="icon-item" data-icon="Metcon" data-image="/static/metcon.png">
+                    <img src="/static/metcon.png" alt="Metcon" class="icon-image">
+                </a>
+                <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
+                    <img src="/static/p6000.png" alt="P-6000" class="icon-image">
+                </a>
+            <div class="icons-slider" id="iconsSlider">
+                <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
+                    <img src="/static/airmax.png" alt="Air Max" class="icon-image">
+                </a>
+                <a href="#airforce" class="icon-item" data-icon="Air Force" data-image="/static/airforce.png">
+                    <img src="/static/airforce.png" alt="Air Force" class="icon-image">
+                </a>
+                <a href="#blazer" class="icon-item" data-icon="Blazer" data-image="/static/blazer.png">
+                    <img src="/static/blazer.png" alt="Blazer" class="icon-image">
+                </a>
+                <a href="#dunk" class="icon-item" data-icon="Dunk" data-image="/static/dunk.png">
+                    <img src="/static/dunk.png" alt="Dunk" class="icon-image">
+                </a>
+                <a href="#cortez" class="icon-item" data-icon="Cortez" data-image="/static/cortez.png">
+                    <img src="/static/cortezz.png" alt="Cortez" class="icon-image">
+                </a>
+                <a href="#killshot" class="icon-item" data-icon="Killshot" data-image="/static/killshot.png">
+                    <img src="/static/killshot.png" alt="Killshot" class="icon-image">
+                </a>
+                <a href="#jordans" class="icon-item" data-icon="Jordans" data-image="/static/jordan.png">
+                    <img src="/static/jordan.png" alt="Jordans" class="icon-image">
+                </a>
+                <a href="#metcon" class="icon-item" data-icon="Metcon" data-image="/static/metcon.png">
+                    <img src="/static/metcon.png" alt="Metcon" class="icon-image">
+                </a>
+                <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
+                    <img src="/static/p6000.png" alt="P-6000" class="icon-image">
+                </a>
+            <div class="icons-slider" id="iconsSlider">
+                <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
+                    <img src="/static/airmax.png" alt="Air Max" class="icon-image">
+                </a>
+                <a href="#airforce" class="icon-item" data-icon="Air Force" data-image="/static/airforce.png">
+                    <img src="/static/airforce.png" alt="Air Force" class="icon-image">
+                </a>
+                <a href="#blazer" class="icon-item" data-icon="Blazer" data-image="/static/blazer.png">
+                    <img src="/static/blazer.png" alt="Blazer" class="icon-image">
+                </a>
+                <a href="#dunk" class="icon-item" data-icon="Dunk" data-image="/static/dunk.png">
+                    <img src="/static/dunk.png" alt="Dunk" class="icon-image">
+                </a>
+                <a href="#cortez" class="icon-item" data-icon="Cortez" data-image="/static/cortez.png">
+                    <img src="/static/cortezz.png" alt="Cortez" class="icon-image">
+                </a>
+                <a href="#killshot" class="icon-item" data-icon="Killshot" data-image="/static/killshot.png">
+                    <img src="/static/killshot.png" alt="Killshot" class="icon-image">
+                </a>
+                <a href="#jordans" class="icon-item" data-icon="Jordans" data-image="/static/jordan.png">
+                    <img src="/static/jordan.png" alt="Jordans" class="icon-image">
+                </a>
+                <a href="#metcon" class="icon-item" data-icon="Metcon" data-image="/static/metcon.png">
+                    <img src="/static/metcon.png" alt="Metcon" class="icon-image">
+                </a>
+                <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
+                    <img src="/static/p6000.png" alt="P-6000" class="icon-image">
+                </a>
+            <div class="icons-slider" id="iconsSlider">
+                <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
+                    <img src="/static/airmax.png" alt="Air Max" class="icon-image">
+                </a>
+                <a href="#airforce" class="icon-item" data-icon="Air Force" data-image="/static/airforce.png">
+                    <img src="/static/airforce.png" alt="Air Force" class="icon-image">
+                </a>
+                <a href="#blazer" class="icon-item" data-icon="Blazer" data-image="/static/blazer.png">
+                    <img src="/static/blazer.png" alt="Blazer" class="icon-image">
+                </a>
+                <a href="#dunk" class="icon-item" data-icon="Dunk" data-image="/static/dunk.png">
+                    <img src="/static/dunk.png" alt="Dunk" class="icon-image">
+                </a>
+                <a href="#cortez" class="icon-item" data-icon="Cortez" data-image="/static/cortez.png">
+                    <img src="/static/cortezz.png" alt="Cortez" class="icon-image">
+                </a>
+                <a href="#killshot" class="icon-item" data-icon="Killshot" data-image="/static/killshot.png">
+                    <img src="/static/killshot.png" alt="Killshot" class="icon-image">
+                </a>
+                <a href="#jordans" class="icon-item" data-icon="Jordans" data-image="/static/jordan.png">
+                    <img src="/static/jordan.png" alt="Jordans" class="icon-image">
+                </a>
+                <a href="#metcon" class="icon-item" data-icon="Metcon" data-image="/static/metcon.png">
+                    <img src="/static/metcon.png" alt="Metcon" class="icon-image">
+                </a>
+                <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
+                    <img src="/static/p6000.png" alt="P-6000" class="icon-image">
+                </a>
+            <div class="icons-slider" id="iconsSlider">
+                <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
+                    <img src="/static/airmax.png" alt="Air Max" class="icon-image">
+                </a>
+                <a href="#airforce" class="icon-item" data-icon="Air Force" data-image="/static/airforce.png">
+                    <img src="/static/airforce.png" alt="Air Force" class="icon-image">
+                </a>
+                <a href="#blazer" class="icon-item" data-icon="Blazer" data-image="/static/blazer.png">
+                    <img src="/static/blazer.png" alt="Blazer" class="icon-image">
+                </a>
+                <a href="#dunk" class="icon-item" data-icon="Dunk" data-image="/static/dunk.png">
+                    <img src="/static/dunk.png" alt="Dunk" class="icon-image">
+                </a>
+                <a href="#cortez" class="icon-item" data-icon="Cortez" data-image="/static/cortez.png">
+                    <img src="/static/cortezz.png" alt="Cortez" class="icon-image">
+                </a>
+                <a href="#killshot" class="icon-item" data-icon="Killshot" data-image="/static/killshot.png">
+                    <img src="/static/killshot.png" alt="Killshot" class="icon-image">
+                </a>
+                <a href="#jordans" class="icon-item" data-icon="Jordans" data-image="/static/jordan.png">
+                    <img src="/static/jordan.png" alt="Jordans" class="icon-image">
+                </a>
+                <a href="#metcon" class="icon-item" data-icon="Metcon" data-image="/static/metcon.png">
+                    <img src="/static/metcon.png" alt="Metcon" class="icon-image">
+                </a>
+                <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
+                    <img src="/static/p6000.png" alt="P-6000" class="icon-image">
+                </a>
+            <div class="icons-slider" id="iconsSlider">
+                <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
+                    <img src="/static/airmax.png" alt="Air Max" class="icon-image">
+                </a>
+                <a href="#airforce" class="icon-item" data-icon="Air Force" data-image="/static/airforce.png">
+                    <img src="/static/airforce.png" alt="Air Force" class="icon-image">
+                </a>
+                <a href="#blazer" class="icon-item" data-icon="Blazer" data-image="/static/blazer.png">
+                    <img src="/static/blazer.png" alt="Blazer" class="icon-image">
+                </a>
+                <a href="#dunk" class="icon-item" data-icon="Dunk" data-image="/static/dunk.png">
+                    <img src="/static/dunk.png" alt="Dunk" class="icon-image">
+                </a>
+                <a href="#cortez" class="icon-item" data-icon="Cortez" data-image="/static/cortez.png">
+                    <img src="/static/cortezz.png" alt="Cortez" class="icon-image">
+                </a>
+                <a href="#killshot" class="icon-item" data-icon="Killshot" data-image="/static/killshot.png">
+                    <img src="/static/killshot.png" alt="Killshot" class="icon-image">
+                </a>
+                <a href="#jordans" class="icon-item" data-icon="Jordans" data-image="/static/jordan.png">
+                    <img src="/static/jordan.png" alt="Jordans" class="icon-image">
+                </a>
+                <a href="#metcon" class="icon-item" data-icon="Metcon" data-image="/static/metcon.png">
+                    <img src="/static/metcon.png" alt="Metcon" class="icon-image">
+                </a>
+                <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
+                    <img src="/static/p6000.png" alt="P-6000" class="icon-image">
+                </a>
+            <div class="icons-slider" id="iconsSlider">
+                <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
+                    <img src="/static/airmax.png" alt="Air Max" class="icon-image">
+                </a>
+                <a href="#airforce" class="icon-item" data-icon="Air Force" data-image="/static/airforce.png">
+                    <img src="/static/airforce.png" alt="Air Force" class="icon-image">
+                </a>
+                <a href="#blazer" class="icon-item" data-icon="Blazer" data-image="/static/blazer.png">
+                    <img src="/static/blazer.png" alt="Blazer" class="icon-image">
+                </a>
+                <a href="#dunk" class="icon-item" data-icon="Dunk" data-image="/static/dunk.png">
+                    <img src="/static/dunk.png" alt="Dunk" class="icon-image">
+                </a>
+                <a href="#cortez" class="icon-item" data-icon="Cortez" data-image="/static/cortez.png">
+                    <img src="/static/cortezz.png" alt="Cortez" class="icon-image">
+                </a>
+                <a href="#killshot" class="icon-item" data-icon="Killshot" data-image="/static/killshot.png">
+                    <img src="/static/killshot.png" alt="Killshot" class="icon-image">
+                </a>
+                <a href="#jordans" class="icon-item" data-icon="Jordans" data-image="/static/jordan.png">
+                    <img src="/static/jordan.png" alt="Jordans" class="icon-image">
+                </a>
+                <a href="#metcon" class="icon-item" data-icon="Metcon" data-image="/static/metcon.png">
+                    <img src="/static/metcon.png" alt="Metcon" class="icon-image">
+                </a>
+                <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
+                    <img src="/static/p6000.png" alt="P-6000" class="icon-image">
+                </a>
+            <div class="icons-slider" id="iconsSlider">
+                <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
+                    <img src="/static/airmax.png" alt="Air Max" class="icon-image">
+                </a>
+                <a href="#airforce" class="icon-item" data-icon="Air Force" data-image="/static/airforce.png">
+                    <img src="/static/airforce.png" alt="Air Force" class="icon-image">
+                </a>
+                <a href="#blazer" class="icon-item" data-icon="Blazer" data-image="/static/blazer.png">
+                    <img src="/static/blazer.png" alt="Blazer" class="icon-image">
+                </a>
+                <a href="#dunk" class="icon-item" data-icon="Dunk" data-image="/static/dunk.png">
+                    <img src="/static/dunk.png" alt="Dunk" class="icon-image">
+                </a>
+                <a href="#cortez" class="icon-item" data-icon="Cortez" data-image="/static/cortez.png">
+                    <img src="/static/cortezz.png" alt="Cortez" class="icon-image">
+                </a>
+                <a href="#killshot" class="icon-item" data-icon="Killshot" data-image="/static/killshot.png">
+                    <img src="/static/killshot.png" alt="Killshot" class="icon-image">
+                </a>
+                <a href="#jordans" class="icon-item" data-icon="Jordans" data-image="/static/jordan.png">
+                    <img src="/static/jordan.png" alt="Jordans" class="icon-image">
+                </a>
+                <a href="#metcon" class="icon-item" data-icon="Metcon" data-image="/static/metcon.png">
+                    <img src="/static/metcon.png" alt="Metcon" class="icon-image">
+                </a>
+                <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
+                    <img src="/static/p6000.png" alt="P-6000" class="icon-image">
+                </a>
+            <div class="icons-slider" id="iconsSlider">
+                <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
+                    <img src="/static/airmax.png" alt="Air Max" class="icon-image">
+                </a>
+                <a href="#airforce" class="icon-item" data-icon="Air Force" data-image="/static/airforce.png">
+                    <img src="/static/airforce.png" alt="Air Force" class="icon-image">
+                </a>
+                <a href="#blazer" class="icon-item" data-icon="Blazer" data-image="/static/blazer.png">
+                    <img src="/static/blazer.png" alt="Blazer" class="icon-image">
+                </a>
+                <a href="#dunk" class="icon-item" data-icon="Dunk" data-image="/static/dunk.png">
+                    <img src="/static/dunk.png" alt="Dunk" class="icon-image">
+                </a>
+                <a href="#cortez" class="icon-item" data-icon="Cortez" data-image="/static/cortez.png">
+                    <img src="/static/cortezz.png" alt="Cortez" class="icon-image">
+                </a>
+                <a href="#killshot" class="icon-item" data-icon="Killshot" data-image="/static/killshot.png">
+                    <img src="/static/killshot.png" alt="Killshot" class="icon-image">
+                </a>
+                <a href="#jordans" class="icon-item" data-icon="Jordans" data-image="/static/jordan.png">
+                    <img src="/static/jordan.png" alt="Jordans" class="icon-image">
+                </a>
+                <a href="#metcon" class="icon-item" data-icon="Metcon" data-image="/static/metcon.png">
+                    <img src="/static/metcon.png" alt="Metcon" class="icon-image">
+                </a>
+                <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
+                    <img src="/static/p6000.png" alt="P-6000" class="icon-image">
+                </a>
+            <div class="icons-slider" id="iconsSlider">
+                <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
+                    <img src="/static/airmax.png" alt="Air Max" class="icon-image">
+                </a>
+                <a href="#airforce" class="icon-item" data-icon="Air Force" data-image="/static/airforce.png">
+                    <img src="/static/airforce.png" alt="Air Force" class="icon-image">
+                </a>
+                <a href="#blazer" class="icon-item" data-icon="Blazer" data-image="/static/blazer.png">
+                    <img src="/static/blazer.png" alt="Blazer" class="icon-image">
+                </a>
+                <a href="#dunk" class="icon-item" data-icon="Dunk" data-image="/static/dunk.png">
+                    <img src="/static/dunk.png" alt="Dunk" class="icon-image">
+                </a>
+                <a href="#cortez" class="icon-item" data-icon="Cortez" data-image="/static/cortez.png">
+                    <img src="/static/cortezz.png" alt="Cortez" class="icon-image">
+                </a>
+                <a href="#killshot" class="icon-item" data-icon="Killshot" data-image="/static/killshot.png">
+                    <img src="/static/killshot.png" alt="Killshot" class="icon-image">
+                </a>
+                <a href="#jordans" class="icon-item" data-icon="Jordans" data-image="/static/jordan.png">
+                    <img src="/static/jordan.png" alt="Jordans" class="icon-image">
+                </a>
+                <a href="#metcon" class="icon-item" data-icon="Metcon" data-image="/static/metcon.png">
+                    <img src="/static/metcon.png" alt="Metcon" class="icon-image">
+                </a>
+                <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
+                    <img src="/static/p6000.png" alt="P-6000" class="icon-image">
+                </a>
+            <div class="icons-slider" id="iconsSlider">
+                <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
+                    <img src="/static/airmax.png" alt="Air Max" class="icon-image">
+                </a>
+                <a href="#airforce" class="icon-item" data-icon="Air Force" data-image="/static/airforce.png">
+                    <img src="/static/airforce.png" alt="Air Force" class="icon-image">
+                </a>
+                <a href="#blazer" class="icon-item" data-icon="Blazer" data-image="/static/blazer.png">
+                    <img src="/static/blazer.png" alt="Blazer" class="icon-image">
+                </a>
+                <a href="#dunk" class="icon-item" data-icon="Dunk" data-image="/static/dunk.png">
+                    <img src="/static/dunk.png" alt="Dunk" class="icon-image">
+                </a>
+                <a href="#cortez" class="icon-item" data-icon="Cortez" data-image="/static/cortez.png">
+                    <img src="/static/cortezz.png" alt="Cortez" class="icon-image">
+                </a>
+                <a href="#killshot" class="icon-item" data-icon="Killshot" data-image="/static/killshot.png">
+                    <img src="/static/killshot.png" alt="Killshot" class="icon-image">
+                </a>
+                <a href="#jordans" class="icon-item" data-icon="Jordans" data-image="/static/jordan.png">
+                    <img src="/static/jordan.png" alt="Jordans" class="icon-image">
+                </a>
+                <a href="#metcon" class="icon-item" data-icon="Metcon" data-image="/static/metcon.png">
+                    <img src="/static/metcon.png" alt="Metcon" class="icon-image">
+                </a>
+                <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
+                    <img src="/static/p6000.png" alt="P-6000" class="icon-image">
+                </a>
+            <div class="icons-slider" id="iconsSlider">
+                <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
+                    <img src="/static/airmax.png" alt="Air Max" class="icon-image">
+                </a>
+                <a href="#airforce" class="icon-item" data-icon="Air Force" data-image="/static/airforce.png">
+                    <img src="/static/airforce.png" alt="Air Force" class="icon-image">
+                </a>
+                <a href="#blazer" class="icon-item" data-icon="Blazer" data-image="/static/blazer.png">
+                    <img src="/static/blazer.png" alt="Blazer" class="icon-image">
+                </a>
+                <a href="#dunk" class="icon-item" data-icon="Dunk" data-image="/static/dunk.png">
+                    <img src="/static/dunk.png" alt="Dunk" class="icon-image">
+                </a>
+                <a href="#cortez" class="icon-item" data-icon="Cortez" data-image="/static/cortez.png">
+                    <img src="/static/cortezz.png" alt="Cortez" class="icon-image">
+                </a>
+                <a href="#killshot" class="icon-item" data-icon="Killshot" data-image="/static/killshot.png">
+                    <img src="/static/killshot.png" alt="Killshot" class="icon-image">
+                </a>
+                <a href="#jordans" class="icon-item" data-icon="Jordans" data-image="/static/jordan.png">
+                    <img src="/static/jordan.png" alt="Jordans" class="icon-image">
+                </a>
+                <a href="#metcon" class="icon-item" data-icon="Metcon" data-image="/static/metcon.png">
+                    <img src="/static/metcon.png" alt="Metcon" class="icon-image">
+                </a>
+                <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
+                    <img src="/static/p6000.png" alt="P-6000" class="icon-image">
+                </a>
+            <div class="icons-slider" id="iconsSlider">
                 <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
                     <img src="/static/airmax.png" alt="Air Max" class="icon-image">
                 </a>
@@ -1625,6 +1990,92 @@ HTML_TEMPLATE = '''
             }, 100);
         });
         
+        // Icons slider with infinite loop
+        const iconsSlider = document.getElementById('iconsSlider');
+        const iconsLeftBtn = document.querySelector('.icons-slider-btn.left');
+        const iconsRightBtn = document.querySelector('.icons-slider-btn.right');
+        
+        // Set initial scroll position to middle
+        window.addEventListener('load', () => {
+            iconsSlider.scrollLeft = iconsSlider.scrollWidth / 2;
+        });
+        
+        function slideIconsLeft() {
+            const scrollAmount = iconsSlider.offsetWidth / 2;
+            iconsSlider.scrollBy({
+                left: -scrollAmount,
+                behavior: 'smooth'
+            });
+            
+            // Check if we've scrolled near the beginning, jump to end portion
+            setTimeout(() => {
+                if (iconsSlider.scrollLeft <= 100) {
+                    iconsSlider.scrollTo({
+                        left: iconsSlider.scrollWidth / 2,
+                        behavior: 'auto'
+                    });
+                }
+            }, 400);
+        }
+        
+        function slideIconsRight() {
+            const scrollAmount = iconsSlider.offsetWidth / 2;
+            iconsSlider.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+            
+            // Check if we've scrolled near the end, jump to beginning portion
+            setTimeout(() => {
+                const maxScroll = iconsSlider.scrollWidth - iconsSlider.clientWidth;
+                if (iconsSlider.scrollLeft >= maxScroll - 100) {
+                    iconsSlider.scrollTo({
+                        left: iconsSlider.scrollWidth / 2 - iconsSlider.clientWidth,
+                        behavior: 'auto'
+                    });
+                }
+            }, 400);
+        }
+        
+        // Icons popup functionality
+        const iconsPopup = document.getElementById('iconsPopup');
+        const iconItems = document.querySelectorAll('.icon-item');
+        let iconPopupTimeout;
+        
+        iconItems.forEach(item => {
+            item.addEventListener('mouseenter', (e) => {
+                clearTimeout(iconPopupTimeout);
+                const iconName = item.dataset.icon;
+                const imageUrl = item.dataset.image;
+                const rect = item.getBoundingClientRect();
+                
+                iconsPopup.innerHTML = `
+                    <img src="${imageUrl}" alt="${iconName}" class="icons-popup-image">
+                    <div class="icons-popup-text">${iconName}</div>
+                `;
+                
+                iconsPopup.classList.add('active');
+                iconsPopup.style.top = (rect.top + window.scrollY - 440) + 'px';
+                iconsPopup.style.left = (rect.left + rect.width / 2 - 350) + 'px';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                iconPopupTimeout = setTimeout(() => {
+                    iconsPopup.classList.remove('active');
+                }, 100);
+            });
+        });
+        
+        iconsPopup.addEventListener('mouseenter', () => {
+            clearTimeout(iconPopupTimeout);
+        });
+        
+        iconsPopup.addEventListener('mouseleave', () => {
+            iconPopupTimeout = setTimeout(() => {
+                iconsPopup.classList.remove('active');
+            }, 100);
+        });
+        
         // NBA slider functionality
         const nbaSlider = document.getElementById('nbaSlider');
         const nbaLeftBtn = document.querySelector('.nba-slider-btn.left');
@@ -1665,42 +2116,6 @@ HTML_TEMPLATE = '''
         
         nbaSlider.addEventListener('scroll', updateNbaArrowVisibility);
         window.addEventListener('load', updateNbaArrowVisibility);
-
-                // Icons slider with infinite loop
-        const iconsSlider = document.getElementById('iconsSlider');
-        const iconsLeftBtn = document.querySelector('.icons-slider-btn.left');
-        const iconsRightBtn = document.querySelector('.icons-slider-btn.right');
-
-        function slideIconsLeft() {
-            const scrollAmount = iconsSlider.offsetWidth / 2;
-            iconsSlider.scrollBy({
-                left: -scrollAmount,
-                behavior: 'smooth'
-            });
-            
-            // Check if we've scrolled to the beginning, loop to end
-            setTimeout(() => {
-                if (iconsSlider.scrollLeft <= 0) {
-                    iconsSlider.scrollLeft = iconsSlider.scrollWidth / 2;
-                }
-            }, 300);
-        }
-
-        function slideIconsRight() {
-            const scrollAmount = iconsSlider.offsetWidth / 2;
-            iconsSlider.scrollBy({
-                left: scrollAmount,
-                behavior: 'smooth'
-            });
-            
-            // Check if we've scrolled to the end, loop to beginning
-            setTimeout(() => {
-                const maxScroll = iconsSlider.scrollWidth - iconsSlider.clientWidth;
-                if (iconsSlider.scrollLeft >= maxScroll - 10) {
-                    iconsSlider.scrollLeft = iconsSlider.scrollWidth / 2 - iconsSlider.clientWidth;
-                }
-            }, 300);
-        }
     </script>
 </body>
 </html>
