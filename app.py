@@ -273,7 +273,7 @@ HTML_TEMPLATE = '''
             width: 100%;
             margin-top: 30px;
             overflow: hidden;
-            height: calc(100vh - 130px); /* Full screen minus header, margin, and 10px extra */
+            height: calc(100vh - 90px); /* Full screen minus header, margin, and 10px extra */
             max-height: none; /* Remove max-height restriction for full screen */
         }
 
