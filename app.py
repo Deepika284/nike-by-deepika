@@ -113,9 +113,9 @@ HTML_TEMPLATE = '''
         .kids-link, .sale-link, .snkrs-link {
             color: black;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: bold;
-            padding: 8px 12px;
+            padding: 8px 10px;
             cursor: pointer;
         }
 
