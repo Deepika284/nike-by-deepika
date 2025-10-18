@@ -291,7 +291,7 @@ HTML_TEMPLATE = '''
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.50);
+            background-color: rgba(255, 255, 255, 0.80);
             backdrop-filter: blur(5px);
             border: none;
             cursor: pointer;
@@ -307,7 +307,7 @@ HTML_TEMPLATE = '''
         }
 
         .slideshow-control-btn:hover {
-            background-color: rgba(255, 255, 255, 0.70);
+            background-color: white;
             transform: scale(1.02);
             box-shadow: none;
         }
