@@ -1301,10 +1301,10 @@ HTML_TEMPLATE = '''
     
     <div class="slideshow-container">
         <img src="/static/ssf3.avif" class="slide active" alt="Slide 1">
-        <video class="slide" muted playsinline preload="auto" autoplay loop>
+        <video class="slide" muted playsinline preload="metadata">
             <source src="/static/slideshow.mp4" type="video/mp4">
         </video>
-        <video class="slide" muted playsinline preload="auto" autoplay loop>
+        <video class="slide" muted playsinline preload="metadata">
             <source src="/static/slideshow2.mp4" type="video/mp4">
         </video>
         
@@ -2344,37 +2344,31 @@ HTML_TEMPLATE = '''
             if (currentSlide.tagName === 'VIDEO') {
                 const video = currentSlide;
                 
-                // Load the video if not loaded
-                if (video.readyState < 2) {
-                    video.load();
-                }
+                // Reset video to beginning
+                video.currentTime = 0;
                 
-                video.onloadeddata = function() {
-                    const duration = Math.floor(video.duration * 1000);
+                // Wait for video to be ready, then play
+                video.addEventListener('loadeddata', function onLoaded() {
+                    video.removeEventListener('loadeddata', onLoaded);
                     
-                    // Set timeout for video duration
-                    slideTimeout = setTimeout(() => {
+                    video.play().then(() => {
+                        const duration = Math.floor(video.duration * 1000);
+                        
+                        slideTimeout = setTimeout(() => {
+                            currentIndex++;
+                            showSlide(currentIndex);
+                        }, duration);
+                    }).catch(err => {
+                        console.error('Video play failed:', err);
+                        // Skip to next slide if video fails
                         currentIndex++;
                         showSlide(currentIndex);
-                    }, duration);
-                };
-                
-                video.onended = function() {
-                    clearTimeout(slideTimeout);
-                    currentIndex++;
-                    showSlide(currentIndex);
-                };
-                
-                // Play video
-                video.play().catch(err => {
-                    console.error('Video play failed:', err);
-                    // Skip to next slide if video fails
-                    setTimeout(() => {
-                        currentIndex++;
-                        showSlide(currentIndex);
-                    }, 1000);
+                    });
                 });
-            } 
+                
+                // Load the video
+                video.load();
+            }
             // Handle image slides
             else {
                 const imageDuration = 2000; // 2 seconds for images
