@@ -14,7 +14,7 @@ HTML_TEMPLATE = '''
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nike Store</title>
     <style>
-    `    * {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -369,35 +369,24 @@ HTML_TEMPLATE = '''
             background-color: rgba(255, 255, 255, 0.9);
         }
 
-        #pauseBtn::before {
-            content: '';
+        /* Circular progress ring using SVG */
+        .progress-ring {
             position: absolute;
-            top: -3px;
-            left: -3px;
-            width: 54px;
-            height: 54px;
-            border-radius: 50%;
-            background: conic-gradient(
-                #111 var(--progress, 0deg),
-                transparent var(--progress, 0deg)
-            );
-            mask: radial-gradient(
-                circle,
-                transparent 0,
-                transparent 22px,
-                black 22px,
-                black 25px,
-                transparent 25px
-            );
-            -webkit-mask: radial-gradient(
-                circle,
-                transparent 0,
-                transparent 22px,
-                black 22px,
-                black 25px,
-                transparent 25px
-            );
-            transition: --progress 0.1s linear;
+            top: -4px;
+            left: -4px;
+            width: 56px;
+            height: 56px;
+            transform: rotate(-90deg);
+            pointer-events: none;
+        }
+
+        .progress-ring-circle {
+            fill: none;
+            stroke: #111;
+            stroke-width: 3;
+            stroke-dasharray: 164;
+            stroke-dashoffset: 164;
+            transition: stroke-dashoffset 0.1s linear;
         }
 
         /* Arrow buttons styling */
@@ -409,6 +398,31 @@ HTML_TEMPLATE = '''
             stroke-width: 2.5;
             stroke-linecap: round;
             stroke-linejoin: round;
+        }
+
+        /* Pause icon bars - more natural look */
+        #pauseBtn .pause-icon {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #pauseBtn .pause-bar {
+            width: 3px;
+            height: 16px;
+            background-color: #111;
+            border-radius: 1.5px;
+        }
+
+        /* Play icon */
+        #pauseBtn .play-icon {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 8px 0 8px 14px;
+            border-color: transparent transparent transparent #111;
+            margin-left: 2px;
         }
 
         /* Content Wrapper - Responsive */
@@ -1316,10 +1330,13 @@ HTML_TEMPLATE = '''
         <button class="shop-button">Shop</button>
         <div class="slideshow-controls">
             <button class="slideshow-control-btn" onclick="togglePause()" id="pauseBtn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="6" y="4" width="4" height="16"></rect>
-                    <rect x="14" y="4" width="4" height="16"></rect>
+                <svg class="progress-ring">
+                    <circle class="progress-ring-circle" cx="28" cy="28" r="26"></circle>
                 </svg>
+                <div class="pause-icon">
+                    <div class="pause-bar"></div>
+                    <div class="pause-bar"></div>
+                </div>
             </button>
             <button class="slideshow-control-btn" onclick="prevSlide()">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2278,7 +2295,6 @@ HTML_TEMPLATE = '''
     
     <script>
         //slideshow
-
         let currentIndex = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
@@ -2287,11 +2303,22 @@ HTML_TEMPLATE = '''
         let progressInterval;
         let currentProgress = 0;
         let slideDuration = 3000; // default duration in ms
+        const progressCircle = document.querySelector('.progress-ring-circle');
+        const circumference = 2 * Math.PI * 26; // 26 is the radius
+
+        // Set up the circle
+        progressCircle.style.strokeDasharray = circumference;
+        progressCircle.style.strokeDashoffset = circumference;
 
         function updateProgress() {
-            const pauseBtn = document.getElementById('pauseBtn');
-            const progressDeg = (currentProgress / slideDuration) * 360;
-            pauseBtn.style.setProperty('--progress', `${progressDeg}deg`);
+            const percent = currentProgress / slideDuration;
+            const offset = circumference - (percent * circumference);
+            progressCircle.style.strokeDashoffset = offset;
+        }
+
+        function resetProgress() {
+            progressCircle.style.strokeDashoffset = circumference;
+            currentProgress = 0;
         }
 
         function startProgress(duration) {
@@ -2299,15 +2326,14 @@ HTML_TEMPLATE = '''
             slideDuration = duration;
             clearInterval(progressInterval);
             
-            const pauseBtn = document.getElementById('pauseBtn');
-            pauseBtn.style.setProperty('--progress', '0deg');
+            // Reset the circle to start position
+            resetProgress();
             
             progressInterval = setInterval(() => {
                 if (!isPaused) {
                     currentProgress += 100;
                     if (currentProgress >= slideDuration) {
                         currentProgress = slideDuration;
-                        clearInterval(progressInterval);
                     }
                     updateProgress();
                 }
@@ -2337,6 +2363,9 @@ HTML_TEMPLATE = '''
             const currentSlide = document.querySelectorAll('.slide')[currentIndex];
             currentSlide.classList.add('active');
             
+            // Reset progress for new slide
+            resetProgress();
+            
             if (isPaused) {
                 return;
             }
@@ -2347,16 +2376,19 @@ HTML_TEMPLATE = '''
                 
                 video.onended = function() {
                     console.log('Video ended, moving to next slide');
+                    clearInterval(progressInterval);
                     currentIndex++;
                     showSlide(currentIndex);
                 };
                 
                 video.onloadedmetadata = function() {
                     const duration = video.duration * 1000;
+                    console.log('Video duration:', duration / 1000, 'seconds');
                     startProgress(duration);
                     
                     slideTimeout = setTimeout(() => {
                         console.log('Backup timeout triggered');
+                        clearInterval(progressInterval);
                         currentIndex++;
                         showSlide(currentIndex);
                     }, duration + 1000);
@@ -2368,6 +2400,7 @@ HTML_TEMPLATE = '''
                     console.log('Video play failed:', err);
                     startProgress(5000);
                     slideTimeout = setTimeout(() => {
+                        clearInterval(progressInterval);
                         currentIndex++;
                         showSlide(currentIndex);
                     }, 5000);
@@ -2376,6 +2409,7 @@ HTML_TEMPLATE = '''
                 console.log('Showing image slide');
                 startProgress(3000);
                 slideTimeout = setTimeout(() => {
+                    clearInterval(progressInterval);
                     currentIndex++;
                     showSlide(currentIndex);
                 }, 3000);
@@ -2385,11 +2419,12 @@ HTML_TEMPLATE = '''
         function togglePause() {
             isPaused = !isPaused;
             const pauseBtn = document.getElementById('pauseBtn');
-            const pauseSvg = pauseBtn.querySelector('svg');
+            const iconContainer = pauseBtn.querySelector('.pause-icon, .play-icon');
             
             if (isPaused) {
                 // Change to play icon
-                pauseSvg.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
+                iconContainer.className = 'play-icon';
+                iconContainer.innerHTML = '';
                 clearTimeout(slideTimeout);
                 clearInterval(progressInterval);
                 
@@ -2399,22 +2434,48 @@ HTML_TEMPLATE = '''
                 }
             } else {
                 // Change to pause icon
-                pauseSvg.innerHTML = '<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>';
+                iconContainer.className = 'pause-icon';
+                iconContainer.innerHTML = '<div class="pause-bar"></div><div class="pause-bar"></div>';
                 
                 const currentSlide = document.querySelectorAll('.slide')[currentIndex];
                 if (currentSlide.tagName === 'VIDEO') {
                     currentSlide.play();
                     const remainingTime = (currentSlide.duration - currentSlide.currentTime) * 1000;
-                    startProgress(remainingTime);
+                    const totalDuration = currentSlide.duration * 1000;
+                    const elapsedTime = currentSlide.currentTime * 1000;
+                    
+                    // Continue from where we paused
+                    currentProgress = elapsedTime;
+                    slideDuration = totalDuration;
+                    
+                    progressInterval = setInterval(() => {
+                        currentProgress += 100;
+                        if (currentProgress >= slideDuration) {
+                            currentProgress = slideDuration;
+                            clearInterval(progressInterval);
+                        }
+                        updateProgress();
+                    }, 100);
                     
                     currentSlide.onended = function() {
+                        clearInterval(progressInterval);
                         currentIndex++;
                         showSlide(currentIndex);
                     };
                 } else {
                     const remainingTime = slideDuration - currentProgress;
-                    startProgress(remainingTime);
+                    
+                    progressInterval = setInterval(() => {
+                        currentProgress += 100;
+                        if (currentProgress >= slideDuration) {
+                            currentProgress = slideDuration;
+                            clearInterval(progressInterval);
+                        }
+                        updateProgress();
+                    }, 100);
+                    
                     slideTimeout = setTimeout(() => {
+                        clearInterval(progressInterval);
                         currentIndex++;
                         showSlide(currentIndex);
                     }, remainingTime);
@@ -2423,11 +2484,13 @@ HTML_TEMPLATE = '''
         }
 
         function prevSlide() {
+            clearInterval(progressInterval);
             currentIndex--;
             showSlide(currentIndex);
         }
 
         function nextSlide() {
+            clearInterval(progressInterval);
             currentIndex++;
             showSlide(currentIndex);
         }
