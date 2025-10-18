@@ -535,7 +535,7 @@ HTML_TEMPLATE = '''
             align-items: center;
             justify-content: center;
             top: 50%;
-            transform: translateY(-50%);
+            transform: translateY(-80%);
             border-radius: 50%;
             z-index: 10;
         }
