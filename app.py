@@ -1578,7 +1578,6 @@ HTML_TEMPLATE = '''
                 <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
                     <img src="/static/p6000.png" alt="P-6000" class="icon-image">
                 </a>
-            <div class="icons-slider" id="iconsSlider">
                 <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
                     <img src="/static/airmax.png" alt="Air Max" class="icon-image">
                 </a>
@@ -1606,7 +1605,6 @@ HTML_TEMPLATE = '''
                 <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
                     <img src="/static/p6000.png" alt="P-6000" class="icon-image">
                 </a>
-            <div class="icons-slider" id="iconsSlider">
                 <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
                     <img src="/static/airmax.png" alt="Air Max" class="icon-image">
                 </a>
@@ -1634,7 +1632,6 @@ HTML_TEMPLATE = '''
                 <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
                     <img src="/static/p6000.png" alt="P-6000" class="icon-image">
                 </a>
-            <div class="icons-slider" id="iconsSlider">
                 <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
                     <img src="/static/airmax.png" alt="Air Max" class="icon-image">
                 </a>
@@ -1662,7 +1659,6 @@ HTML_TEMPLATE = '''
                 <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
                     <img src="/static/p6000.png" alt="P-6000" class="icon-image">
                 </a>
-            <div class="icons-slider" id="iconsSlider">
                 <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
                     <img src="/static/airmax.png" alt="Air Max" class="icon-image">
                 </a>
@@ -1690,7 +1686,6 @@ HTML_TEMPLATE = '''
                 <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
                     <img src="/static/p6000.png" alt="P-6000" class="icon-image">
                 </a>
-            <div class="icons-slider" id="iconsSlider">
                 <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
                     <img src="/static/airmax.png" alt="Air Max" class="icon-image">
                 </a>
@@ -1981,52 +1976,44 @@ HTML_TEMPLATE = '''
             }, 100);
         });
         
-        // Icons slider with infinite loop
+        // Icons slider functionality with infinite loop (15 repetitions)
         const iconsSlider = document.getElementById('iconsSlider');
         const iconsLeftBtn = document.querySelector('.icons-slider-btn.left');
         const iconsRightBtn = document.querySelector('.icons-slider-btn.right');
         
-        // Set initial scroll position to middle
-        window.addEventListener('load', () => {
-            iconsSlider.scrollLeft = iconsSlider.scrollWidth / 2;
-        });
-        
         function slideIconsLeft() {
-            const scrollAmount = iconsSlider.offsetWidth / 2;
+            const itemWidth = 288; // 280px width + 8px gap
             iconsSlider.scrollBy({
-                left: -scrollAmount,
+                left: -itemWidth * 3,
                 behavior: 'smooth'
             });
             
-            // Check if we've scrolled near the beginning, jump to end portion
             setTimeout(() => {
-                if (iconsSlider.scrollLeft <= 100) {
-                    iconsSlider.scrollTo({
-                        left: iconsSlider.scrollWidth / 2,
-                        behavior: 'auto'
-                    });
+                if (iconsSlider.scrollLeft <= itemWidth * 9) {
+                    iconsSlider.scrollLeft = iconsSlider.scrollLeft + (itemWidth * 9 * 7);
                 }
             }, 400);
         }
         
         function slideIconsRight() {
-            const scrollAmount = iconsSlider.offsetWidth / 2;
+            const itemWidth = 288;
             iconsSlider.scrollBy({
-                left: scrollAmount,
+                left: itemWidth * 3,
                 behavior: 'smooth'
             });
             
-            // Check if we've scrolled near the end, jump to beginning portion
             setTimeout(() => {
                 const maxScroll = iconsSlider.scrollWidth - iconsSlider.clientWidth;
-                if (iconsSlider.scrollLeft >= maxScroll - 100) {
-                    iconsSlider.scrollTo({
-                        left: iconsSlider.scrollWidth / 2 - iconsSlider.clientWidth,
-                        behavior: 'auto'
-                    });
+                if (iconsSlider.scrollLeft >= maxScroll - (itemWidth * 9)) {
+                    iconsSlider.scrollLeft = iconsSlider.scrollLeft - (itemWidth * 9 * 7);
                 }
             }, 400);
         }
+        
+        window.addEventListener('load', () => {
+            const itemWidth = 288;
+            iconsSlider.scrollLeft = itemWidth * 9 * 7;
+        });
         
         // Icons popup functionality
         const iconsPopup = document.getElementById('iconsPopup');
