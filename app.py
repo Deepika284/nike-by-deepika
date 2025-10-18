@@ -367,40 +367,36 @@ HTML_TEMPLATE = '''
         /* Pause/Play button with circular progress */
         #pauseBtn {
             background-color: rgba(255, 255, 255, 0.9);
+            position: relative;
         }
 
         /* Circular progress ring using SVG */
         .progress-ring {
             position: absolute;
-            top: -4px;
-            left: -4px;
+            top: 50%;
+            left: 50%;
             width: 56px;
             height: 56px;
-            transform: rotate(-90deg);
+            transform: translate(-50%, -50%) rotate(-90deg);
             pointer-events: none;
+            z-index: 1;
         }
 
         .progress-ring-circle {
             fill: none;
             stroke: #111;
             stroke-width: 3;
-            stroke-dasharray: 164;
-            stroke-dashoffset: 164;
+            stroke-linecap: round;
             transition: stroke-dashoffset 0.1s linear;
         }
 
-        /* Arrow buttons styling */
-        .slideshow-control-btn svg {
-            width: 20px;
-            height: 20px;
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 2.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
+        /* Pause icon bars - more natural look */
+        #pauseBtn .pause-icon,
+        #pauseBtn .play-icon {
+            position: relative;
+            z-index: 2;
         }
 
-        /* Pause icon bars - more natural look */
         #pauseBtn .pause-icon {
             display: flex;
             gap: 4px;
@@ -415,14 +411,17 @@ HTML_TEMPLATE = '''
             border-radius: 1.5px;
         }
 
-        /* Play icon */
-        #pauseBtn .play-icon {
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 8px 0 8px 14px;
-            border-color: transparent transparent transparent #111;
-            margin-left: 2px;
+        /* Arrow buttons styling */
+        .slideshow-control-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            position: relative;
+            z-index: 2;
         }
 
         /* Content Wrapper - Responsive */
@@ -968,7 +967,7 @@ HTML_TEMPLATE = '''
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
-        }`
+        }
     </style>
 </head>
 <body>
@@ -2312,7 +2311,7 @@ HTML_TEMPLATE = '''
                 return;
             }
             
-            const radius = 26;
+            const radius = 24; // Changed from 26 to 24 for better fit
             const circumference = 2 * Math.PI * radius;
             const progress = Math.min(elapsed / duration, 1);
             const offset = circumference * (1 - progress);
@@ -2320,9 +2319,9 @@ HTML_TEMPLATE = '''
             progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
             progressCircle.style.strokeDashoffset = offset;
             
-            // Debug logging
-            if (Math.floor(elapsed) % 500 === 0) { // Log every 500ms
-                console.log(`Progress: ${Math.round(progress * 100)}% | Elapsed: ${Math.round(elapsed)}ms | Duration: ${duration}ms`);
+            // Debug logging every second
+            if (elapsed % 1000 < 50) {
+                console.log(`Progress: ${Math.round(progress * 100)}% | ${Math.round(elapsed/1000)}s / ${Math.round(duration/1000)}s`);
             }
         }
 
@@ -2330,11 +2329,11 @@ HTML_TEMPLATE = '''
             const progressCircle = document.querySelector('.progress-ring-circle');
             if (!progressCircle) return;
             
-            const radius = 26;
+            const radius = 24;
             const circumference = 2 * Math.PI * radius;
             progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
             progressCircle.style.strokeDashoffset = circumference;
-            console.log('Progress ring reset');
+            console.log('✓ Progress ring reset to 0%');
         }
 
         function animateProgress(duration) {
@@ -2343,25 +2342,26 @@ HTML_TEMPLATE = '''
             pausedTime = 0;
             slideDuration = duration;
             
-            console.log(`Starting progress animation for ${duration}ms (${duration/1000}s)`);
+            console.log(`▶ Starting ${duration/1000}s progress animation`);
             
-            // Reset first
+            // Reset to empty circle
             resetProgressRing();
             
-            // Start animation after a tiny delay
-            setTimeout(() => {
-                progressInterval = setInterval(() => {
-                    if (!isPaused) {
-                        const elapsed = Date.now() - startTime - pausedTime;
+            // Start animation immediately
+            progressInterval = setInterval(() => {
+                if (!isPaused) {
+                    const elapsed = Date.now() - startTime - pausedTime;
+                    
+                    if (elapsed >= duration) {
+                        // Complete the circle at 100%
+                        updateProgressRing(duration, duration);
+                        clearInterval(progressInterval);
+                        console.log('✓ Progress complete at 100%');
+                    } else {
                         updateProgressRing(elapsed, duration);
-                        
-                        if (elapsed >= duration) {
-                            clearInterval(progressInterval);
-                            console.log('Progress animation complete');
-                        }
                     }
-                }, 16); // ~60fps for smooth animation
-            }, 50);
+                }
+            }, 16); // ~60fps
         }
 
         function showSlide(index) {
@@ -2410,24 +2410,32 @@ HTML_TEMPLATE = '''
                 const video = currentSlide;
                 
                 video.onloadedmetadata = function() {
-                    const duration = video.duration * 1000;
-                    console.log(`Video loaded - Duration: ${video.duration}s (${duration}ms)`);
+                    const duration = Math.floor(video.duration * 1000); // Round to avoid decimals
+                    console.log(`📹 Video loaded: ${video.duration.toFixed(1)}s (${duration}ms)`);
                     
                     // Start progress animation
                     animateProgress(duration);
                     
-                    // Setup backup timeout
+                    // Setup backup timeout (slightly longer than video)
                     slideTimeout = setTimeout(() => {
-                        console.log('Video backup timeout triggered');
+                        console.log('⏱ Video backup timeout');
                         clearInterval(progressInterval);
                         currentIndex++;
                         showSlide(currentIndex);
-                    }, duration + 500);
+                    }, duration + 1000);
                 };
                 
                 video.onended = function() {
-                    console.log('Video ended naturally');
+                    console.log('✓ Video ended naturally');
                     clearTimeout(slideTimeout);
+                    clearInterval(progressInterval);
+                    currentIndex++;
+                    showSlide(currentIndex);
+                };
+                
+                // Handle video errors
+                video.onerror = function() {
+                    console.error('❌ Video failed to load');
                     clearInterval(progressInterval);
                     currentIndex++;
                     showSlide(currentIndex);
@@ -2439,23 +2447,21 @@ HTML_TEMPLATE = '''
                 if (playPromise !== undefined) {
                     playPromise
                         .then(() => {
-                            console.log('Video playing successfully');
+                            console.log('✓ Video playing');
                         })
                         .catch(err => {
-                            console.error('Video play failed:', err);
-                            // Fallback to 5 second duration
-                            animateProgress(5000);
-                            slideTimeout = setTimeout(() => {
-                                clearInterval(progressInterval);
+                            console.error('❌ Video play failed:', err.message);
+                            // Fallback: skip to next slide
+                            setTimeout(() => {
                                 currentIndex++;
                                 showSlide(currentIndex);
-                            }, 5000);
+                            }, 1000);
                         });
                 }
             } 
             // Handle image slides
             else {
-                console.log('Image slide - 3 second duration');
+                console.log('🖼 Image slide - 3s duration');
                 const duration = 3000;
                 
                 // Start progress animation
@@ -2463,7 +2469,7 @@ HTML_TEMPLATE = '''
                 
                 // Setup slide advance
                 slideTimeout = setTimeout(() => {
-                    console.log('Image slide timeout complete');
+                    console.log('✓ Image slide complete');
                     clearInterval(progressInterval);
                     currentIndex++;
                     showSlide(currentIndex);
@@ -2597,24 +2603,29 @@ HTML_TEMPLATE = '''
 
         // Initialize on page load
         window.addEventListener('load', () => {
-            console.log('=== SLIDESHOW INITIALIZED ===');
-            console.log(`Total slides: ${totalSlides}`);
+            console.log('\n🚀 === SLIDESHOW STARTING ===');
+            console.log(`📊 Total slides: ${totalSlides}`);
             
             // Verify progress circle exists
             const progressCircle = document.querySelector('.progress-ring-circle');
             if (progressCircle) {
-                console.log('Progress circle found!');
-                const radius = 26;
+                console.log('✓ Progress circle found');
+                const radius = 24;
                 const circumference = 2 * Math.PI * radius;
-                console.log(`Circle circumference: ${circumference}`);
+                console.log(`📐 Circle radius: ${radius}px, circumference: ${circumference.toFixed(2)}px`);
+                
+                // Initialize the circle properly
+                progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+                progressCircle.style.strokeDashoffset = circumference;
+                console.log('✓ Circle initialized to 0%\n');
             } else {
-                console.error('ERROR: Progress circle NOT found!');
+                console.error('❌ ERROR: Progress circle NOT found!');
             }
             
             // Start slideshow after brief delay
             setTimeout(() => {
                 showSlide(0);
-            }, 200);
+            }, 100);
         });
 
         // Sports slider functionality
