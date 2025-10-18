@@ -1193,10 +1193,10 @@ HTML_TEMPLATE = '''
     
     <div class="slideshow-container">
         <img src="/static/ssf3.avif" class="slide active" alt="SS 1">
-        <video class="slide" muted loop playsinline>
+        <video class="slide" muted playsinline>
             <source src="/static/slideshow.mp4" type="video/mp4">
         </video>
-        <video class="slide" muted loop playsinline>
+        <video class="slide" muted playsinline>
             <source src="/static/slideshow2.mp4" type="video/mp4">
         </video>
         <button class="shop-button">Shop</button>
@@ -2156,13 +2156,15 @@ HTML_TEMPLATE = '''
             // Clear any existing timeout
             clearTimeout(slideTimeout);
             
-            // Stop all videos
-            document.querySelectorAll('.slide').forEach(slide => {
+            // Stop all videos and remove their event listeners
+            document.querySelectorAll('.slide').forEach((slide, i) => {
                 if (slide.tagName === 'VIDEO') {
                     slide.pause();
                     slide.currentTime = 0;
-                    // Remove old event listeners
-                    slide.removeEventListener('ended', handleVideoEnd);
+                    // Clone and replace to remove all event listeners
+                    const newSlide = slide.cloneNode(true);
+                    slide.parentNode.replaceChild(newSlide, slide);
+                    slides[i] = newSlide; // Update reference
                 }
                 slide.classList.remove('active');
             });
@@ -2175,23 +2177,27 @@ HTML_TEMPLATE = '''
                 currentIndex = index;
             }
             
-            slides[currentIndex].classList.add('active');
+            const currentSlide = document.querySelectorAll('.slide')[currentIndex];
+            currentSlide.classList.add('active');
             
             // Handle timing based on slide type
-            if (slides[currentIndex].tagName === 'VIDEO') {
-                const video = slides[currentIndex];
+            if (currentSlide.tagName === 'VIDEO') {
+                const video = currentSlide;
                 
-                // Add event listener for when video ends
-                video.addEventListener('ended', handleVideoEnd);
+                // Add ONE event listener for when video ends
+                video.addEventListener('ended', function() {
+                    currentIndex++;
+                    showSlide(currentIndex);
+                }, { once: true }); // 'once: true' ensures it only fires once
                 
                 // Play the video
                 video.play().catch(err => {
                     console.log('Video play failed:', err);
-                    // If video fails, move to next slide after 3 seconds
+                    // If video fails, move to next slide after 5 seconds
                     slideTimeout = setTimeout(() => {
                         currentIndex++;
                         showSlide(currentIndex);
-                    }, 3000);
+                    }, 5000);
                 });
             } else {
                 // Image slide - show for 3 seconds
@@ -2200,11 +2206,6 @@ HTML_TEMPLATE = '''
                     showSlide(currentIndex);
                 }, 3000);
             }
-        }
-
-        function handleVideoEnd() {
-            currentIndex++;
-            showSlide(currentIndex);
         }
 
         // Start the slideshow
