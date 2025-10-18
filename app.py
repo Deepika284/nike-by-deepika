@@ -216,7 +216,7 @@ HTML_TEMPLATE = '''
         .search-container {
             display: flex;
             align-items: center;
-            gap: 20px;  /* Add this line - adjust the value (20px, 25px, 30px, etc.) as needed */
+            gap: 20px;
         }
 
         .search-bar {
@@ -238,6 +238,8 @@ HTML_TEMPLATE = '''
             font-size: 34px;
             cursor: pointer;
             color: black;
+            display: inline-block;
+            position: relative;
         }
         .basket-icon {
             font-size: 24px;
@@ -346,8 +348,8 @@ HTML_TEMPLATE = '''
             font-size: 16px;
             font-weight: bold;
             border-radius: 50px;
-            display: block;           /* Add this */
-            margin: 0 auto;          /* Add this */
+            display: block;
+            margin: 0 auto;
         }
         
         .featured-cta-button:hover {
@@ -404,13 +406,13 @@ HTML_TEMPLATE = '''
         }
         
         /* Sliders - Responsive */
-        .sports-slider-container, .icons-slider-container {
+        .sports-slider-container {
             position: relative;
             overflow: hidden;
             margin-bottom: 80px;
         }
         
-        .sports-slider, .icons-slider {
+        .sports-slider {
             display: flex; 
             gap: 8px;
             overflow-x: auto;
@@ -419,18 +421,17 @@ HTML_TEMPLATE = '''
             padding: 20px 0;
         }
         
-        .sports-slider::-webkit-scrollbar, 
-        .icons-slider::-webkit-scrollbar {
+        .sports-slider::-webkit-scrollbar {
             display: none;
         }
         
-        .sports-item, .icon-item {
+        .sports-item {
             flex: 0 0 calc(25% - 12px);
             min-width: 280px;
             cursor: pointer;
         }
         
-        .sports-image, .icon-image {
+        .sports-image {
             width: 100%;
             height: 400px;
             object-fit: cover;
@@ -444,7 +445,7 @@ HTML_TEMPLATE = '''
             text-transform: uppercase;
         }
         
-        .slider-btn, .icons-slider-btn {
+        .slider-btn {
             position: absolute;
             background-color: rgba(255, 255, 255, 0.9);
             border: none;
@@ -462,21 +463,66 @@ HTML_TEMPLATE = '''
             z-index: 10;
         }
         
-        .slider-btn:hover, .icons-slider-btn:hover {
+        .slider-btn:hover {
             background-color: rgba(255, 255, 255, 1);
         }
         
-        .slider-btn.hidden, .icons-slider-btn.hidden {
+        .slider-btn.hidden {
             opacity: 0;
             pointer-events: none;
         }
         
-        .slider-btn.left, .icons-slider-btn.left {
+        .slider-btn.left {
             left: 20px;
         }
         
-        .slider-btn.right, .icons-slider-btn.right {
+        .slider-btn.right {
             right: 20px;
+        }
+        
+        /* Icons Slider - Infinite Loop */
+        .icons-slider-container {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 80px;
+        }
+        
+        .icons-slider {
+            display: flex; 
+            gap: 8px;
+            overflow: hidden;
+            padding: 20px 0;
+            animation: infiniteScroll 40s linear infinite;
+        }
+        
+        .icons-slider::-webkit-scrollbar {
+            display: none;
+        }
+        
+        @keyframes infiniteScroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        .icon-item {
+            flex: 0 0 280px;
+            min-width: 280px;
+            cursor: pointer;
+        }
+        
+        .icon-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            margin-bottom: 12px;
+        }
+        
+        .icons-slider-btn {
+            display: none;
         }
         
         /* NBA Slider - Responsive */
@@ -581,7 +627,7 @@ HTML_TEMPLATE = '''
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 40px;
             max-width: 1400px;
-            margin: 80 auto 40px;
+            margin: 80px auto 40px;
         }
         
         .footer-column-title {
@@ -752,14 +798,14 @@ HTML_TEMPLATE = '''
                 min-width: 200px;
             }
             
-            .slider-btn, .icons-slider-btn, .nba-slider-btn {
+            .slider-btn, .nba-slider-btn {
                 width: 40px;
                 height: 40px;
                 font-size: 28px;
             }
             
             .footer-content {
-                grid-template-columns: 3fr;
+                grid-template-columns: 1fr;
                 gap: 30px;
             }
         }
@@ -899,7 +945,7 @@ HTML_TEMPLATE = '''
                 <a href="/women" class="women-link">Women</a>
                 <div class="women-menu">
                     <div class="women-content">
-                        <div class="women-column">
+                    <div class="women-column">
                             <div class="women-heading">Featured</div>
                             <a href="#new-arrivals" class="women-item">New Arrivals</a>
                             <a href="#bestsellers" class="women-item">Bestsellers</a>
@@ -1227,9 +1273,36 @@ HTML_TEMPLATE = '''
         
         <div class="select-icons-title">Select By Icons</div>
         <div class="icons-slider-container">
-            <button class="icons-slider-btn left" onclick="slideIconsLeft()">‹</button>
-            <button class="icons-slider-btn right" onclick="slideIconsRight()">›</button>
             <div class="icons-slider" id="iconsSlider">
+                <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
+                    <img src="/static/airmax.png" alt="Air Max" class="icon-image">
+                </a>
+                <a href="#airforce" class="icon-item" data-icon="Air Force" data-image="/static/airforce.png">
+                    <img src="/static/airforce.png" alt="Air Force" class="icon-image">
+                </a>
+                <a href="#blazer" class="icon-item" data-icon="Blazer" data-image="/static/blazer.png">
+                    <img src="/static/blazer.png" alt="Blazer" class="icon-image">
+                </a>
+                <a href="#dunk" class="icon-item" data-icon="Dunk" data-image="/static/dunk.png">
+                    <img src="/static/dunk.png" alt="Dunk" class="icon-image">
+                </a>
+                <a href="#cortez" class="icon-item" data-icon="Cortez" data-image="/static/cortez.png">
+                    <img src="/static/cortezz.png" alt="Cortez" class="icon-image">
+                </a>
+                <a href="#killshot" class="icon-item" data-icon="Killshot" data-image="/static/killshot.png">
+                    <img src="/static/killshot.png" alt="Killshot" class="icon-image">
+                </a>
+                <a href="#jordans" class="icon-item" data-icon="Jordans" data-image="/static/jordan.png">
+                    <img src="/static/jordan.png" alt="Jordans" class="icon-image">
+                </a>
+                <a href="#metcon" class="icon-item" data-icon="Metcon" data-image="/static/metcon.png">
+                    <img src="/static/metcon.png" alt="Metcon" class="icon-image">
+                </a>
+                <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
+                    <img src="/static/p6000.png" alt="P-6000" class="icon-image">
+                </a>
+                
+                <!-- DUPLICATE FOR INFINITE LOOP -->
                 <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
                     <img src="/static/airmax.png" alt="Air Max" class="icon-image">
                 </a>
@@ -1334,7 +1407,7 @@ HTML_TEMPLATE = '''
                         <div class="nba-price">MRP : ₹ 1795.00</div>
                     </div>
                     <div class="nba-item">
-                        <mg src="/static/nba14.avif" alt="NBA 14" class="nba-image">
+                        <img src="/static/nba14.avif" alt="NBA 14" class="nba-image">
                         <div class="nba-item-title">New York Knicks Statement Edition</div>
                         <div class="nba-description">Men's Nike Dri-FIT NBA Swingman Jersey</div>
                         <div class="nba-price">MRP : ₹ 5995.00</div>
@@ -1349,7 +1422,8 @@ HTML_TEMPLATE = '''
             </div>
             <div class="nba-slider-controls">
                 <button class="nba-slider-btn left" onclick="slideNbaLeft()">‹</button>
-                <button class="nba-slider-btn right" onclick="slideNbaRight()">›</button>
+                <button class="nba-slider-btn right" onclick="slideNbaRight()">
+                </button>
             </div>
         </div>
     </div>
@@ -1411,7 +1485,7 @@ HTML_TEMPLATE = '''
             </div>
         </div>
     </footer>
- <div class="sports-popup" id="sportsPopup"></div>
+    <div class="sports-popup" id="sportsPopup"></div>
     <div class="icons-popup" id="iconsPopup"></div>
     
     <script>
@@ -1516,86 +1590,6 @@ HTML_TEMPLATE = '''
         sportsPopup.addEventListener('mouseleave', () => {
             popupTimeout = setTimeout(() => {
                 sportsPopup.classList.remove('active');
-            }, 100);
-        });
-        
-        // Icons slider functionality
-        const iconsSlider = document.getElementById('iconsSlider');
-        const iconsLeftBtn = document.querySelector('.icons-slider-btn.left');
-        const iconsRightBtn = document.querySelector('.icons-slider-btn.right');
-        
-        function updateIconsArrowVisibility() {
-            const scrollLeft = iconsSlider.scrollLeft;
-            const maxScroll = iconsSlider.scrollWidth - iconsSlider.clientWidth;
-            
-            if (scrollLeft <= 5) {
-                iconsLeftBtn.classList.add('hidden');
-            } else {
-                iconsLeftBtn.classList.remove('hidden');
-            }
-            
-            if (scrollLeft >= maxScroll - 5) {
-                iconsRightBtn.classList.add('hidden');
-            } else {
-                iconsRightBtn.classList.remove('hidden');
-            }
-        }
-        
-        function slideIconsLeft() {
-            iconsSlider.scrollBy({
-                left: -iconsSlider.offsetWidth / 2,
-                behavior: 'smooth'
-            });
-            setTimeout(updateIconsArrowVisibility, 300);
-        }
-        
-        function slideIconsRight() {
-            iconsSlider.scrollBy({
-                left: iconsSlider.offsetWidth / 2,
-                behavior: 'smooth'
-            });
-            setTimeout(updateIconsArrowVisibility, 300);
-        }
-        
-        iconsSlider.addEventListener('scroll', updateIconsArrowVisibility);
-        window.addEventListener('load', updateIconsArrowVisibility);
-        
-        // Icons popup functionality
-        const iconsPopup = document.getElementById('iconsPopup');
-        const iconItems = document.querySelectorAll('.icon-item');
-        let iconPopupTimeout;
-        
-        iconItems.forEach(item => {
-            item.addEventListener('mouseenter', (e) => {
-                clearTimeout(iconPopupTimeout);
-                const iconName = item.dataset.icon;
-                const imageUrl = item.dataset.image;
-                const rect = item.getBoundingClientRect();
-                
-                iconsPopup.innerHTML = `
-                    <img src="${imageUrl}" alt="${iconName}" class="icons-popup-image">
-                    <div class="icons-popup-text">${iconName}</div>
-                `;
-                
-                iconsPopup.classList.add('active');
-                iconsPopup.style.top = (rect.top + window.scrollY - 440) + 'px';
-                iconsPopup.style.left = (rect.left + rect.width / 2 - 350) + 'px';
-            });
-            
-            item.addEventListener('mouseleave', () => {
-                iconPopupTimeout = setTimeout(() => {
-                    iconsPopup.classList.remove('active');
-                }, 100);
-            });
-        });
-        
-        iconsPopup.addEventListener('mouseenter', () => {
-            clearTimeout(iconPopupTimeout);
-        });
-        
-        iconsPopup.addEventListener('mouseleave', () => {
-            iconPopupTimeout = setTimeout(() => {
-                iconsPopup.classList.remove('active');
             }, 100);
         });
         
