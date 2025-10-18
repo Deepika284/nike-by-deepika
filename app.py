@@ -7,14 +7,15 @@ if not os.path.exists('static'):
     os.makedirs('static')
 
 HTML_TEMPLATE = '''
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nike Store</title>
+    <title>Nike Slideshow - Fixed Progress Ring</title>
     <style>
-        {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -22,261 +23,30 @@ HTML_TEMPLATE = '''
 
         body {
             background-color: #F2EDED;
-            color: black;
             font-family: Arial, sans-serif;
         }
 
-        /* Header - Responsive */
-        .header-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: black;
-            padding: 8px 15px;
-            min-height: 40px;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-container img {
-            width: 40px;
-            height: 24px;
-        }
-
-        .text-container {
-            text-align: center;
-            font-size: 15px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            color: white;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .top-right-menu {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 12px;
-            color: white;
-        }
-
-        .top-right-menu a {
-            color: white;
-            text-decoration: none;
-        }
-
-        .top-right-menu a:hover {
-            text-decoration: underline;
-        }
-
-        .top-right-menu .separator {
-            color: white;
-        }
-
-        /* Navigation - Responsive */
-        .nav-menu {
-            background-color: white;
-            padding: 0 40px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            position: sticky;
-            z-index: 100;
-            top: 0;
-            gap: 20px;
-        }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            margin-right: 40px;
-        }
-
-        .nav-logo img {
-            width: 60px;
-            height: 36px;
-        }
-
-        .nav-links-container {
-            display: flex;
-            gap: 25px;
-            align-items: center;
-            flex: 1;
-        }
-
-        .nav-link,
-        .new-featured-link, .men-link, .women-link, 
-        .kids-link, .sale-link, .snkrs-link {
-            color: black;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 600;
-            padding: 8px 12px;
-            cursor: pointer;
-        }
-
-        .nav-link:hover,
-        .new-featured-link:hover, .men-link:hover, 
-        .women-link:hover, .kids-link:hover, 
-        .sale-link:hover, .snkrs-link:hover {
-            border-bottom: 2px solid black;
-        }
-
-        .new-featured-trigger, .men-trigger, .women-trigger, 
-        .kids-trigger, .sale-trigger, .snkrs-trigger {
-            position: relative;
-            display: inline-block;
-        }
-
-        /* Dropdown Menus - Responsive */
-        .new-featured-menu, .men-menu, .women-menu, 
-        .kids-menu, .sale-menu, .snkrs-menu {
-            display: none;
-            position: fixed;
-            top: 85px;
-            left: 0;
-            right: 0;
-            background-color: white;
-            padding: 40px 60px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-            z-index: 200;
-            animation: slideDown 0.3s ease-out;
-        }
-
-        .new-featured-trigger:hover .new-featured-menu, 
-        .men-trigger:hover .men-menu,
-        .women-trigger:hover .women-menu, 
-        .kids-trigger:hover .kids-menu,
-        .sale-trigger:hover .sale-menu, 
-        .snkrs-trigger:hover .snkrs-menu {
-            display: block;
-        }
-
-        .new-featured-content, .men-content, .women-content, 
-        .kids-content, .sale-content, .snkrs-content {
-            display: grid;
-            gap: 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .new-featured-content {
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        }
-
-        .men-content, .women-content, .kids-content, .sale-content {
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        }
-
-        .snkrs-content {
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        }
-
-        .new-featured-heading, .men-heading, .women-heading, 
-        .kids-heading, .sale-heading, .snkrs-heading {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: black;
-        }
-
-        .new-featured-item, .men-item, .women-item, 
-        .kids-item, .sale-item, .snkrs-item {
-            font-size: 14px;
-            margin-bottom: 12px;
-            color: #666;
-            text-decoration: none;
-            display: block;
-        }
-
-        .new-featured-item:hover, .men-item:hover, 
-        .women-item:hover, .kids-item:hover, 
-        .sale-item:hover, .snkrs-item:hover {
-            color: black;
-            text-decoration: underline;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .search-container {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .search-bar {
-            background-color: #f5f5f5;
-            border: 1px solid #ccc;
-            border-radius: 20px;
-            padding: 8px 20px;
-            font-size: 16px;
-            width: 200px;
-            outline: none;
-        }
-
-        .search-bar:focus {
-            background-color: #e8e8e8;
-            border-color: #999;
-        }
-
-        .favorites-icon {
-            font-size: 34px;
-            cursor: pointer;
-            color: black;
-            display: inline-block;
-            position: relative;
-        }
-        .basket-icon {
-            font-size: 24px;
-            cursor: pointer;
-            color: black;
-        }
-
-        .favorites-icon:hover {
-            text-decoration: none;
-        }
-
-        .heart-outline {
-            display: inline-block;
-        }
-
-        .heart-filled {
-            display: none;
-        }
-
-        .favorites-icon:hover .heart-outline {
-            display: none;
-        }
-
-        .favorites-icon:hover .heart-filled {
-            display: inline-block;
-        }
-
-        /* Slideshow - Responsive */
+        /* Slideshow Container */
         .slideshow-container {
             position: relative;
             width: 100%;
-            margin-top: 20px;
+            height: 600px;
             overflow: hidden;
-            height: calc(100vh - 10px);
-            max-height: none;
+            background: #000;
         }
 
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        /* Shop Button */
         .shop-button {
             position: absolute;
             bottom: 40px;
@@ -297,35 +67,7 @@ HTML_TEMPLATE = '''
             background-color: #f0f0f0;
         }
 
-        .slide {
-            display: none;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top center;
-        }
-
-        .slide.active {
-            display: block;
-        }
-
-        /* Ensure videos load and display properly */
-        .slide video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top center;
-        }
-
-        /* Specific styling for video elements */
-        video.slide {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top center;
-        }
-
-        /* Slideshow Controls - Updated with realistic icons and progress */
+        /* Slideshow Controls */
         .slideshow-controls {
             position: absolute;
             bottom: 40px;
@@ -364,52 +106,36 @@ HTML_TEMPLATE = '''
             transform: scale(0.95);
         }
 
-        /* Pause/Play button with circular progress */
-        #pauseBtn {
-            background-color: rgba(255, 255, 255, 0.9);
-            position: relative;
-        }
-
-        /* Circular progress ring using SVG */
-        .progress-ring {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 48px;
-            height: 48px;
-            transform: rotate(-90deg);
-            pointer-events: none;
-        }
-
-        .progress-ring-circle {
-            fill: none;
-            stroke: #111;
-            stroke-width: 3;
-            stroke-linecap: round;
-            transition: none;
-        }
-        /* Pause icon bars - more natural look */
-        #pauseBtn .pause-icon,
-        #pauseBtn .play-icon {
-            position: relative;
-            z-index: 2;
-        }
-
-        #pauseBtn .pause-icon {
+        /* Pause/Play Icons */
+        .pause-icon,
+        .play-icon {
             display: flex;
-            gap: 4px;
             align-items: center;
             justify-content: center;
         }
 
-        #pauseBtn .pause-bar {
+        .pause-icon {
+            gap: 4px;
+        }
+
+        .pause-bar {
             width: 3px;
             height: 16px;
             background-color: #111;
             border-radius: 1.5px;
         }
 
-        /* Arrow buttons styling */
+        .play-icon::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 12px solid #111;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            margin-left: 2px;
+        }
+
+        /* Arrow Buttons */
         .slideshow-control-btn svg {
             width: 20px;
             height: 20px;
@@ -418,10 +144,8 @@ HTML_TEMPLATE = '''
             stroke-width: 2.5;
             stroke-linecap: round;
             stroke-linejoin: round;
-            position: relative;
-            z-index: 2;
         }
-
+        
         /* Content Wrapper - Responsive */
         .content-wrapper {
             padding: 0 40px;
@@ -1317,31 +1041,30 @@ HTML_TEMPLATE = '''
     </div>
     
     <div class="slideshow-container">
-        <img src="/static/ssf3.avif" class="slide active" alt="SS 1">
+        <img src="/static/ssf3.avif" class="slide active" alt="Slide 1">
         <video class="slide" muted playsinline preload="auto">
             <source src="/static/slideshow.mp4" type="video/mp4">
         </video>
         <video class="slide" muted playsinline preload="auto">
             <source src="/static/slideshow2.mp4" type="video/mp4">
         </video>
+        
         <button class="shop-button">Shop</button>
+        
         <div class="slideshow-controls">
             <button class="slideshow-control-btn" onclick="togglePause()" id="pauseBtn">
-                <svg class="progress-ring" viewBox="0 0 48 48">
-                    <circle class="progress-ring-circle" cx="24" cy="24" r="20"></circle>
-                </svg>
                 <div class="pause-icon">
                     <div class="pause-bar"></div>
                     <div class="pause-bar"></div>
                 </div>
             </button>
             <button class="slideshow-control-btn" onclick="prevSlide()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg viewBox="0 0 24 24">
                     <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
             </button>
             <button class="slideshow-control-btn" onclick="nextSlide()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg viewBox="0 0 24 24">
                     <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
             </button>
@@ -2292,93 +2015,22 @@ HTML_TEMPLATE = '''
     <div class="icons-popup" id="iconsPopup"></div>
     
     <script>
-        //slideshow
         let currentIndex = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
         let slideTimeout;
         let isPaused = false;
-        let progressInterval;
-        let startTime;
-        let slideDuration = 3000;
-        let pausedTime = 0;
-
-        function updateProgressRing(elapsed, duration) {
-            const progressCircle = document.querySelector('.progress-ring-circle');
-            if (!progressCircle) {
-                console.error('Progress circle element not found!');
-                return;
-            }
-            
-            const radius = 24; // Changed from 26 to 24 for better fit
-            const circumference = 2 * Math.PI * radius;
-            const progress = Math.min(elapsed / duration, 1);
-            const offset = circumference * (1 - progress);
-            
-            progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
-            progressCircle.style.strokeDashoffset = offset;
-            
-            // Debug logging every second
-            if (elapsed % 1000 < 50) {
-                console.log(`Progress: ${Math.round(progress * 100)}% | ${Math.round(elapsed/1000)}s / ${Math.round(duration/1000)}s`);
-            }
-        }
-
-        function resetProgressRing() {
-            const progressCircle = document.querySelector('.progress-ring-circle');
-            if (!progressCircle) return;
-            
-            const radius = 24;
-            const circumference = 2 * Math.PI * radius;
-            progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
-            progressCircle.style.strokeDashoffset = circumference;
-            console.log('✓ Progress ring reset to 0%');
-        }
-
-        function animateProgress(duration) {
-            clearInterval(progressInterval);
-            startTime = Date.now();
-            pausedTime = 0;
-            slideDuration = duration;
-            
-            console.log(`▶ Starting ${duration/1000}s progress animation`);
-            
-            // Reset to empty circle
-            resetProgressRing();
-            
-            // Start animation immediately
-            progressInterval = setInterval(() => {
-                if (!isPaused) {
-                    const elapsed = Date.now() - startTime - pausedTime;
-                    
-                    if (elapsed >= duration) {
-                        // Complete the circle at 100%
-                        updateProgressRing(duration, duration);
-                        clearInterval(progressInterval);
-                        console.log('✓ Progress complete at 100%');
-                    } else {
-                        updateProgressRing(elapsed, duration);
-                    }
-                }
-            }, 16); // ~60fps
-        }
 
         function showSlide(index) {
-            console.log(`\n=== Showing slide ${index} ===`);
-            
-            // Clear all timers
+            // Clear existing timer
             clearTimeout(slideTimeout);
-            clearInterval(progressInterval);
             
-            // Stop all videos and hide all slides
-            document.querySelectorAll('.slide').forEach(slide => {
+            // Stop all videos
+            slides.forEach(slide => {
                 if (slide.tagName === 'VIDEO') {
                     slide.pause();
                     slide.currentTime = 0;
-                    slide.onended = null;
-                    slide.onloadedmetadata = null;
                 }
-                slide.classList.remove('active');
             });
             
             // Handle index boundaries
@@ -2390,17 +2042,18 @@ HTML_TEMPLATE = '''
                 currentIndex = index;
             }
             
-            const currentSlide = document.querySelectorAll('.slide')[currentIndex];
+            // Hide all slides
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            // Show current slide
+            const currentSlide = slides[currentIndex];
             currentSlide.classList.add('active');
-            
-            console.log(`Active slide type: ${currentSlide.tagName}`);
-            
-            // Reset progress ring
-            resetProgressRing();
             
             // Don't auto-advance if paused
             if (isPaused) {
-                console.log('Paused - not starting auto-advance');
+                if (currentSlide.tagName === 'VIDEO') {
+                    currentSlide.pause();
+                }
                 return;
             }
             
@@ -2409,70 +2062,38 @@ HTML_TEMPLATE = '''
                 const video = currentSlide;
                 
                 video.onloadedmetadata = function() {
-                    const duration = Math.floor(video.duration * 1000); // Round to avoid decimals
-                    console.log(`📹 Video loaded: ${video.duration.toFixed(1)}s (${duration}ms)`);
+                    const duration = Math.floor(video.duration * 1000);
                     
-                    // Start progress animation
-                    animateProgress(duration);
-                    
-                    // Setup backup timeout (slightly longer than video)
+                    // Set timeout for video duration
                     slideTimeout = setTimeout(() => {
-                        console.log('⏱ Video backup timeout');
-                        clearInterval(progressInterval);
                         currentIndex++;
                         showSlide(currentIndex);
-                    }, duration + 1000);
+                    }, duration);
                 };
                 
                 video.onended = function() {
-                    console.log('✓ Video ended naturally');
                     clearTimeout(slideTimeout);
-                    clearInterval(progressInterval);
-                    currentIndex++;
-                    showSlide(currentIndex);
-                };
-                
-                // Handle video errors
-                video.onerror = function() {
-                    console.error('❌ Video failed to load');
-                    clearInterval(progressInterval);
                     currentIndex++;
                     showSlide(currentIndex);
                 };
                 
                 // Play video
-                const playPromise = video.play();
-                
-                if (playPromise !== undefined) {
-                    playPromise
-                        .then(() => {
-                            console.log('✓ Video playing');
-                        })
-                        .catch(err => {
-                            console.error('❌ Video play failed:', err.message);
-                            // Fallback: skip to next slide
-                            setTimeout(() => {
-                                currentIndex++;
-                                showSlide(currentIndex);
-                            }, 1000);
-                        });
-                }
+                video.play().catch(err => {
+                    console.error('Video play failed:', err);
+                    // Skip to next slide if video fails
+                    setTimeout(() => {
+                        currentIndex++;
+                        showSlide(currentIndex);
+                    }, 1000);
+                });
             } 
             // Handle image slides
             else {
-                console.log('🖼 Image slide - 3s duration');
-                const duration = 3000;
-                
-                // Start progress animation
-                animateProgress(duration);
-                
-                // Setup slide advance
+                const imageDuration = 4000; // 4 seconds for images
                 slideTimeout = setTimeout(() => {
-                    console.log('✓ Image slide complete');
-                    clearInterval(progressInterval);
                     currentIndex++;
                     showSlide(currentIndex);
-                }, duration);
+                }, imageDuration);
             }
         }
 
@@ -2480,101 +2101,53 @@ HTML_TEMPLATE = '''
             isPaused = !isPaused;
             const pauseBtn = document.getElementById('pauseBtn');
             const iconContainer = pauseBtn.querySelector('.pause-icon, .play-icon');
-            
-            console.log(`Toggle pause: ${isPaused ? 'PAUSED' : 'PLAYING'}`);
+            const currentSlide = slides[currentIndex];
             
             if (isPaused) {
-                // PAUSE
+                // Switch to play icon
                 iconContainer.className = 'play-icon';
                 iconContainer.innerHTML = '';
                 
-                clearTimeout(slideTimeout);
-                clearInterval(progressInterval);
-                
-                // Store pause time
-                pausedTime += Date.now() - startTime - pausedTime;
-                
-                const currentSlide = document.querySelectorAll('.slide')[currentIndex];
+                // Pause video if current slide is video
                 if (currentSlide.tagName === 'VIDEO') {
                     currentSlide.pause();
-                    console.log(`Video paused at ${currentSlide.currentTime}s`);
                 }
+                
+                // Clear timer
+                clearTimeout(slideTimeout);
             } else {
-                // RESUME
+                // Switch to pause icon
                 iconContainer.className = 'pause-icon';
                 iconContainer.innerHTML = '<div class="pause-bar"></div><div class="pause-bar"></div>';
                 
-                const currentSlide = document.querySelectorAll('.slide')[currentIndex];
-                
+                // Resume video if current slide is video
                 if (currentSlide.tagName === 'VIDEO') {
                     const video = currentSlide;
-                    const remainingTime = (video.duration - video.currentTime) * 1000;
-                    const totalDuration = video.duration * 1000;
-                    
-                    console.log(`Resuming video - Remaining: ${remainingTime}ms`);
-                    
-                    // Resume progress from where we left off
-                    const elapsed = totalDuration - remainingTime;
-                    startTime = Date.now() - elapsed;
-                    
-                    progressInterval = setInterval(() => {
-                        const currentElapsed = Date.now() - startTime;
-                        updateProgressRing(currentElapsed, totalDuration);
-                        
-                        if (currentElapsed >= totalDuration) {
-                            clearInterval(progressInterval);
-                        }
-                    }, 16);
-                    
                     video.play();
                     
-                    video.onended = function() {
-                        clearTimeout(slideTimeout);
-                        clearInterval(progressInterval);
-                        currentIndex++;
-                        showSlide(currentIndex);
-                    };
+                    // Calculate remaining time
+                    const remainingTime = (video.duration - video.currentTime) * 1000;
                     
                     slideTimeout = setTimeout(() => {
-                        clearInterval(progressInterval);
-                        currentIndex++;
-                        showSlide(currentIndex);
-                    }, remainingTime + 500);
-                    
-                } else {
-                    // Resume image slide
-                    const elapsed = Date.now() - startTime - pausedTime;
-                    const remainingTime = slideDuration - elapsed;
-                    
-                    console.log(`Resuming image - Remaining: ${remainingTime}ms`);
-                    
-                    startTime = Date.now() - elapsed;
-                    
-                    progressInterval = setInterval(() => {
-                        const currentElapsed = Date.now() - startTime;
-                        updateProgressRing(currentElapsed, slideDuration);
-                        
-                        if (currentElapsed >= slideDuration) {
-                            clearInterval(progressInterval);
-                        }
-                    }, 16);
-                    
-                    slideTimeout = setTimeout(() => {
-                        clearInterval(progressInterval);
                         currentIndex++;
                         showSlide(currentIndex);
                     }, remainingTime);
+                } else {
+                    // For images, just restart the timer
+                    const imageDuration = 4000;
+                    slideTimeout = setTimeout(() => {
+                        currentIndex++;
+                        showSlide(currentIndex);
+                    }, imageDuration);
                 }
             }
         }
 
         function prevSlide() {
-            console.log('Previous slide clicked');
-            clearInterval(progressInterval);
             clearTimeout(slideTimeout);
-            isPaused = false;
             
-            // Reset pause button to pause icon
+            // Reset pause state
+            isPaused = false;
             const pauseBtn = document.getElementById('pauseBtn');
             const iconContainer = pauseBtn.querySelector('.pause-icon, .play-icon');
             iconContainer.className = 'pause-icon';
@@ -2585,12 +2158,10 @@ HTML_TEMPLATE = '''
         }
 
         function nextSlide() {
-            console.log('Next slide clicked');
-            clearInterval(progressInterval);
             clearTimeout(slideTimeout);
-            isPaused = false;
             
-            // Reset pause button to pause icon
+            // Reset pause state
+            isPaused = false;
             const pauseBtn = document.getElementById('pauseBtn');
             const iconContainer = pauseBtn.querySelector('.pause-icon, .play-icon');
             iconContainer.className = 'pause-icon';
@@ -2600,231 +2171,10 @@ HTML_TEMPLATE = '''
             showSlide(currentIndex);
         }
 
-        // Initialize on page load
+        // Start slideshow on page load
         window.addEventListener('load', () => {
-            console.log('\n🚀 === SLIDESHOW STARTING ===');
-            console.log(`📊 Total slides: ${totalSlides}`);
-            
-            // Verify progress circle exists
-            const progressCircle = document.querySelector('.progress-ring-circle');
-            if (progressCircle) {
-                console.log('✓ Progress circle found');
-                const radius = 24;
-                const circumference = 2 * Math.PI * radius;
-                console.log(`📐 Circle radius: ${radius}px, circumference: ${circumference.toFixed(2)}px`);
-                
-                // Initialize the circle properly
-                progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
-                progressCircle.style.strokeDashoffset = circumference;
-                console.log('✓ Circle initialized to 0%\n');
-            } else {
-                console.error('❌ ERROR: Progress circle NOT found!');
-            }
-            
-            // Start slideshow after brief delay
-            setTimeout(() => {
-                showSlide(0);
-            }, 100);
+            showSlide(0);
         });
-
-        // Sports slider functionality
-        const sportsSlider = document.getElementById('sportsSlider');
-        const leftBtn = document.querySelector('.slider-btn.left');
-        const rightBtn = document.querySelector('.slider-btn.right');
-
-        function updateArrowVisibility() {
-            const scrollLeft = sportsSlider.scrollLeft;
-            const maxScroll = sportsSlider.scrollWidth - sportsSlider.clientWidth;
-            
-            if (scrollLeft <= 5) {
-                leftBtn.classList.add('hidden');
-            } else {
-                leftBtn.classList.remove('hidden');
-            }
-            
-            if (scrollLeft >= maxScroll - 5) {
-                rightBtn.classList.add('hidden');
-            } else {
-                rightBtn.classList.remove('hidden');
-            }
-        }
-
-        function slideLeft() {
-            sportsSlider.scrollBy({
-                left: -sportsSlider.offsetWidth / 2,
-                behavior: 'smooth'
-            });
-            setTimeout(updateArrowVisibility, 300);
-        }
-
-        function slideRight() {
-            sportsSlider.scrollBy({
-                left: sportsSlider.offsetWidth / 2,
-                behavior: 'smooth'
-            });
-            setTimeout(updateArrowVisibility, 300);
-        }
-
-        sportsSlider.addEventListener('scroll', updateArrowVisibility);
-        window.addEventListener('load', updateArrowVisibility);
-
-        // Sports popup functionality
-        const sportsPopup = document.getElementById('sportsPopup');
-        const sportsItems = document.querySelectorAll('.sports-item');
-        let popupTimeout;
-
-        sportsItems.forEach(item => {
-            item.addEventListener('mouseenter', (e) => {
-                clearTimeout(popupTimeout);
-                const sport = item.dataset.sport;
-                const imageUrl = item.dataset.image;
-                const rect = item.getBoundingClientRect();
-                
-                sportsPopup.innerHTML = `
-                    <img src="${imageUrl}" alt="${sport}" class="sports-popup-image">
-                    <div class="sports-popup-text">${sport}</div>
-                `;
-                
-                sportsPopup.classList.add('active');
-                sportsPopup.style.top = (rect.top + window.scrollY - 270) + 'px';
-                sportsPopup.style.left = (rect.left + rect.width / 2 - 150) + 'px';
-            });
-            
-            item.addEventListener('mouseleave', () => {
-                popupTimeout = setTimeout(() => {
-                    sportsPopup.classList.remove('active');
-                }, 100);
-            });
-        });
-
-        sportsPopup.addEventListener('mouseenter', () => {
-            clearTimeout(popupTimeout);
-        });
-
-        sportsPopup.addEventListener('mouseleave', () => {
-            popupTimeout = setTimeout(() => {
-                sportsPopup.classList.remove('active');
-            }, 100);
-        });
-
-        // Icons slider functionality with infinite loop (15 repetitions)
-        const iconsSlider = document.getElementById('iconsSlider');
-        const iconsLeftBtn = document.querySelector('.icons-slider-btn.left');
-        const iconsRightBtn = document.querySelector('.icons-slider-btn.right');
-
-        function slideIconsLeft() {
-            const itemWidth = 288; // 280px width + 8px gap
-            iconsSlider.scrollBy({
-                left: -itemWidth * 3,
-                behavior: 'smooth'
-            });
-            
-            setTimeout(() => {
-                if (iconsSlider.scrollLeft <= itemWidth * 9) {
-                    iconsSlider.scrollLeft = iconsSlider.scrollLeft + (itemWidth * 9 * 7);
-                }
-            }, 400);
-        }
-
-        function slideIconsRight() {
-            const itemWidth = 288;
-            iconsSlider.scrollBy({
-                left: itemWidth * 3,
-                behavior: 'smooth'
-            });
-            
-            setTimeout(() => {
-                const maxScroll = iconsSlider.scrollWidth - iconsSlider.clientWidth;
-                if (iconsSlider.scrollLeft >= maxScroll - (itemWidth * 9)) {
-                    iconsSlider.scrollLeft = iconsSlider.scrollLeft - (itemWidth * 9 * 7);
-                }
-            }, 400);
-        }
-
-        window.addEventListener('load', () => {
-            const itemWidth = 288;
-            iconsSlider.scrollLeft = itemWidth * 9 * 7;
-        });
-
-        // Icons popup functionality
-        const iconsPopup = document.getElementById('iconsPopup');
-        const iconItems = document.querySelectorAll('.icon-item');
-        let iconPopupTimeout;
-
-        iconItems.forEach(item => {
-            item.addEventListener('mouseenter', (e) => {
-                clearTimeout(iconPopupTimeout);
-                const iconName = item.dataset.icon;
-                const imageUrl = item.dataset.image;
-                const rect = item.getBoundingClientRect();
-                
-                iconsPopup.innerHTML = `
-                    <img src="${imageUrl}" alt="${iconName}" class="icons-popup-image">
-                    <div class="icons-popup-text">${iconName}</div>
-                `;
-                
-                iconsPopup.classList.add('active');
-                iconsPopup.style.top = (rect.top + window.scrollY - 440) + 'px';
-                iconsPopup.style.left = (rect.left + rect.width / 2 - 350) + 'px';
-            });
-            
-            item.addEventListener('mouseleave', () => {
-                iconPopupTimeout = setTimeout(() => {
-                    iconsPopup.classList.remove('active');
-                }, 100);
-            });
-        });
-
-        iconsPopup.addEventListener('mouseenter', () => {
-            clearTimeout(iconPopupTimeout);
-        });
-
-        iconsPopup.addEventListener('mouseleave', () => {
-            iconPopupTimeout = setTimeout(() => {
-                iconsPopup.classList.remove('active');
-            }, 100);
-        });
-
-        // NBA slider functionality
-        const nbaSlider = document.getElementById('nbaSlider');
-        const nbaLeftBtn = document.querySelector('.nba-slider-btn.left');
-        const nbaRightBtn = document.querySelector('.nba-slider-btn.right');
-
-        function updateNbaArrowVisibility() {
-            const scrollLeft = nbaSlider.scrollLeft;
-            const maxScroll = nbaSlider.scrollWidth - nbaSlider.clientWidth;
-            
-            if (scrollLeft <= 5) {
-                nbaLeftBtn.classList.add('hidden');
-            } else {
-                nbaLeftBtn.classList.remove('hidden');
-            }
-            
-            if (scrollLeft >= maxScroll - 5) {
-                nbaRightBtn.classList.add('hidden');
-            } else {
-                nbaRightBtn.classList.remove('hidden');
-            }
-        }
-
-        function slideNbaLeft() {
-            nbaSlider.scrollBy({
-                left: -nbaSlider.offsetWidth / 3,
-                behavior: 'smooth'
-            });
-            setTimeout(updateNbaArrowVisibility, 300);
-        }
-
-        function slideNbaRight() {
-            nbaSlider.scrollBy({
-                left: nbaSlider.offsetWidth / 3,
-                behavior: 'smooth'
-            });
-            setTimeout(updateNbaArrowVisibility, 300);
-        }
-
-        nbaSlider.addEventListener('scroll', updateNbaArrowVisibility);
-        window.addEventListener('load', updateNbaArrowVisibility);
     </script>
 </body>
 </html>
