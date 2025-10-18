@@ -486,13 +486,14 @@ HTML_TEMPLATE = '''
             overflow: hidden;
             margin-bottom: 80px;
         }
-        
+                
         .icons-slider {
             display: flex; 
             gap: 8px;
-            overflow: hidden;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
             padding: 20px 0;
-            animation: infiniteScroll 40s linear infinite;
         }
         
         .icons-slider::-webkit-scrollbar {
@@ -522,7 +523,38 @@ HTML_TEMPLATE = '''
         }
         
         .icons-slider-btn {
-            display: none;
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 36px;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            top: 50%;
+            transform: translateY(-50%);
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .icons-slider-btn:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        .icons-slider-btn.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .icons-slider-btn.left {
+            left: 20px;
+        }
+
+        .icons-slider-btn.right {
+            right: 20px;
         }
         
         /* NBA Slider - Responsive */
@@ -1633,6 +1665,42 @@ HTML_TEMPLATE = '''
         
         nbaSlider.addEventListener('scroll', updateNbaArrowVisibility);
         window.addEventListener('load', updateNbaArrowVisibility);
+
+                // Icons slider with infinite loop
+        const iconsSlider = document.getElementById('iconsSlider');
+        const iconsLeftBtn = document.querySelector('.icons-slider-btn.left');
+        const iconsRightBtn = document.querySelector('.icons-slider-btn.right');
+
+        function slideIconsLeft() {
+            const scrollAmount = iconsSlider.offsetWidth / 2;
+            iconsSlider.scrollBy({
+                left: -scrollAmount,
+                behavior: 'smooth'
+            });
+            
+            // Check if we've scrolled to the beginning, loop to end
+            setTimeout(() => {
+                if (iconsSlider.scrollLeft <= 0) {
+                    iconsSlider.scrollLeft = iconsSlider.scrollWidth / 2;
+                }
+            }, 300);
+        }
+
+        function slideIconsRight() {
+            const scrollAmount = iconsSlider.offsetWidth / 2;
+            iconsSlider.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+            
+            // Check if we've scrolled to the end, loop to beginning
+            setTimeout(() => {
+                const maxScroll = iconsSlider.scrollWidth - iconsSlider.clientWidth;
+                if (iconsSlider.scrollLeft >= maxScroll - 10) {
+                    iconsSlider.scrollLeft = iconsSlider.scrollWidth / 2 - iconsSlider.clientWidth;
+                }
+            }, 300);
+        }
     </script>
 </body>
 </html>
