@@ -2150,13 +2150,19 @@ HTML_TEMPLATE = '''
         let currentIndex = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
+        let slideTimeout;
 
         function showSlide(index) {
+            // Clear any existing timeout
+            clearTimeout(slideTimeout);
+            
             // Stop all videos
             document.querySelectorAll('.slide').forEach(slide => {
                 if (slide.tagName === 'VIDEO') {
                     slide.pause();
                     slide.currentTime = 0;
+                    // Remove old event listeners
+                    slide.removeEventListener('ended', handleVideoEnd);
                 }
                 slide.classList.remove('active');
             });
@@ -2174,20 +2180,31 @@ HTML_TEMPLATE = '''
             // Handle timing based on slide type
             if (slides[currentIndex].tagName === 'VIDEO') {
                 const video = slides[currentIndex];
-                video.play();
                 
-                // When video ends, move to next slide
-                video.onended = function() {
-                    currentIndex++;
-                    showSlide(currentIndex);
-                };
+                // Add event listener for when video ends
+                video.addEventListener('ended', handleVideoEnd);
+                
+                // Play the video
+                video.play().catch(err => {
+                    console.log('Video play failed:', err);
+                    // If video fails, move to next slide after 3 seconds
+                    slideTimeout = setTimeout(() => {
+                        currentIndex++;
+                        showSlide(currentIndex);
+                    }, 3000);
+                });
             } else {
                 // Image slide - show for 3 seconds
-                setTimeout(() => {
+                slideTimeout = setTimeout(() => {
                     currentIndex++;
                     showSlide(currentIndex);
                 }, 3000);
             }
+        }
+
+        function handleVideoEnd() {
+            currentIndex++;
+            showSlide(currentIndex);
         }
 
         // Start the slideshow
