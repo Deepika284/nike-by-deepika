@@ -1335,7 +1335,6 @@ HTML_TEMPLATE = '''
                 <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
                     <img src="/static/p6000.png" alt="P-6000" class="icon-image">
                 </a>
-            <div class="icons-slider" id="iconsSlider">
                 <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
                     <img src="/static/airmax.png" alt="Air Max" class="icon-image">
                 </a>
@@ -1363,7 +1362,6 @@ HTML_TEMPLATE = '''
                 <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
                     <img src="/static/p6000.png" alt="P-6000" class="icon-image">
                 </a>
-            <div class="icons-slider" id="iconsSlider">
                 <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
                     <img src="/static/airmax.png" alt="Air Max" class="icon-image">
                 </a>
@@ -1391,7 +1389,6 @@ HTML_TEMPLATE = '''
                 <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
                     <img src="/static/p6000.png" alt="P-6000" class="icon-image">
                 </a>
-            <div class="icons-slider" id="iconsSlider">
                 <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
                     <img src="/static/airmax.png" alt="Air Max" class="icon-image">
                 </a>
@@ -1419,7 +1416,6 @@ HTML_TEMPLATE = '''
                 <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
                     <img src="/static/p6000.png" alt="P-6000" class="icon-image">
                 </a>
-            <div class="icons-slider" id="iconsSlider">
                 <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
                     <img src="/static/airmax.png" alt="Air Max" class="icon-image">
                 </a>
@@ -1447,7 +1443,6 @@ HTML_TEMPLATE = '''
                 <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
                     <img src="/static/p6000.png" alt="P-6000" class="icon-image">
                 </a>
-            <div class="icons-slider" id="iconsSlider">
                 <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
                     <img src="/static/airmax.png" alt="Air Max" class="icon-image">
                 </a>
@@ -1475,7 +1470,6 @@ HTML_TEMPLATE = '''
                 <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
                     <img src="/static/p6000.png" alt="P-6000" class="icon-image">
                 </a>
-            <div class="icons-slider" id="iconsSlider">
                 <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
                     <img src="/static/airmax.png" alt="Air Max" class="icon-image">
                 </a>
@@ -1503,7 +1497,6 @@ HTML_TEMPLATE = '''
                 <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
                     <img src="/static/p6000.png" alt="P-6000" class="icon-image">
                 </a>
-            <div class="icons-slider" id="iconsSlider">
                 <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
                     <img src="/static/airmax.png" alt="Air Max" class="icon-image">
                 </a>
@@ -1531,7 +1524,6 @@ HTML_TEMPLATE = '''
                 <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
                     <img src="/static/p6000.png" alt="P-6000" class="icon-image">
                 </a>
-            <div class="icons-slider" id="iconsSlider">
                 <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
                     <img src="/static/airmax.png" alt="Air Max" class="icon-image">
                 </a>
@@ -1559,7 +1551,6 @@ HTML_TEMPLATE = '''
                 <a href="#p6000" class="icon-item" data-icon="P-6000" data-image="/static/p6000.png">
                     <img src="/static/p6000.png" alt="P-6000" class="icon-image">
                 </a>
-            <div class="icons-slider" id="iconsSlider">
                 <a href="#airmax" class="icon-item" data-icon="Air Max" data-image="/static/airmax.png">
                     <img src="/static/airmax.png" alt="Air Max" class="icon-image">
                 </a>
