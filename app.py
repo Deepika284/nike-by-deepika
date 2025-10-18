@@ -271,7 +271,7 @@ HTML_TEMPLATE = '''
         .slideshow-container {
             position: relative;
             width: 100%;
-            margin-top: 20px;
+            margin-top: 30px;
             overflow: hidden;
             height: calc(100vh - 130px); /* Full screen minus header, margin, and 10px extra */
             max-height: none; /* Remove max-height restriction for full screen */
