@@ -659,7 +659,7 @@ HTML_TEMPLATE = '''
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 40px;
             max-width: 1400px;
-            margin: 30px auto 40px;
+            margin: 20px auto 40px;
         }
         
         .footer-column-title {
@@ -1192,9 +1192,9 @@ HTML_TEMPLATE = '''
     </div>
     
     <div class="slideshow-container">
-        <img src="/static/ssf.avif" class="slide active" alt="SS 1">
-        <img src="/static/ssf2.avif" class="slide" alt="SS 2">
-        <img src="/static/ssf3.avif" class="slide" alt="SS 3">
+        <img src="/static/ssf3.avif" class="slide active" alt="SS 1">
+        <img src="/static/slideshow.mp4" class="slide" alt="SS 2">
+        <img src="/static/slideshow2.mp4" class="slide" alt="SS 3">
         <button class="shop-button">Shop</button>
     </div>
 
