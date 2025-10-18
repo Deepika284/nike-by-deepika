@@ -2394,7 +2394,7 @@ HTML_TEMPLATE = '''
             }
             // Handle image slides
             else {
-                const imageDuration = 5000; // 5 seconds for images
+                const imageDuration = 2000; // 2 seconds for images
                 slideTimeout = setTimeout(() => {
                     currentIndex++;
                     showSlide(currentIndex);
