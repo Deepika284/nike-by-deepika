@@ -25,7 +25,8 @@ HTML_TEMPLATE = '''
             background-color: #F2EDED;
             font-family: Arial, sans-serif;
         }
-                /* Header - Responsive */
+
+        /* Header - Responsive */
         .header-container {
             display: flex;
             align-items: center;
@@ -252,27 +253,38 @@ HTML_TEMPLATE = '''
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center;
             opacity: 0;
-            transform: translateX(100%);
-            transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.8s ease;
+            z-index: 1;
+            transition: opacity 0.6s ease-in-out;
             pointer-events: none;
         }
+
         .slide:first-child {
             opacity: 1;
-            transform: translateX(0);
+            z-index: 2;
+            pointer-events: auto;
         }
 
         .slide.active {
             opacity: 1;
-            transform: translateX(0);
-            pointer-events: auto;
             z-index: 2;
+            pointer-events: auto;
         }
 
         .slide.slide-out {
-            transform: translateX(-100%);
-            opacity: 1;
+            opacity: 0;
             z-index: 1;
+        }
+
+        video.slide {
+            object-fit: cover;
+            object-position: center;
+        }
+
+        img.slide {
+            object-fit: cover;
+            object-position: center;
         }
 
         /* Shop Button */
@@ -374,8 +386,8 @@ HTML_TEMPLATE = '''
             stroke-linecap: round;
             stroke-linejoin: round;
         }
-                
-                /* Slide Indicators/Dots */
+
+        /* Slide Indicators/Dots */
         .slide-indicators {
             position: absolute;
             bottom: 15px;
@@ -404,7 +416,7 @@ HTML_TEMPLATE = '''
         .slide-dot:hover {
             background-color: rgba(255, 255, 255, 0.7);
         }
-        
+
         /* Content Wrapper - Responsive */
         .content-wrapper {
             padding: 0 40px;
@@ -465,6 +477,7 @@ HTML_TEMPLATE = '''
             height: 300px;
             object-fit: cover;
         }
+
         .discover-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -582,7 +595,7 @@ HTML_TEMPLATE = '''
             overflow: hidden;
             margin-bottom: 80px;
         }
-                
+
         .icons-slider {
             display: flex; 
             gap: 8px;
@@ -2279,7 +2292,7 @@ HTML_TEMPLATE = '''
     <div class="icons-popup" id="iconsPopup"></div>
     
     <script>
-    //slideshow//
+        //Slideshow//
         let currentIndex = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
@@ -2307,35 +2320,20 @@ HTML_TEMPLATE = '''
                 currentIndex = index;
             }
             
-            // Get previous slide
-            let prevIndex = currentIndex - 1;
-            if (prevIndex < 0) prevIndex = totalSlides - 1;
-            
-            // Reset all slides except current and previous
+            // Remove all active and slide-out classes first
             slides.forEach((slide, idx) => {
-                if (idx !== currentIndex && idx !== prevIndex) {
-                    slide.classList.remove('active', 'slide-out');
-                    slide.style.transform = 'translateX(100%)';
+                slide.classList.remove('active', 'slide-out');
+                if (idx !== currentIndex) {
                     slide.style.opacity = '0';
+                    slide.style.zIndex = '1';
                 }
             });
             
-            // Slide out previous slide
-            if (slides[prevIndex]) {
-                slides[prevIndex].classList.remove('active');
-                slides[prevIndex].classList.add('slide-out');
-            }
-            
-            // Slide in current slide
+            // Set current slide as active
             const currentSlide = slides[currentIndex];
-            currentSlide.classList.remove('slide-out');
-            currentSlide.style.transform = 'translateX(100%)';
-            currentSlide.style.opacity = '0';
-            
-            // Trigger animation
-            setTimeout(() => {
-                currentSlide.classList.add('active');
-            }, 50);
+            currentSlide.classList.add('active');
+            currentSlide.style.opacity = '1';
+            currentSlide.style.zIndex = '2';
             
             // Update dots
             updateDots();
@@ -2348,8 +2346,8 @@ HTML_TEMPLATE = '''
                 video.currentTime = 0;
                 
                 // Wait for video to be ready, then play
-                video.addEventListener('loadeddata', function onLoaded() {
-                    video.removeEventListener('loadeddata', onLoaded);
+                video.addEventListener('loadedmetadata', function onLoaded() {
+                    video.removeEventListener('loadedmetadata', onLoaded);
                     
                     video.play().then(() => {
                         const duration = Math.floor(video.duration * 1000);
@@ -2371,7 +2369,7 @@ HTML_TEMPLATE = '''
             }
             // Handle image slides
             else {
-                const imageDuration = 2000; // 2 seconds for images
+                const imageDuration = 5000; // 5 seconds for images
                 slideTimeout = setTimeout(() => {
                     currentIndex++;
                     showSlide(currentIndex);
@@ -2440,7 +2438,7 @@ HTML_TEMPLATE = '''
                     }, remainingTime);
                 } else {
                     // For images, just restart the timer
-                    const imageDuration = 2000;
+                    const imageDuration = 5000;
                     slideTimeout = setTimeout(() => {
                         currentIndex++;
                         showSlide(currentIndex);
@@ -2480,6 +2478,172 @@ HTML_TEMPLATE = '''
         // Start slideshow on page load
         window.addEventListener('load', () => {
             showSlide(0);
+        });
+
+        //Sports Slider//
+        function slideLeft() {
+            const slider = document.getElementById('sportsSlider');
+            const itemWidth = document.querySelector('.sports-item').offsetWidth + 8;
+            slider.scrollLeft -= itemWidth * 3;
+            updateSliderButtons();
+        }
+
+        function slideRight() {
+            const slider = document.getElementById('sportsSlider');
+            const itemWidth = document.querySelector('.sports-item').offsetWidth + 8;
+            slider.scrollLeft += itemWidth * 3;
+            updateSliderButtons();
+        }
+
+        function updateSliderButtons() {
+            const slider = document.getElementById('sportsSlider');
+            const leftBtn = document.querySelector('.slider-btn.left');
+            const rightBtn = document.querySelector('.slider-btn.right');
+            
+            if (slider.scrollLeft <= 0) {
+                leftBtn.classList.add('hidden');
+            } else {
+                leftBtn.classList.remove('hidden');
+            }
+            
+            if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth - 10) {
+                rightBtn.classList.add('hidden');
+            } else {
+                rightBtn.classList.remove('hidden');
+            }
+        }
+
+        document.getElementById('sportsSlider')?.addEventListener('scroll', updateSliderButtons);
+        window.addEventListener('load', updateSliderButtons);
+
+        //Icons Slider//
+        function slideIconsLeft() {
+            const slider = document.getElementById('iconsSlider');
+            const itemWidth = document.querySelector('.icon-item').offsetWidth + 8;
+            slider.scrollLeft -= itemWidth * 3;
+            updateIconsSliderButtons();
+        }
+
+        function slideIconsRight() {
+            const slider = document.getElementById('iconsSlider');
+            const itemWidth = document.querySelector('.icon-item').offsetWidth + 8;
+            slider.scrollLeft += itemWidth * 3;
+            updateIconsSliderButtons();
+        }
+
+        function updateIconsSliderButtons() {
+            const slider = document.getElementById('iconsSlider');
+            const leftBtn = document.querySelectorAll('.icons-slider-btn.left')[0];
+            const rightBtn = document.querySelectorAll('.icons-slider-btn.right')[0];
+            
+            if (slider.scrollLeft <= 0) {
+                leftBtn.classList.add('hidden');
+            } else {
+                leftBtn.classList.remove('hidden');
+            }
+            
+            if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth - 10) {
+                rightBtn.classList.add('hidden');
+            } else {
+                rightBtn.classList.remove('hidden');
+            }
+        }
+
+        document.getElementById('iconsSlider')?.addEventListener('scroll', updateIconsSliderButtons);
+        window.addEventListener('load', updateIconsSliderButtons);
+
+        //NBA Slider//
+        function slideNbaLeft() {
+            const slider = document.getElementById('nbaSlider');
+            const itemWidth = document.querySelector('.nba-item').offsetWidth + 15;
+            slider.scrollLeft -= itemWidth * 3;
+            updateNbaSliderButtons();
+        }
+
+        function slideNbaRight() {
+            const slider = document.getElementById('nbaSlider');
+            const itemWidth = document.querySelector('.nba-item').offsetWidth + 15;
+            slider.scrollLeft += itemWidth * 3;
+            updateNbaSliderButtons();
+        }
+
+        function updateNbaSliderButtons() {
+            const slider = document.getElementById('nbaSlider');
+            const leftBtn = document.querySelectorAll('.nba-slider-btn.left')[0];
+            const rightBtn = document.querySelectorAll('.nba-slider-btn.right')[0];
+            
+            if (slider.scrollLeft <= 0) {
+                leftBtn.classList.add('hidden');
+            } else {
+                leftBtn.classList.remove('hidden');
+            }
+            
+            if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth - 10) {
+                rightBtn.classList.add('hidden');
+            } else {
+                rightBtn.classList.remove('hidden');
+            }
+        }
+
+        document.getElementById('nbaSlider')?.addEventListener('scroll', updateNbaSliderButtons);
+        window.addEventListener('load', updateNbaSliderButtons);
+
+        //Sports Items Hover Popup//
+        document.querySelectorAll('.sports-item').forEach(item => {
+            item.addEventListener('mouseenter', function(e) {
+                const popup = document.getElementById('sportsPopup');
+                const sportName = this.getAttribute('data-sport');
+                const imageUrl = this.getAttribute('data-image');
+                
+                popup.innerHTML = `
+                    <img src="${imageUrl}" alt="${sportName}" class="sports-popup-image">
+                    <div class="sports-popup-text">${sportName}</div>
+                `;
+                
+                popup.classList.add('active');
+                popup.style.left = e.pageX + 10 + 'px';
+                popup.style.top = e.pageY + 10 + 'px';
+            });
+            
+            item.addEventListener('mousemove', function(e) {
+                const popup = document.getElementById('sportsPopup');
+                popup.style.left = e.pageX + 10 + 'px';
+                popup.style.top = e.pageY + 10 + 'px';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                const popup = document.getElementById('sportsPopup');
+                popup.classList.remove('active');
+            });
+        });
+
+        //Icons Items Hover Popup//
+        document.querySelectorAll('.icon-item').forEach(item => {
+            item.addEventListener('mouseenter', function(e) {
+                const popup = document.getElementById('iconsPopup');
+                const iconName = this.getAttribute('data-icon');
+                const imageUrl = this.getAttribute('data-image');
+                
+                popup.innerHTML = `
+                    <img src="${imageUrl}" alt="${iconName}" class="icons-popup-image">
+                    <div class="icons-popup-text">${iconName}</div>
+                `;
+                
+                popup.classList.add('active');
+                popup.style.left = e.pageX + 10 + 'px';
+                popup.style.top = e.pageY + 10 + 'px';
+            });
+            
+            item.addEventListener('mousemove', function(e) {
+                const popup = document.getElementById('iconsPopup');
+                popup.style.left = e.pageX + 10 + 'px';
+                popup.style.top = e.pageY + 10 + 'px';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                const popup = document.getElementById('iconsPopup');
+                popup.classList.remove('active');
+            });
         });
     </script>
 </body>
