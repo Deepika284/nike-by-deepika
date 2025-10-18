@@ -1301,10 +1301,10 @@ HTML_TEMPLATE = '''
     
     <div class="slideshow-container">
         <img src="/static/ssf3.avif" class="slide active" alt="Slide 1">
-        <video class="slide" muted playsinline preload="auto">
+        <video class="slide" muted playsinline preload="auto" autoplay loop>
             <source src="/static/slideshow.mp4" type="video/mp4">
         </video>
-        <video class="slide" muted playsinline preload="auto">
+        <video class="slide" muted playsinline preload="auto" autoplay loop>
             <source src="/static/slideshow2.mp4" type="video/mp4">
         </video>
         
@@ -2340,19 +2340,16 @@ HTML_TEMPLATE = '''
             // Update dots
             updateDots();
             
-            // Don't auto-advance if paused
-            if (isPaused) {
-                if (currentSlide.tagName === 'VIDEO') {
-                    currentSlide.pause();
-                }
-                return;
-            }
-            
             // Handle video slides
             if (currentSlide.tagName === 'VIDEO') {
                 const video = currentSlide;
                 
-                video.onloadedmetadata = function() {
+                // Load the video if not loaded
+                if (video.readyState < 2) {
+                    video.load();
+                }
+                
+                video.onloadeddata = function() {
                     const duration = Math.floor(video.duration * 1000);
                     
                     // Set timeout for video duration
