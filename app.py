@@ -246,14 +246,25 @@ HTML_TEMPLATE = '''
         }
 
         .slide {
-            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
         }
 
         .slide.active {
-            display: block;
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide.slide-out {
+            transform: translateX(-100%);
+            opacity: 0;
         }
 
         /* Shop Button */
@@ -2288,12 +2299,23 @@ HTML_TEMPLATE = '''
                 currentIndex = index;
             }
             
-            // Hide all slides
-            slides.forEach(slide => slide.classList.remove('active'));
             
-            // Show current slide
+            // Hide all slides with slide-out animation
+            slides.forEach((slide, idx) => {
+                if (idx !== currentIndex) {
+                    slide.classList.remove('active');
+                    slide.classList.add('slide-out');
+                }
+            });
+            
+            // Show current slide with slide-in animation
             const currentSlide = slides[currentIndex];
-            currentSlide.classList.add('active');
+            // Remove slide-out class and reset position
+            currentSlide.classList.remove('slide-out');
+            // Small delay to ensure animation triggers
+            setTimeout(() => {
+                currentSlide.classList.add('active');
+            }, 10);
             
             // Update dots
             updateDots();
@@ -2338,7 +2360,7 @@ HTML_TEMPLATE = '''
             } 
             // Handle image slides
             else {
-                const imageDuration = 4000; // 4 seconds for images
+                const imageDuration = 2000; // 2 seconds for images
                 slideTimeout = setTimeout(() => {
                     currentIndex++;
                     showSlide(currentIndex);
