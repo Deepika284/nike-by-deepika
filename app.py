@@ -47,8 +47,8 @@ HTML_TEMPLATE = '''
 
         .text-container {
             text-align: center;
-            font-size: 15px;
-            font-weight: bold;
+            font-size: 16px;
+            font-weight: bolder;
             letter-spacing: 2px;
             color: white;
             position: absolute;
@@ -114,7 +114,7 @@ HTML_TEMPLATE = '''
             color: black;
             text-decoration: none;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 300;
             padding: 8px 12px;
             cursor: pointer;
         }
@@ -208,7 +208,7 @@ HTML_TEMPLATE = '''
         }
 
         .favorites-icon {
-            font-size: 24px;
+            font-size: 34px;
             cursor: pointer;
             color: black;
             text-decoration: none;
