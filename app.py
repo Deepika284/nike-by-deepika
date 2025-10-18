@@ -543,7 +543,7 @@ HTML_TEMPLATE = '''
         
         .nba-slider-controls {
             position: relative;
-            margin-top: -80px;
+            margin-top: -200px;
             pointer-events: none;
         }
         
@@ -627,7 +627,7 @@ HTML_TEMPLATE = '''
             border-top: 1px solid #e5e5e5;
             max-width: 1400px;
             margin: 0 auto;
-            font-size: 12px;
+            font-size: 15px;
             color: #7e7e7e;
         }
         
