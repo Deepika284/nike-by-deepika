@@ -254,9 +254,8 @@ HTML_TEMPLATE = '''
             height: 100%;
             object-fit: cover;
             object-position: center;
-            opacity: 0;
+            opacity: 1;
             z-index: 1;
-            transition: opacity 0.6s ease-in-out;
             pointer-events: none;
         }
 
@@ -267,13 +266,13 @@ HTML_TEMPLATE = '''
         }
 
         .slide.active {
-            opacity: 1;
+            animation: slideInRight 0.8s ease-in-out forwards;
             z-index: 2;
             pointer-events: auto;
         }
 
         .slide.slide-out {
-            opacity: 0;
+            animation: slideOutLeft 0.8s ease-in-out forwards;
             z-index: 1;
         }
 
@@ -285,6 +284,28 @@ HTML_TEMPLATE = '''
         img.slide {
             object-fit: cover;
             object-position: center;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutLeft {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
         }
 
         /* Shop Button */
@@ -2311,6 +2332,9 @@ HTML_TEMPLATE = '''
                 }
             });
             
+            // Get previous slide index
+            const prevIndex = currentIndex;
+            
             // Handle index boundaries
             if (index >= totalSlides) {
                 currentIndex = 0;
@@ -2320,20 +2344,19 @@ HTML_TEMPLATE = '''
                 currentIndex = index;
             }
             
-            // Remove all active and slide-out classes first
-            slides.forEach((slide, idx) => {
+            // Remove animations from all slides
+            slides.forEach(slide => {
                 slide.classList.remove('active', 'slide-out');
-                if (idx !== currentIndex) {
-                    slide.style.opacity = '0';
-                    slide.style.zIndex = '1';
-                }
             });
             
-            // Set current slide as active
+            // Add slide-out animation to previous slide
+            if (prevIndex !== currentIndex) {
+                slides[prevIndex].classList.add('slide-out');
+            }
+            
+            // Add slide-in animation to current slide
             const currentSlide = slides[currentIndex];
             currentSlide.classList.add('active');
-            currentSlide.style.opacity = '1';
-            currentSlide.style.zIndex = '2';
             
             // Update dots
             updateDots();
@@ -2359,8 +2382,10 @@ HTML_TEMPLATE = '''
                     }).catch(err => {
                         console.error('Video play failed:', err);
                         // Skip to next slide if video fails
-                        currentIndex++;
-                        showSlide(currentIndex);
+                        slideTimeout = setTimeout(() => {
+                            currentIndex++;
+                            showSlide(currentIndex);
+                        }, 3000);
                     });
                 });
                 
@@ -2394,9 +2419,11 @@ HTML_TEMPLATE = '''
             // Reset pause state
             isPaused = false;
             const pauseBtn = document.getElementById('pauseBtn');
-            const iconContainer = pauseBtn.querySelector('.pause-icon, .play-icon');
-            iconContainer.className = 'pause-icon';
-            iconContainer.innerHTML = '<div class="pause-bar"></div><div class="pause-bar"></div>';
+            if (pauseBtn) {
+                const iconContainer = pauseBtn.querySelector('.pause-icon, .play-icon');
+                iconContainer.className = 'pause-icon';
+                iconContainer.innerHTML = '<div class="pause-bar"></div><div class="pause-bar"></div>';
+            }
             
             showSlide(index);
         }
@@ -2453,9 +2480,11 @@ HTML_TEMPLATE = '''
             // Reset pause state
             isPaused = false;
             const pauseBtn = document.getElementById('pauseBtn');
-            const iconContainer = pauseBtn.querySelector('.pause-icon, .play-icon');
-            iconContainer.className = 'pause-icon';
-            iconContainer.innerHTML = '<div class="pause-bar"></div><div class="pause-bar"></div>';
+            if (pauseBtn) {
+                const iconContainer = pauseBtn.querySelector('.pause-icon, .play-icon');
+                iconContainer.className = 'pause-icon';
+                iconContainer.innerHTML = '<div class="pause-bar"></div><div class="pause-bar"></div>';
+            }
             
             currentIndex--;
             showSlide(currentIndex);
@@ -2467,9 +2496,11 @@ HTML_TEMPLATE = '''
             // Reset pause state
             isPaused = false;
             const pauseBtn = document.getElementById('pauseBtn');
-            const iconContainer = pauseBtn.querySelector('.pause-icon, .play-icon');
-            iconContainer.className = 'pause-icon';
-            iconContainer.innerHTML = '<div class="pause-bar"></div><div class="pause-bar"></div>';
+            if (pauseBtn) {
+                const iconContainer = pauseBtn.querySelector('.pause-icon, .play-icon');
+                iconContainer.className = 'pause-icon';
+                iconContainer.innerHTML = '<div class="pause-bar"></div><div class="pause-bar"></div>';
+            }
             
             currentIndex++;
             showSlide(currentIndex);
