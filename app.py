@@ -19,13 +19,13 @@ HTML_TEMPLATE = '''
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             background-color: #F2EDED;
             color: black;
             font-family: Arial, sans-serif;
         }
-        
+
         /* Header - Responsive */
         .header-container {
             display: flex;
@@ -35,17 +35,17 @@ HTML_TEMPLATE = '''
             padding: 8px 15px;
             min-height: 40px;
         }
-        
+
         .logo-container {
             display: flex;
             align-items: center;
         }
-        
+
         .logo-container img {
             width: 40px;
             height: 24px;
         }
-        
+
         .text-container {
             text-align: center;
             font-size: 15px;
@@ -56,7 +56,7 @@ HTML_TEMPLATE = '''
             left: 50%;
             transform: translateX(-50%);
         }
-        
+
         .top-right-menu {
             display: flex;
             align-items: center;
@@ -64,20 +64,20 @@ HTML_TEMPLATE = '''
             font-size: 12px;
             color: white;
         }
-        
+
         .top-right-menu a {
             color: white;
             text-decoration: none;
         }
-        
+
         .top-right-menu a:hover {
             text-decoration: underline;
         }
-        
+
         .top-right-menu .separator {
             color: white;
         }
-        
+
         /* Navigation - Responsive */
         .nav-menu {
             background-color: white;
@@ -91,25 +91,25 @@ HTML_TEMPLATE = '''
             top: 0;
             gap: 20px;
         }
-        
+
         .nav-logo {
             display: flex;
             align-items: center;
             margin-right: 40px;
         }
-        
+
         .nav-logo img {
             width: 60px;
             height: 36px;
         }
-        
+
         .nav-links-container {
             display: flex;
             gap: 25px;
             align-items: center;
             flex: 1;
         }
-        
+
         .nav-link,
         .new-featured-link, .men-link, .women-link, 
         .kids-link, .sale-link, .snkrs-link {
@@ -120,20 +120,20 @@ HTML_TEMPLATE = '''
             padding: 8px 12px;
             cursor: pointer;
         }
-        
+
         .nav-link:hover,
         .new-featured-link:hover, .men-link:hover, 
         .women-link:hover, .kids-link:hover, 
         .sale-link:hover, .snkrs-link:hover {
             border-bottom: 2px solid black;
         }
-        
+
         .new-featured-trigger, .men-trigger, .women-trigger, 
         .kids-trigger, .sale-trigger, .snkrs-trigger {
             position: relative;
             display: inline-block;
         }
-        
+
         /* Dropdown Menus - Responsive */
         .new-featured-menu, .men-menu, .women-menu, 
         .kids-menu, .sale-menu, .snkrs-menu {
@@ -148,7 +148,7 @@ HTML_TEMPLATE = '''
             z-index: 200;
             animation: slideDown 0.3s ease-out;
         }
-        
+
         .new-featured-trigger:hover .new-featured-menu, 
         .men-trigger:hover .men-menu,
         .women-trigger:hover .women-menu, 
@@ -157,7 +157,7 @@ HTML_TEMPLATE = '''
         .snkrs-trigger:hover .snkrs-menu {
             display: block;
         }
-        
+
         .new-featured-content, .men-content, .women-content, 
         .kids-content, .sale-content, .snkrs-content {
             display: grid;
@@ -165,19 +165,19 @@ HTML_TEMPLATE = '''
             max-width: 1400px;
             margin: 0 auto;
         }
-        
+
         .new-featured-content {
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         }
-        
+
         .men-content, .women-content, .kids-content, .sale-content {
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
         }
-        
+
         .snkrs-content {
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         }
-        
+
         .new-featured-heading, .men-heading, .women-heading, 
         .kids-heading, .sale-heading, .snkrs-heading {
             font-size: 16px;
@@ -185,7 +185,7 @@ HTML_TEMPLATE = '''
             margin-bottom: 20px;
             color: black;
         }
-        
+
         .new-featured-item, .men-item, .women-item, 
         .kids-item, .sale-item, .snkrs-item {
             font-size: 14px;
@@ -194,14 +194,14 @@ HTML_TEMPLATE = '''
             text-decoration: none;
             display: block;
         }
-        
+
         .new-featured-item:hover, .men-item:hover, 
         .women-item:hover, .kids-item:hover, 
         .sale-item:hover, .snkrs-item:hover {
             color: black;
             text-decoration: underline;
         }
-        
+
         @keyframes slideDown {
             from {
                 opacity: 0;
@@ -212,7 +212,7 @@ HTML_TEMPLATE = '''
                 transform: translateY(0);
             }
         }
-        
+
         .search-container {
             display: flex;
             align-items: center;
@@ -233,7 +233,7 @@ HTML_TEMPLATE = '''
             background-color: #e8e8e8;
             border-color: #999;
         }
-        
+
         .favorites-icon {
             font-size: 34px;
             cursor: pointer;
@@ -266,7 +266,7 @@ HTML_TEMPLATE = '''
         .favorites-icon:hover .heart-filled {
             display: inline-block;
         }
-        
+
         /* Slideshow - Responsive */
         .slideshow-container {
             position: relative;
@@ -276,7 +276,7 @@ HTML_TEMPLATE = '''
             height: calc(100vh - 100px);
             max-height: 800px;
         }
-        
+
         .shop-button {
             position: absolute;
             bottom: 40px;
@@ -292,11 +292,11 @@ HTML_TEMPLATE = '''
             z-index: 10;
             border-radius: 50px;
         }
-        
+
         .shop-button:hover {
             background-color: #f0f0f0;
         }
-        
+
         .slide {
             display: none;
             width: 100%;
@@ -304,18 +304,34 @@ HTML_TEMPLATE = '''
             object-fit: cover;
             object-position: top center;
         }
-        
+
         .slide.active {
             display: block;
         }
-        
+
+        /* Ensure videos load and display properly */
+        .slide video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+        }
+
+        /* Specific styling for video elements */
+        video.slide {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+        }
+
         /* Content Wrapper - Responsive */
         .content-wrapper {
             padding: 0 40px;
             max-width: 1400px;
             margin: 0 auto;
         }
-        
+
         /* Sections - Responsive Typography */
         .athlete-title, .features-title, .gear-title, 
         .sports-title, .discover-title, .nba-section-title,
@@ -324,21 +340,21 @@ HTML_TEMPLATE = '''
             font-weight: normal;
             margin: 100px 0 30px 0;
         }
-        
+
         .featured-main-title {
             font-size: 30px;
             font-weight: bold;
             margin-bottom: 10px;
             text-align: center;
         }
-        
+
         .featured-subtitle {
             font-size: 24px;
             color: #757575;
             margin-bottom: 15px;
             text-align: center;
         }
-        
+
         .featured-cta-button {
             background-color: black;
             color: white;
@@ -351,11 +367,11 @@ HTML_TEMPLATE = '''
             display: block;
             margin: 0 auto;
         }
-        
+
         .featured-cta-button:hover {
             background-color: #333;
         }
-        
+
         /* Image Grids - Responsive */
         .athlete-images-container {
             display: grid;
@@ -363,7 +379,7 @@ HTML_TEMPLATE = '''
             gap: 10px;
             margin-bottom: 40px;
         }
-        
+
         .athlete-image {
             width: 100%;
             height: 300px;
@@ -377,41 +393,41 @@ HTML_TEMPLATE = '''
             margin-bottom: 40px;
             line-height: 0;
         }
-        
+
         .discover-image {
             width: 100%;
             height: 620px;
             object-fit: cover;
             display: block;
         }
-        
+
         .featured-images-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 10px;
             margin-bottom: 40px;
         }
-        
+
         .featured-image {
             width: 100%;
             height: 500px;
             object-fit: cover;
         }
-        
+
         .gear-image {
             width: 100%;
             height: 700px;
             object-fit: cover;
             margin-bottom: 40px;
         }
-        
+
         /* Sliders - Responsive */
         .sports-slider-container {
             position: relative;
             overflow: hidden;
             margin-bottom: 80px;
         }
-        
+
         .sports-slider {
             display: flex; 
             gap: 8px;
@@ -420,31 +436,31 @@ HTML_TEMPLATE = '''
             scrollbar-width: none;
             padding: 20px 0;
         }
-        
+
         .sports-slider::-webkit-scrollbar {
             display: none;
         }
-        
+
         .sports-item {
             flex: 0 0 calc(25% - 12px);
             min-width: 280px;
             cursor: pointer;
         }
-        
+
         .sports-image {
             width: 100%;
             height: 400px;
             object-fit: cover;
             margin-bottom: 12px;
         }
-        
+
         .sports-text {
             text-align: center;
             font-size: 20px;
             font-weight: normal;
             text-transform: uppercase;
         }
-        
+
         .slider-btn {
             position: absolute;
             background-color: rgba(255, 255, 255, 0.9);
@@ -462,24 +478,24 @@ HTML_TEMPLATE = '''
             border-radius: 50%;
             z-index: 10;
         }
-        
+
         .slider-btn:hover {
             background-color: rgba(255, 255, 255, 1);
         }
-        
+
         .slider-btn.hidden {
             opacity: 0;
             pointer-events: none;
         }
-        
+
         .slider-btn.left {
             left: 20px;
         }
-        
+
         .slider-btn.right {
             right: 20px;
         }
-        
+
         /* Icons Slider - Infinite Loop */
         .icons-slider-container {
             position: relative;
@@ -495,11 +511,11 @@ HTML_TEMPLATE = '''
             scrollbar-width: none;
             padding: 20px 0;
         }
-        
+
         .icons-slider::-webkit-scrollbar {
             display: none;
         }
-        
+
         @keyframes infiniteScroll {
             0% {
                 transform: translateX(0);
@@ -508,20 +524,20 @@ HTML_TEMPLATE = '''
                 transform: translateX(-50%);
             }
         }
-        
+
         .icon-item {
             flex: 0 0 280px;
             min-width: 280px;
             cursor: pointer;
         }
-        
+
         .icon-image {
             width: 100%;
             height: 400px;
             object-fit: cover;
             margin-bottom: 12px;
         }
-        
+
         .icons-slider-btn {
             position: absolute;
             background-color: rgba(255, 255, 255, 0.9);
@@ -556,7 +572,7 @@ HTML_TEMPLATE = '''
         .icons-slider-btn.right {
             right: 20px;
         }
-        
+
         /* NBA Slider - Responsive */
         .nba-slider {
             display: flex;
@@ -566,41 +582,41 @@ HTML_TEMPLATE = '''
             scrollbar-width: none;
             padding: 20px 0;
         }
-        
+
         .nba-slider::-webkit-scrollbar {
             display: none;
         }
-        
+
         .nba-item {
             flex: 0 0 calc(25% - 12px);
             min-width: 280px;
         }
-        
+
         .nba-image {
             width: 100%;
             height: 320px;
             object-fit: cover;
             margin-bottom: 12px;
         }
-        
+
         .nba-item-title {
             font-size: 16px;
             font-weight: 600;
             margin-bottom: 8px;
         }
-        
+
         .nba-description {
             font-size: 14px;
             color: #757575;
             margin-bottom: 8px;
             font-weight: normal;
         }
-        
+
         .nba-price {
             font-size: 13px;
             font-weight: 300;
         }
-        
+
         .nba-slider-btn {
             position: absolute;
             background-color: rgba(255, 255, 255, 0.9);
@@ -618,34 +634,34 @@ HTML_TEMPLATE = '''
             border-radius: 50%;
             z-index: 10;
         }
-        
+
         .nba-slider-controls {
             position: relative;
             margin-top: -200px;
             pointer-events: none;
         }
-        
+
         .nba-slider-btn {
             pointer-events: auto;
         }
-        
+
         .nba-slider-btn:hover {
             background-color: rgba(255, 255, 255, 1);
         }
-        
+
         .nba-slider-btn.hidden {
             opacity: 0;
             pointer-events: none;
         }
-        
+
         .nba-slider-btn.left {
             left: 20px;
         }
-        
+
         .nba-slider-btn.right {
             right: 20px;
         }
-        
+
         /* Footer - Responsive */
         .footer-section {
             background-color: white;
@@ -653,7 +669,7 @@ HTML_TEMPLATE = '''
             margin-top: 200px;
             border-top: 1px solid #ccc;
         }
-        
+
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -661,14 +677,14 @@ HTML_TEMPLATE = '''
             max-width: 1400px;
             margin: 20px auto 40px;
         }
-        
+
         .footer-column-title {
             font-size: 16px;
             font-weight: bold;
             margin-bottom: 20px;
             color: black;
         }
-        
+
         .footer-link {
             color: #7e7e7e;
             text-decoration: none;
@@ -676,12 +692,12 @@ HTML_TEMPLATE = '''
             margin-bottom: 10px;
             display: block;
         }
-        
+
         .footer-link:hover {
             color: black;
             text-decoration: underline;
         }
-        
+
         .footer-location {
             display: flex;
             align-items: center;
@@ -689,12 +705,12 @@ HTML_TEMPLATE = '''
             font-size: 14px;
             margin-top: 200px;
         }
-        
+
         .location-icon {
             width: 20px;
             height: 20px;
         }
-        
+
         .footer-bottom {
             display: flex;
             justify-content: space-between;
@@ -708,28 +724,28 @@ HTML_TEMPLATE = '''
             font-size: 15px;
             color: #7e7e7e;
         }
-        
+
         .footer-bottom-left {
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
         }
-        
+
         .footer-bottom-right {
             display: flex;
             gap: 20px;
         }
-        
+
         .footer-bottom-link {
             color: #7e7e7e;
             text-decoration: none;
         }
-        
+
         .footer-bottom-link:hover {
             color: black;
             text-decoration: underline;
         }
-        
+
         /* Popups - Responsive */
         .sports-popup, .icons-popup {
             position: fixed;
@@ -743,17 +759,17 @@ HTML_TEMPLATE = '''
             max-width: 400px;
             pointer-events: none;
         }
-        
+
         .sports-popup.active, .icons-popup.active {
             display: block;
         }
-        
+
         .sports-popup-image, .icons-popup-image {
             width: 100%;
             height: 400px;
             object-fit: cover;
         }
-        
+
         .sports-popup-text, .icons-popup-text {
             padding: 20px;
             text-align: center;
@@ -761,7 +777,7 @@ HTML_TEMPLATE = '''
             font-weight: bold;
             text-transform: uppercase;
         }
-        
+
         /* Mobile Responsive - Phone screens only */
         @media (max-width: 768px) {
             .text-container {
@@ -774,15 +790,22 @@ HTML_TEMPLATE = '''
                 gap: 8px;
             }
 
-            /* Slideshow mobile override */
+            /* Slideshow mobile - keep consistent height */
             .slideshow-container {
-                height: auto;
-                max-height: none;
+                height: 60vh;
+                max-height: 600px;
+                margin-top: 10px;
             }
 
             .slide {
-                height: auto;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
                 object-position: center center;
+            }
+
+            video.slide {
+                object-fit: cover;
             }
             
             .nav-menu {
@@ -1193,10 +1216,10 @@ HTML_TEMPLATE = '''
     
     <div class="slideshow-container">
         <img src="/static/ssf3.avif" class="slide active" alt="SS 1">
-        <video class="slide" muted playsinline>
+        <video class="slide" muted playsinline preload="auto">
             <source src="/static/slideshow.mp4" type="video/mp4">
         </video>
-        <video class="slide" muted playsinline>
+        <video class="slide" muted playsinline preload="auto">
             <source src="/static/slideshow2.mp4" type="video/mp4">
         </video>
         <button class="shop-button">Shop</button>
@@ -2156,15 +2179,11 @@ HTML_TEMPLATE = '''
             // Clear any existing timeout
             clearTimeout(slideTimeout);
             
-            // Stop all videos and remove their event listeners
-            document.querySelectorAll('.slide').forEach((slide, i) => {
+            // Stop all videos
+            document.querySelectorAll('.slide').forEach(slide => {
                 if (slide.tagName === 'VIDEO') {
                     slide.pause();
                     slide.currentTime = 0;
-                    // Clone and replace to remove all event listeners
-                    const newSlide = slide.cloneNode(true);
-                    slide.parentNode.replaceChild(newSlide, slide);
-                    slides[i] = newSlide; // Update reference
                 }
                 slide.classList.remove('active');
             });
@@ -2184,14 +2203,31 @@ HTML_TEMPLATE = '''
             if (currentSlide.tagName === 'VIDEO') {
                 const video = currentSlide;
                 
-                // Add ONE event listener for when video ends
-                video.addEventListener('ended', function() {
+                // Remove any existing listeners
+                video.onended = null;
+                
+                // Set up ended event
+                video.onended = function() {
+                    console.log('Video ended, moving to next slide');
                     currentIndex++;
                     showSlide(currentIndex);
-                }, { once: true }); // 'once: true' ensures it only fires once
+                };
+                
+                // Also set up a backup timeout in case video doesn't load
+                video.onloadedmetadata = function() {
+                    console.log('Video duration:', video.duration);
+                    // Set backup timeout slightly longer than video duration
+                    slideTimeout = setTimeout(() => {
+                        console.log('Backup timeout triggered');
+                        currentIndex++;
+                        showSlide(currentIndex);
+                    }, (video.duration + 1) * 1000);
+                };
                 
                 // Play the video
-                video.play().catch(err => {
+                video.play().then(() => {
+                    console.log('Video playing successfully');
+                }).catch(err => {
                     console.log('Video play failed:', err);
                     // If video fails, move to next slide after 5 seconds
                     slideTimeout = setTimeout(() => {
@@ -2201,6 +2237,7 @@ HTML_TEMPLATE = '''
                 });
             } else {
                 // Image slide - show for 3 seconds
+                console.log('Showing image slide');
                 slideTimeout = setTimeout(() => {
                     currentIndex++;
                     showSlide(currentIndex);
