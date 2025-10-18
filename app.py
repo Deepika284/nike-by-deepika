@@ -1193,8 +1193,12 @@ HTML_TEMPLATE = '''
     
     <div class="slideshow-container">
         <img src="/static/ssf3.avif" class="slide active" alt="SS 1">
-        <img src="/static/slideshow.mp4" class="slide" alt="SS 2">
-        <img src="/static/slideshow2.mp4" class="slide" alt="SS 3">
+        <video class="slide" muted loop playsinline>
+            <source src="/static/slideshow.mp4" type="video/mp4">
+        </video>
+        <video class="slide" muted loop playsinline>
+            <source src="/static/slideshow2.mp4" type="video/mp4">
+        </video>
         <button class="shop-button">Shop</button>
     </div>
 
@@ -2146,9 +2150,17 @@ HTML_TEMPLATE = '''
         let currentIndex = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
-        
+
         function showSlide(index) {
-            slides.forEach(slide => slide.classList.remove('active'));
+            // Stop all videos
+            document.querySelectorAll('.slide').forEach(slide => {
+                if (slide.tagName === 'VIDEO') {
+                    slide.pause();
+                    slide.currentTime = 0;
+                }
+                slide.classList.remove('active');
+            });
+            
             if (index >= totalSlides) {
                 currentIndex = 0;
             } else if (index < 0) {
@@ -2156,13 +2168,32 @@ HTML_TEMPLATE = '''
             } else {
                 currentIndex = index;
             }
+            
             slides[currentIndex].classList.add('active');
+            
+            // Handle timing based on slide type
+            if (slides[currentIndex].tagName === 'VIDEO') {
+                const video = slides[currentIndex];
+                video.play();
+                
+                // When video ends, move to next slide
+                video.onended = function() {
+                    currentIndex++;
+                    showSlide(currentIndex);
+                };
+            } else {
+                // Image slide - show for 3 seconds
+                setTimeout(() => {
+                    currentIndex++;
+                    showSlide(currentIndex);
+                }, 3000);
+            }
         }
-        
-        function autoSlide() {
-            currentIndex++;
-            showSlide(currentIndex);
-        }
+
+        // Start the slideshow
+        window.addEventListener('load', () => {
+            showSlide(0);
+        });
         
         setInterval(autoSlide, 5000);
         
