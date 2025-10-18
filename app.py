@@ -2301,74 +2301,88 @@ HTML_TEMPLATE = '''
         let slideTimeout;
         let isPaused = false;
         let progressInterval;
-        let currentProgress = 0;
-        let slideDuration = 3000; // default duration in ms
-        let progressCircle;
-        let circumference;
+        let startTime;
+        let slideDuration = 3000;
+        let pausedTime = 0;
 
-        // Initialize after DOM loads
-        function initializeProgressCircle() {
-            progressCircle = document.querySelector('.progress-ring-circle');
-            if (progressCircle) {
-                circumference = 2 * Math.PI * 26; // 26 is the radius
-                progressCircle.style.strokeDasharray = circumference;
-                progressCircle.style.strokeDashoffset = circumference;
-                console.log('Progress circle initialized, circumference:', circumference);
-            } else {
-                console.error('Progress circle not found!');
+        function updateProgressRing(elapsed, duration) {
+            const progressCircle = document.querySelector('.progress-ring-circle');
+            if (!progressCircle) {
+                console.error('Progress circle element not found!');
+                return;
+            }
+            
+            const radius = 26;
+            const circumference = 2 * Math.PI * radius;
+            const progress = Math.min(elapsed / duration, 1);
+            const offset = circumference * (1 - progress);
+            
+            progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+            progressCircle.style.strokeDashoffset = offset;
+            
+            // Debug logging
+            if (Math.floor(elapsed) % 500 === 0) { // Log every 500ms
+                console.log(`Progress: ${Math.round(progress * 100)}% | Elapsed: ${Math.round(elapsed)}ms | Duration: ${duration}ms`);
             }
         }
 
-        function updateProgress() {
+        function resetProgressRing() {
+            const progressCircle = document.querySelector('.progress-ring-circle');
             if (!progressCircle) return;
-            const percent = currentProgress / slideDuration;
-            const offset = circumference - (percent * circumference);
-            progressCircle.style.strokeDashoffset = offset;
-            console.log('Progress update:', Math.round(percent * 100) + '%', 'offset:', Math.round(offset));
-        }
-
-        function resetProgress() {
-            if (!progressCircle) return;
-            console.log('Resetting progress circle');
+            
+            const radius = 26;
+            const circumference = 2 * Math.PI * radius;
+            progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
             progressCircle.style.strokeDashoffset = circumference;
-            currentProgress = 0;
+            console.log('Progress ring reset');
         }
 
-        function startProgress(duration) {
-            console.log('Starting progress for duration:', duration / 1000, 'seconds');
-            currentProgress = 0;
-            slideDuration = duration;
+        function animateProgress(duration) {
             clearInterval(progressInterval);
+            startTime = Date.now();
+            pausedTime = 0;
+            slideDuration = duration;
             
-            // Reset the circle to start position
-            resetProgress();
+            console.log(`Starting progress animation for ${duration}ms (${duration/1000}s)`);
             
-            // Small delay to ensure reset is visible
+            // Reset first
+            resetProgressRing();
+            
+            // Start animation after a tiny delay
             setTimeout(() => {
                 progressInterval = setInterval(() => {
                     if (!isPaused) {
-                        currentProgress += 50; // Update every 50ms for smoother animation
-                        if (currentProgress >= slideDuration) {
-                            currentProgress = slideDuration;
+                        const elapsed = Date.now() - startTime - pausedTime;
+                        updateProgressRing(elapsed, duration);
+                        
+                        if (elapsed >= duration) {
+                            clearInterval(progressInterval);
+                            console.log('Progress animation complete');
                         }
-                        updateProgress();
                     }
-                }, 50);
+                }, 16); // ~60fps for smooth animation
             }, 50);
         }
 
         function showSlide(index) {
+            console.log(`\n=== Showing slide ${index} ===`);
+            
+            // Clear all timers
             clearTimeout(slideTimeout);
             clearInterval(progressInterval);
             
+            // Stop all videos and hide all slides
             document.querySelectorAll('.slide').forEach(slide => {
                 if (slide.tagName === 'VIDEO') {
                     slide.pause();
                     slide.currentTime = 0;
+                    slide.onended = null;
+                    slide.onloadedmetadata = null;
                 }
                 slide.classList.remove('active');
             });
             
+            // Handle index boundaries
             if (index >= totalSlides) {
                 currentIndex = 0;
             } else if (index < 0) {
@@ -2380,56 +2394,80 @@ HTML_TEMPLATE = '''
             const currentSlide = document.querySelectorAll('.slide')[currentIndex];
             currentSlide.classList.add('active');
             
-            // Reset progress for new slide
-            resetProgress();
+            console.log(`Active slide type: ${currentSlide.tagName}`);
             
+            // Reset progress ring
+            resetProgressRing();
+            
+            // Don't auto-advance if paused
             if (isPaused) {
+                console.log('Paused - not starting auto-advance');
                 return;
             }
             
+            // Handle video slides
             if (currentSlide.tagName === 'VIDEO') {
                 const video = currentSlide;
-                video.onended = null;
-                
-                video.onended = function() {
-                    console.log('Video ended, moving to next slide');
-                    clearInterval(progressInterval);
-                    currentIndex++;
-                    showSlide(currentIndex);
-                };
                 
                 video.onloadedmetadata = function() {
                     const duration = video.duration * 1000;
-                    console.log('Video duration:', duration / 1000, 'seconds');
-                    startProgress(duration);
+                    console.log(`Video loaded - Duration: ${video.duration}s (${duration}ms)`);
                     
+                    // Start progress animation
+                    animateProgress(duration);
+                    
+                    // Setup backup timeout
                     slideTimeout = setTimeout(() => {
-                        console.log('Backup timeout triggered');
+                        console.log('Video backup timeout triggered');
                         clearInterval(progressInterval);
                         currentIndex++;
                         showSlide(currentIndex);
-                    }, duration + 1000);
+                    }, duration + 500);
                 };
                 
-                video.play().then(() => {
-                    console.log('Video playing successfully');
-                }).catch(err => {
-                    console.log('Video play failed:', err);
-                    startProgress(5000);
-                    slideTimeout = setTimeout(() => {
-                        clearInterval(progressInterval);
-                        currentIndex++;
-                        showSlide(currentIndex);
-                    }, 5000);
-                });
-            } else {
-                console.log('Showing image slide');
-                startProgress(3000);
-                slideTimeout = setTimeout(() => {
+                video.onended = function() {
+                    console.log('Video ended naturally');
+                    clearTimeout(slideTimeout);
                     clearInterval(progressInterval);
                     currentIndex++;
                     showSlide(currentIndex);
-                }, 3000);
+                };
+                
+                // Play video
+                const playPromise = video.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise
+                        .then(() => {
+                            console.log('Video playing successfully');
+                        })
+                        .catch(err => {
+                            console.error('Video play failed:', err);
+                            // Fallback to 5 second duration
+                            animateProgress(5000);
+                            slideTimeout = setTimeout(() => {
+                                clearInterval(progressInterval);
+                                currentIndex++;
+                                showSlide(currentIndex);
+                            }, 5000);
+                        });
+                }
+            } 
+            // Handle image slides
+            else {
+                console.log('Image slide - 3 second duration');
+                const duration = 3000;
+                
+                // Start progress animation
+                animateProgress(duration);
+                
+                // Setup slide advance
+                slideTimeout = setTimeout(() => {
+                    console.log('Image slide timeout complete');
+                    clearInterval(progressInterval);
+                    currentIndex++;
+                    showSlide(currentIndex);
+                }, duration);
             }
         }
 
@@ -2438,58 +2476,83 @@ HTML_TEMPLATE = '''
             const pauseBtn = document.getElementById('pauseBtn');
             const iconContainer = pauseBtn.querySelector('.pause-icon, .play-icon');
             
+            console.log(`Toggle pause: ${isPaused ? 'PAUSED' : 'PLAYING'}`);
+            
             if (isPaused) {
-                // Change to play icon
+                // PAUSE
                 iconContainer.className = 'play-icon';
                 iconContainer.innerHTML = '';
+                
                 clearTimeout(slideTimeout);
                 clearInterval(progressInterval);
+                
+                // Store pause time
+                pausedTime += Date.now() - startTime - pausedTime;
                 
                 const currentSlide = document.querySelectorAll('.slide')[currentIndex];
                 if (currentSlide.tagName === 'VIDEO') {
                     currentSlide.pause();
+                    console.log(`Video paused at ${currentSlide.currentTime}s`);
                 }
             } else {
-                // Change to pause icon
+                // RESUME
                 iconContainer.className = 'pause-icon';
                 iconContainer.innerHTML = '<div class="pause-bar"></div><div class="pause-bar"></div>';
                 
                 const currentSlide = document.querySelectorAll('.slide')[currentIndex];
+                
                 if (currentSlide.tagName === 'VIDEO') {
-                    currentSlide.play();
-                    const remainingTime = (currentSlide.duration - currentSlide.currentTime) * 1000;
-                    const totalDuration = currentSlide.duration * 1000;
-                    const elapsedTime = currentSlide.currentTime * 1000;
+                    const video = currentSlide;
+                    const remainingTime = (video.duration - video.currentTime) * 1000;
+                    const totalDuration = video.duration * 1000;
                     
-                    // Continue from where we paused
-                    currentProgress = elapsedTime;
-                    slideDuration = totalDuration;
+                    console.log(`Resuming video - Remaining: ${remainingTime}ms`);
+                    
+                    // Resume progress from where we left off
+                    const elapsed = totalDuration - remainingTime;
+                    startTime = Date.now() - elapsed;
                     
                     progressInterval = setInterval(() => {
-                        currentProgress += 100;
-                        if (currentProgress >= slideDuration) {
-                            currentProgress = slideDuration;
+                        const currentElapsed = Date.now() - startTime;
+                        updateProgressRing(currentElapsed, totalDuration);
+                        
+                        if (currentElapsed >= totalDuration) {
                             clearInterval(progressInterval);
                         }
-                        updateProgress();
-                    }, 100);
+                    }, 16);
                     
-                    currentSlide.onended = function() {
+                    video.play();
+                    
+                    video.onended = function() {
+                        clearTimeout(slideTimeout);
                         clearInterval(progressInterval);
                         currentIndex++;
                         showSlide(currentIndex);
                     };
+                    
+                    slideTimeout = setTimeout(() => {
+                        clearInterval(progressInterval);
+                        currentIndex++;
+                        showSlide(currentIndex);
+                    }, remainingTime + 500);
+                    
                 } else {
-                    const remainingTime = slideDuration - currentProgress;
+                    // Resume image slide
+                    const elapsed = Date.now() - startTime - pausedTime;
+                    const remainingTime = slideDuration - elapsed;
+                    
+                    console.log(`Resuming image - Remaining: ${remainingTime}ms`);
+                    
+                    startTime = Date.now() - elapsed;
                     
                     progressInterval = setInterval(() => {
-                        currentProgress += 100;
-                        if (currentProgress >= slideDuration) {
-                            currentProgress = slideDuration;
+                        const currentElapsed = Date.now() - startTime;
+                        updateProgressRing(currentElapsed, slideDuration);
+                        
+                        if (currentElapsed >= slideDuration) {
                             clearInterval(progressInterval);
                         }
-                        updateProgress();
-                    }, 100);
+                    }, 16);
                     
                     slideTimeout = setTimeout(() => {
                         clearInterval(progressInterval);
@@ -2501,24 +2564,57 @@ HTML_TEMPLATE = '''
         }
 
         function prevSlide() {
+            console.log('Previous slide clicked');
             clearInterval(progressInterval);
+            clearTimeout(slideTimeout);
+            isPaused = false;
+            
+            // Reset pause button to pause icon
+            const pauseBtn = document.getElementById('pauseBtn');
+            const iconContainer = pauseBtn.querySelector('.pause-icon, .play-icon');
+            iconContainer.className = 'pause-icon';
+            iconContainer.innerHTML = '<div class="pause-bar"></div><div class="pause-bar"></div>';
+            
             currentIndex--;
             showSlide(currentIndex);
         }
 
         function nextSlide() {
+            console.log('Next slide clicked');
             clearInterval(progressInterval);
+            clearTimeout(slideTimeout);
+            isPaused = false;
+            
+            // Reset pause button to pause icon
+            const pauseBtn = document.getElementById('pauseBtn');
+            const iconContainer = pauseBtn.querySelector('.pause-icon, .play-icon');
+            iconContainer.className = 'pause-icon';
+            iconContainer.innerHTML = '<div class="pause-bar"></div><div class="pause-bar"></div>';
+            
             currentIndex++;
             showSlide(currentIndex);
         }
 
+        // Initialize on page load
         window.addEventListener('load', () => {
-            console.log('Page loaded, initializing slideshow');
-            initializeProgressCircle();
-            // Small delay to ensure everything is ready
+            console.log('=== SLIDESHOW INITIALIZED ===');
+            console.log(`Total slides: ${totalSlides}`);
+            
+            // Verify progress circle exists
+            const progressCircle = document.querySelector('.progress-ring-circle');
+            if (progressCircle) {
+                console.log('Progress circle found!');
+                const radius = 26;
+                const circumference = 2 * Math.PI * radius;
+                console.log(`Circle circumference: ${circumference}`);
+            } else {
+                console.error('ERROR: Progress circle NOT found!');
+            }
+            
+            // Start slideshow after brief delay
             setTimeout(() => {
                 showSlide(0);
-            }, 100);
+            }, 200);
         });
 
         // Sports slider functionality
