@@ -659,7 +659,7 @@ HTML_TEMPLATE = '''
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 40px;
             max-width: 1400px;
-            margin: 80px auto 40px;
+            margin: 30px auto 40px;
         }
         
         .footer-column-title {
