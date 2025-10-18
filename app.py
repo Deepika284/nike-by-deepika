@@ -519,8 +519,8 @@ HTML_TEMPLATE = '''
         }
         
         .nba-price {
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 13px;
+            font-weight: 300;
         }
         
         .nba-slider-btn {
@@ -543,7 +543,7 @@ HTML_TEMPLATE = '''
         
         .nba-slider-controls {
             position: relative;
-            margin-top: -200px;
+            margin-top: -80px;
             pointer-events: none;
         }
         
@@ -581,7 +581,7 @@ HTML_TEMPLATE = '''
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 40px;
             max-width: 1400px;
-            margin: 50 auto 40px;
+            margin: 80 auto 40px;
         }
         
         .footer-column-title {
@@ -1271,79 +1271,79 @@ HTML_TEMPLATE = '''
                         <img src="/static/nba1.avif" alt="NBA 1" class="nba-image">
                         <div class="nba-item-title">Milwaukee Bucks Icon Edition</div>
                         <div class="nba-description">Men's Nike Dri-FIT NBA Swingman Jersey</div>
-                        <div class="nba-price">MRP : ₹ 5 995.00</div>
+                        <div class="nba-price">MRP : ₹ 5995.00</div>
                     </div>
                     <div class="nba-item">
                         <img src="/static/nba2.avif" alt="NBA 2" class="nba-image">
                         <div class="nba-item-title">Denver Nuggets Icon Edition</div>
                         <div class="nba-description">Men's Nike Dri-FIT NBA Swingman Jersey</div>
-                        <div class="nba-price">MRP : ₹ 5 995.00</div>
+                        <div class="nba-price">MRP : ₹ 5995.00</div>
                     </div>
                     <div class="nba-item">
                         <img src="/static/nba3.avif" alt="NBA 3" class="nba-image">
                         <div class="nba-item-title">Team 13</div>
                         <div class="nba-description">Nike WNBA T-shirt</div>
-                        <div class="nba-price">MRP : ₹ 1 795.00</div>
+                        <div class="nba-price">MRP : ₹ 1795.00</div>
                     </div>
                     <div class="nba-item">
                         <img src="/static/nba4.avif" alt="NBA 4" class="nba-image">
                         <div class="nba-item-title">Los Angeles Lakers Icon Edition</div>
                         <div class="nba-description">Men's Nike Dri-FIT NBA Swingman Jersey</div>
-                        <div class="nba-price">MRP : ₹ 5 995.00</div>
+                        <div class="nba-price">MRP : ₹ 5995.00</div>
                     </div>
                     <div class="nba-item">
                         <img src="/static/nba5.avif" alt="NBA 5" class="nba-image">
                         <div class="nba-item-title">Sacramento Kings Icon Edition</div>
                         <div class="nba-description">Nike Dri-FIT NBA Swingman Jersey</div>
-                        <div class="nba-price">MRP : ₹ 5 995.00</div>
+                        <div class="nba-price">MRP : ₹ 5995.00</div>
                     </div>
                     <div class="nba-item">
                         <img src="/static/nba6.avif" alt="NBA 6" class="nba-image">
                         <div class="nba-item-title">San Antonio Spurs Icon Edition</div>
                         <div class="nba-description">Men's Nike Dri-FIT NBA Swingman Jersey</div>
-                        <div class="nba-price">MRP : ₹ 5 995.00</div>
+                        <div class="nba-price">MRP : ₹ 5995.00</div>
                     </div>
                     <div class="nba-item">
                         <img src="/static/nba7.avif" alt="NBA 7" class="nba-image">
                         <div class="nba-item-title">Team 13</div>
                         <div class="nba-description">Women's Nike WNBA Boxy Crew-Neck T-Shirt</div>
-                        <div class="nba-price">₹ 2 087.00</div>
+                        <div class="nba-price">₹ 2087.00</div>
                     </div>
                     <div class="nba-item">
                         <img src="/static/nba8.avif" alt="NBA 8" class="nba-image">
                         <div class="nba-item-title">Stephen Curry Golden State Warriors Select Series</div>
                         <div class="nba-description">Men's Nike NBA T-Shirt</div>
-                        <div class="nba-price">₹ 2 087.00</div>
+                        <div class="nba-price">₹ 2087.00</div>
                     </div>
                     <div class="nba-item">
                         <img src="/static/nba10.avif" alt="NBA 10" class="nba-image">
                         <div class="nba-item-title">Boston Celtics</div>
                         <div class="nba-description">Men's Nike NBA T-Shirt</div>
-                        <div class="nba-price">MRP : ₹ 1 795.00</div>
+                        <div class="nba-price">MRP : ₹ 1795.00</div>
                     </div>
                     <div class="nba-item">
                         <img src="/static/nba12.avif" alt="NBA 12" class="nba-image">
                         <div class="nba-item-title">Los Angeles Lakers</div>
                         <div class="nba-description">Men's Nike NBA T-Shirt</div>
-                        <div class="nba-price">MRP : ₹ 1 795.00</div>
+                        <div class="nba-price">MRP : ₹ 1795.00</div>
                     </div>
                     <div class="nba-item">
                         <img src="/static/nba13.avif" alt="NBA 13" class="nba-image">
                         <div class="nba-item-title">Miami Heat</div>
                         <div class="nba-description">Men's Nike NBA T-Shirt</div>
-                        <div class="nba-price">MRP : ₹ 1 795.00</div>
+                        <div class="nba-price">MRP : ₹ 1795.00</div>
                     </div>
                     <div class="nba-item">
-                        <img src="/static/nba14.avif" alt="NBA 14" class="nba-image">
+                        <mg src="/static/nba14.avif" alt="NBA 14" class="nba-image">
                         <div class="nba-item-title">New York Knicks Statement Edition</div>
                         <div class="nba-description">Men's Nike Dri-FIT NBA Swingman Jersey</div>
-                        <div class="nba-price">MRP : ₹ 5 995.00</div>
+                        <div class="nba-price">MRP : ₹ 5995.00</div>
                     </div>
                     <div class="nba-item">
                         <img src="/static/nba15.avif" alt="NBA 15" class="nba-image">
                         <div class="nba-item-title">Chicago Bulls Courtside Windrunner</div>
                         <div class="nba-description">Men's Nike NBA Anorak Jacket</div>
-                        <div class="nba-price">₹ 5 217.00</div>
+                        <div class="nba-price">₹ 5217.00</div>
                     </div>
                 </div>
             </div>
