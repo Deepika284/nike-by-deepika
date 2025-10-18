@@ -165,7 +165,7 @@ HTML_TEMPLATE = '''
         .new-featured-heading, .men-heading, .women-heading, 
         .kids-heading, .sale-heading, .snkrs-heading {
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 400;
             margin-bottom: 20px;
             color: black;
         }
