@@ -271,10 +271,10 @@ HTML_TEMPLATE = '''
         .slideshow-container {
             position: relative;
             width: 100%;
-            margin-top: 30px;
+            margin-top: 20px;
             overflow: hidden;
-            height: calc(100vh - 10px); /* Full screen minus header, margin, and 10px extra */
-            max-height: none; /* Remove max-height restriction for full screen */
+            height: calc(100vh - 10px);
+            max-height: none;
         }
 
         .shop-button {
@@ -324,6 +324,38 @@ HTML_TEMPLATE = '''
             object-fit: cover;
             object-position: top center;
         }
+
+        /* Slideshow Controls - Laptop Only */
+        .slideshow-controls {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            display: flex;
+            gap: 15px;
+            z-index: 20;
+        }
+
+        .slideshow-control-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+            transition: all 0.3s;
+        }
+
+        .slideshow-control-btn:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.1);
+        }
+
         /* Content Wrapper - Responsive */
         .content-wrapper {
             padding: 0 40px;
@@ -806,6 +838,11 @@ HTML_TEMPLATE = '''
             video.slide {
                 object-fit: cover;
             }
+
+            /* Hide slideshow controls on mobile */
+            .slideshow-controls {
+                display: none;
+            }
             
             .nav-menu {
                 padding: 0 20px;
@@ -1222,6 +1259,11 @@ HTML_TEMPLATE = '''
             <source src="/static/slideshow2.mp4" type="video/mp4">
         </video>
         <button class="shop-button">Shop</button>
+        <div class="slideshow-controls">
+            <button class="slideshow-control-btn" onclick="togglePause()" id="pauseBtn">||</button>
+            <button class="slideshow-control-btn" onclick="prevSlide()">&#60;</button>
+            <button class="slideshow-control-btn" onclick="nextSlide()">&#62;</button>
+        </div>
     </div>
 
     <div class="athlete-section">
@@ -2173,6 +2215,7 @@ HTML_TEMPLATE = '''
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
         let slideTimeout;
+        let isPaused = false;
 
         function showSlide(index) {
             // Clear any existing timeout
@@ -2197,6 +2240,11 @@ HTML_TEMPLATE = '''
             
             const currentSlide = document.querySelectorAll('.slide')[currentIndex];
             currentSlide.classList.add('active');
+            
+            // Don't auto-advance if paused
+            if (isPaused) {
+                return;
+            }
             
             // Handle timing based on slide type
             if (currentSlide.tagName === 'VIDEO') {
@@ -2244,18 +2292,61 @@ HTML_TEMPLATE = '''
             }
         }
 
+        function togglePause() {
+            isPaused = !isPaused;
+            const pauseBtn = document.getElementById('pauseBtn');
+            
+            if (isPaused) {
+                pauseBtn.textContent = '▶';
+                clearTimeout(slideTimeout);
+                
+                // Pause video if currently playing
+                const currentSlide = document.querySelectorAll('.slide')[currentIndex];
+                if (currentSlide.tagName === 'VIDEO') {
+                    currentSlide.pause();
+                }
+            } else {
+                pauseBtn.textContent = '||';
+                
+                // Resume video if it's a video slide
+                const currentSlide = document.querySelectorAll('.slide')[currentIndex];
+                if (currentSlide.tagName === 'VIDEO') {
+                    currentSlide.play();
+                    // Re-setup the onended event
+                    currentSlide.onended = function() {
+                        currentIndex++;
+                        showSlide(currentIndex);
+                    };
+                } else {
+                    // If it's an image, move to next slide after remaining time
+                    slideTimeout = setTimeout(() => {
+                        currentIndex++;
+                        showSlide(currentIndex);
+                    }, 3000);
+                }
+            }
+        }
+
+        function prevSlide() {
+            currentIndex--;
+            showSlide(currentIndex);
+        }
+
+        function nextSlide() {
+            currentIndex++;
+            showSlide(currentIndex);
+        }
+
         // Start the slideshow
         window.addEventListener('load', () => {
             showSlide(0);
         });
-        
-        setInterval(autoSlide, 5000);
-        
+
         // Sports slider functionality
         const sportsSlider = document.getElementById('sportsSlider');
         const leftBtn = document.querySelector('.slider-btn.left');
         const rightBtn = document.querySelector('.slider-btn.right');
-        
+
         function updateArrowVisibility() {
             const scrollLeft = sportsSlider.scrollLeft;
             const maxScroll = sportsSlider.scrollWidth - sportsSlider.clientWidth;
@@ -2272,7 +2363,7 @@ HTML_TEMPLATE = '''
                 rightBtn.classList.remove('hidden');
             }
         }
-        
+
         function slideLeft() {
             sportsSlider.scrollBy({
                 left: -sportsSlider.offsetWidth / 2,
@@ -2280,7 +2371,7 @@ HTML_TEMPLATE = '''
             });
             setTimeout(updateArrowVisibility, 300);
         }
-        
+
         function slideRight() {
             sportsSlider.scrollBy({
                 left: sportsSlider.offsetWidth / 2,
@@ -2288,15 +2379,15 @@ HTML_TEMPLATE = '''
             });
             setTimeout(updateArrowVisibility, 300);
         }
-        
+
         sportsSlider.addEventListener('scroll', updateArrowVisibility);
         window.addEventListener('load', updateArrowVisibility);
-        
+
         // Sports popup functionality
         const sportsPopup = document.getElementById('sportsPopup');
         const sportsItems = document.querySelectorAll('.sports-item');
         let popupTimeout;
-        
+
         sportsItems.forEach(item => {
             item.addEventListener('mouseenter', (e) => {
                 clearTimeout(popupTimeout);
@@ -2320,22 +2411,22 @@ HTML_TEMPLATE = '''
                 }, 100);
             });
         });
-        
+
         sportsPopup.addEventListener('mouseenter', () => {
             clearTimeout(popupTimeout);
         });
-        
+
         sportsPopup.addEventListener('mouseleave', () => {
             popupTimeout = setTimeout(() => {
                 sportsPopup.classList.remove('active');
             }, 100);
         });
-        
+
         // Icons slider functionality with infinite loop (15 repetitions)
         const iconsSlider = document.getElementById('iconsSlider');
         const iconsLeftBtn = document.querySelector('.icons-slider-btn.left');
         const iconsRightBtn = document.querySelector('.icons-slider-btn.right');
-        
+
         function slideIconsLeft() {
             const itemWidth = 288; // 280px width + 8px gap
             iconsSlider.scrollBy({
@@ -2349,7 +2440,7 @@ HTML_TEMPLATE = '''
                 }
             }, 400);
         }
-        
+
         function slideIconsRight() {
             const itemWidth = 288;
             iconsSlider.scrollBy({
@@ -2364,17 +2455,17 @@ HTML_TEMPLATE = '''
                 }
             }, 400);
         }
-        
+
         window.addEventListener('load', () => {
             const itemWidth = 288;
             iconsSlider.scrollLeft = itemWidth * 9 * 7;
         });
-        
+
         // Icons popup functionality
         const iconsPopup = document.getElementById('iconsPopup');
         const iconItems = document.querySelectorAll('.icon-item');
         let iconPopupTimeout;
-        
+
         iconItems.forEach(item => {
             item.addEventListener('mouseenter', (e) => {
                 clearTimeout(iconPopupTimeout);
@@ -2398,22 +2489,22 @@ HTML_TEMPLATE = '''
                 }, 100);
             });
         });
-        
+
         iconsPopup.addEventListener('mouseenter', () => {
             clearTimeout(iconPopupTimeout);
         });
-        
+
         iconsPopup.addEventListener('mouseleave', () => {
             iconPopupTimeout = setTimeout(() => {
                 iconsPopup.classList.remove('active');
             }, 100);
         });
-        
+
         // NBA slider functionality
         const nbaSlider = document.getElementById('nbaSlider');
         const nbaLeftBtn = document.querySelector('.nba-slider-btn.left');
         const nbaRightBtn = document.querySelector('.nba-slider-btn.right');
-        
+
         function updateNbaArrowVisibility() {
             const scrollLeft = nbaSlider.scrollLeft;
             const maxScroll = nbaSlider.scrollWidth - nbaSlider.clientWidth;
@@ -2430,7 +2521,7 @@ HTML_TEMPLATE = '''
                 nbaRightBtn.classList.remove('hidden');
             }
         }
-        
+
         function slideNbaLeft() {
             nbaSlider.scrollBy({
                 left: -nbaSlider.offsetWidth / 3,
@@ -2438,7 +2529,7 @@ HTML_TEMPLATE = '''
             });
             setTimeout(updateNbaArrowVisibility, 300);
         }
-        
+
         function slideNbaRight() {
             nbaSlider.scrollBy({
                 left: nbaSlider.offsetWidth / 3,
@@ -2446,7 +2537,7 @@ HTML_TEMPLATE = '''
             });
             setTimeout(updateNbaArrowVisibility, 300);
         }
-        
+
         nbaSlider.addEventListener('scroll', updateNbaArrowVisibility);
         window.addEventListener('load', updateNbaArrowVisibility);
     </script>
