@@ -237,12 +237,53 @@ HTML_TEMPLATE = '''
         }
 
         /* Slideshow Container */
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        /* Shop Button */
+        .shop-button {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            color: black;
+            padding: 12px 24px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            z-index: 10;
+            border-radius: 50px;
+        }
+
+        .shop-button:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Slideshow Controls */
         .slideshow-controls {
             position: absolute;
-            bottom: 30px;
-            left: 40px;
+            bottom: 40px;
+            right: 40px;
             display: flex;
-            gap: 10px;
+            gap: 15px;
             z-index: 20;
         }
 
@@ -273,46 +314,6 @@ HTML_TEMPLATE = '''
 
         .slideshow-control-btn:active {
             transform: scale(0.95);
-        }
-
-        /* Pause/Play Icons */
-        .pause-icon,
-        .play-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .pause-icon {
-            gap: 4px;
-        }
-
-        .pause-bar {
-            width: 2.5px;
-            height: 14px;
-            background-color: #000;
-            border-radius: 1px;
-        }
-
-        .play-icon::before {
-            content: '';
-            width: 0;
-            height: 0;
-            border-left: 10px solid #000;
-            border-top: 7px solid transparent;
-            border-bottom: 7px solid transparent;
-            margin-left: 2px;
-        }
-
-        /* Arrow Buttons */
-        .slideshow-control-btn svg {
-            width: 18px;
-            height: 18px;
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
         }
 
         /* Pause/Play Icons */
