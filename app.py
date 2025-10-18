@@ -256,6 +256,12 @@ HTML_TEMPLATE = '''
             transform: translateX(100%);
             transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.8s ease;
             pointer-events: none;
+            display: block;
+        }
+
+        .slide:first-child {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         .slide.active {
