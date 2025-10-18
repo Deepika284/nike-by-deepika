@@ -271,10 +271,10 @@ HTML_TEMPLATE = '''
         .slideshow-container {
             position: relative;
             width: 100%;
-            margin-top: 20px;
+            margin-top: 0;
             overflow: hidden;
-            height: calc(100vh - 100px);
-            max-height: 800px;
+            height: calc(100vh - 110px); /* Full screen minus 10px extra and nav height */
+            max-height: none; /* Remove max-height restriction */
         }
 
         .shop-button {
@@ -324,7 +324,6 @@ HTML_TEMPLATE = '''
             object-fit: cover;
             object-position: top center;
         }
-
         /* Content Wrapper - Responsive */
         .content-wrapper {
             padding: 0 40px;
