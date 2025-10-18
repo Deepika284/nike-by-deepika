@@ -165,7 +165,7 @@ HTML_TEMPLATE = '''
         .new-featured-heading, .men-heading, .women-heading, 
         .kids-heading, .sale-heading, .snkrs-heading {
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 20px;
             color: black;
         }
@@ -354,6 +354,36 @@ HTML_TEMPLATE = '''
             stroke-width: 2.5;
             stroke-linecap: round;
             stroke-linejoin: round;
+        }
+                
+                /* Slide Indicators/Dots */
+        .slide-indicators {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 20;
+        }
+
+        .slide-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slide-dot.active {
+            background-color: rgba(255, 255, 255, 0.9);
+            width: 10px;
+            height: 10px;
+        }
+
+        .slide-dot:hover {
+            background-color: rgba(255, 255, 255, 0.7);
         }
         
         /* Content Wrapper - Responsive */
@@ -1278,6 +1308,11 @@ HTML_TEMPLATE = '''
                     <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
             </button>
+        </div>
+        <div class="slide-indicators">
+            <div class="slide-dot active" onclick="goToSlide(0)"></div>
+            <div class="slide-dot" onclick="goToSlide(1)"></div>
+            <div class="slide-dot" onclick="goToSlide(2)"></div>
         </div>
     </div>
 
@@ -2225,6 +2260,7 @@ HTML_TEMPLATE = '''
     <div class="icons-popup" id="iconsPopup"></div>
     
     <script>
+    //slideshow//
         let currentIndex = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
@@ -2258,6 +2294,9 @@ HTML_TEMPLATE = '''
             // Show current slide
             const currentSlide = slides[currentIndex];
             currentSlide.classList.add('active');
+            
+            // Update dots
+            updateDots();
             
             // Don't auto-advance if paused
             if (isPaused) {
@@ -2305,6 +2344,30 @@ HTML_TEMPLATE = '''
                     showSlide(currentIndex);
                 }, imageDuration);
             }
+        }
+
+        function updateDots() {
+            const dots = document.querySelectorAll('.slide-dot');
+            dots.forEach((dot, index) => {
+                if (index === currentIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function goToSlide(index) {
+            clearTimeout(slideTimeout);
+            
+            // Reset pause state
+            isPaused = false;
+            const pauseBtn = document.getElementById('pauseBtn');
+            const iconContainer = pauseBtn.querySelector('.pause-icon, .play-icon');
+            iconContainer.className = 'pause-icon';
+            iconContainer.innerHTML = '<div class="pause-bar"></div><div class="pause-bar"></div>';
+            
+            showSlide(index);
         }
 
         function togglePause() {
@@ -2366,6 +2429,26 @@ HTML_TEMPLATE = '''
             currentIndex--;
             showSlide(currentIndex);
         }
+
+        function nextSlide() {
+            clearTimeout(slideTimeout);
+            
+            // Reset pause state
+            isPaused = false;
+            const pauseBtn = document.getElementById('pauseBtn');
+            const iconContainer = pauseBtn.querySelector('.pause-icon, .play-icon');
+            iconContainer.className = 'pause-icon';
+            iconContainer.innerHTML = '<div class="pause-bar"></div><div class="pause-bar"></div>';
+            
+            currentIndex++;
+            showSlide(currentIndex);
+        }
+
+        // Start slideshow on page load
+        window.addEventListener('load', () => {
+            showSlide(0);
+        });
+
 
         function nextSlide() {
             clearTimeout(slideTimeout);
