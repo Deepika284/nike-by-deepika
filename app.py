@@ -2303,25 +2303,39 @@ HTML_TEMPLATE = '''
         let progressInterval;
         let currentProgress = 0;
         let slideDuration = 3000; // default duration in ms
-        const progressCircle = document.querySelector('.progress-ring-circle');
-        const circumference = 2 * Math.PI * 26; // 26 is the radius
+        let progressCircle;
+        let circumference;
 
-        // Set up the circle
-        progressCircle.style.strokeDasharray = circumference;
-        progressCircle.style.strokeDashoffset = circumference;
+        // Initialize after DOM loads
+        function initializeProgressCircle() {
+            progressCircle = document.querySelector('.progress-ring-circle');
+            if (progressCircle) {
+                circumference = 2 * Math.PI * 26; // 26 is the radius
+                progressCircle.style.strokeDasharray = circumference;
+                progressCircle.style.strokeDashoffset = circumference;
+                console.log('Progress circle initialized, circumference:', circumference);
+            } else {
+                console.error('Progress circle not found!');
+            }
+        }
 
         function updateProgress() {
+            if (!progressCircle) return;
             const percent = currentProgress / slideDuration;
             const offset = circumference - (percent * circumference);
             progressCircle.style.strokeDashoffset = offset;
+            console.log('Progress update:', Math.round(percent * 100) + '%', 'offset:', Math.round(offset));
         }
 
         function resetProgress() {
+            if (!progressCircle) return;
+            console.log('Resetting progress circle');
             progressCircle.style.strokeDashoffset = circumference;
             currentProgress = 0;
         }
 
         function startProgress(duration) {
+            console.log('Starting progress for duration:', duration / 1000, 'seconds');
             currentProgress = 0;
             slideDuration = duration;
             clearInterval(progressInterval);
@@ -2329,15 +2343,18 @@ HTML_TEMPLATE = '''
             // Reset the circle to start position
             resetProgress();
             
-            progressInterval = setInterval(() => {
-                if (!isPaused) {
-                    currentProgress += 100;
-                    if (currentProgress >= slideDuration) {
-                        currentProgress = slideDuration;
+            // Small delay to ensure reset is visible
+            setTimeout(() => {
+                progressInterval = setInterval(() => {
+                    if (!isPaused) {
+                        currentProgress += 50; // Update every 50ms for smoother animation
+                        if (currentProgress >= slideDuration) {
+                            currentProgress = slideDuration;
+                        }
+                        updateProgress();
                     }
-                    updateProgress();
-                }
-            }, 100);
+                }, 50);
+            }, 50);
         }
 
         function showSlide(index) {
@@ -2496,7 +2513,12 @@ HTML_TEMPLATE = '''
         }
 
         window.addEventListener('load', () => {
-            showSlide(0);
+            console.log('Page loaded, initializing slideshow');
+            initializeProgressCircle();
+            // Small delay to ensure everything is ready
+            setTimeout(() => {
+                showSlide(0);
+            }, 100);
         });
 
         // Sports slider functionality
