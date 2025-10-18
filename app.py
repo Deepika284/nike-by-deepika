@@ -373,13 +373,12 @@ HTML_TEMPLATE = '''
         /* Circular progress ring using SVG */
         .progress-ring {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 56px;
-            height: 56px;
-            transform: translate(-50%, -50%) rotate(-90deg);
+            top: 0;
+            left: 0;
+            width: 48px;
+            height: 48px;
+            transform: rotate(-90deg);
             pointer-events: none;
-            z-index: 1;
         }
 
         .progress-ring-circle {
@@ -387,9 +386,8 @@ HTML_TEMPLATE = '''
             stroke: #111;
             stroke-width: 3;
             stroke-linecap: round;
-            transition: stroke-dashoffset 0.1s linear;
+            transition: none;
         }
-
         /* Pause icon bars - more natural look */
         #pauseBtn .pause-icon,
         #pauseBtn .play-icon {
@@ -1329,8 +1327,8 @@ HTML_TEMPLATE = '''
         <button class="shop-button">Shop</button>
         <div class="slideshow-controls">
             <button class="slideshow-control-btn" onclick="togglePause()" id="pauseBtn">
-                <svg class="progress-ring">
-                    <circle class="progress-ring-circle" cx="28" cy="28" r="26"></circle>
+                <svg class="progress-ring" viewBox="0 0 48 48">
+                    <circle class="progress-ring-circle" cx="24" cy="24" r="20"></circle>
                 </svg>
                 <div class="pause-icon">
                     <div class="pause-bar"></div>
